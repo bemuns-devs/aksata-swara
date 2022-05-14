@@ -1,0 +1,3 @@
+<template>
+  Ini blogs
+</template>

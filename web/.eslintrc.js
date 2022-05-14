@@ -18,6 +18,9 @@ module.exports = {
     '@typescript-eslint',
     'vue',
   ],
+  globals: {
+    'useHead': true,
+  },
   rules: {
     // ts
     '@typescript-eslint/explicit-module-boundary-types': 'off',
@@ -27,6 +30,7 @@ module.exports = {
       registeredComponentsOnly: true,
       ignores: [],
     }],
+    'vue/multi-word-component-names': 'off',
 
     // js
     'import/no-unresolved': 'off',
