@@ -1,3 +1,5 @@
 <template>
-  Ini blogs
+  <div>
+    Ini blogs
+  </div>
 </template>

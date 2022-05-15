@@ -19,7 +19,9 @@ module.exports = {
     'vue',
   ],
   globals: {
-    'useHead': true,
+    useHead: true,
+    ref: true,
+    onMounted: true,
   },
   rules: {
     // ts

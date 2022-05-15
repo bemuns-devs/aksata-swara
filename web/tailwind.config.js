@@ -12,14 +12,36 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        brand: {
-          1: '#982581',
-          2: '#F7B718',
+        primary: {
+          DEFAULT: '#982581',
+          50: '#f7cdea',
+          100: '#f5aae0',
+          200: '#f38ed9',
+          300: '#f169d1',
+          400: '#f058ce',
+          500: '#d939b9',
+          600: '#b72f9c',
+          700: '#982581',
+          800: '#761b64',
+          900: '#571349',
+        },
+        secondary: {
+          DEFAULT: '#f7b718',
+          50: '#fcd288',
+          100: '#f7b718',
+          200: '#e0a50a',
+          300: '#c79209',
+          400: '#af8006',
+          500: '#976e05',
+          600: '#805d03',
+          700: '#715103',
+          800: '#543c02',
+          900: '#3f2d03',
         },
       },
       fontFamily: {
-        'brand-title': ['Montserrat', ...defaultTheme.fontFamily.sans],
-        'brand-body': ['Bahnschrift', ...defaultTheme.fontFamily.sans],
+        brand: ['Montserrat', ...defaultTheme.fontFamily.sans],
+        sans: ['Bahnschrift', ...defaultTheme.fontFamily.sans],
       },
     },
   },
