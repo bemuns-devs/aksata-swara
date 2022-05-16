@@ -56,9 +56,9 @@
             <h5 class="title">
               {{ blog.title }}
             </h5>
-            <div class="text-sm text-gray-500 flex items-center divide-x divide-gray-400">
-              <span class="pr-2">Kementrian Media dan Komunikasi</span>
-              <time class="pl-2">{{ blog.createdAt.toLocaleDateString() }}</time>
+            <div class="subtitle">
+              <span class="author">Kementrian Media dan Komunikasi</span>
+              <time class="">{{ blog.createdAt.toLocaleDateString() }}</time>
             </div>
           </article>
           <div class="blog-card justify-center">
@@ -89,7 +89,9 @@
     </header>
 
     <main class="flex flex-col">
-      <section class="flex flex-col lg:flex-row justify-center items-stretch gap-4 lg:gap-16 bg-secondary-50 h-[80vh] px-4 py-8 lg:px-24 lg:py-16">
+      <section class="relative flex flex-col lg:flex-row justify-center items-stretch gap-4 lg:gap-16 bg-secondary-50 h-[80vh] px-4 py-8 lg:px-24 lg:py-16 overflow-hidden">
+        <BrandSVG class="absolute inset-1/2 left-[10%] opacity-10 -translate-y-1/2 -rotate-12 z-0" />
+
         <h3 class="text-sm lg:text-base text-gray-700 font-light">
           Sekilas tentang kami
         </h3>
@@ -169,20 +171,11 @@
             <h5 class="title">
               {{ blog.title }}
             </h5>
-            <div class="text-sm text-gray-500 flex items-center divide-x divide-gray-400">
-              <span class="pr-2">Kementrian Media dan Komunikasi</span>
-              <time class="pl-2">{{ blog.createdAt.toLocaleDateString() }}</time>
+            <div class="subtitle">
+              <span class="author">Kementrian Media dan Komunikasi</span>
+              <time class="">{{ blog.createdAt.toLocaleDateString() }}</time>
             </div>
           </article>
-        </div>
-
-        <div class="hidden lg:flex justify-end">
-          <NuxtLink
-            to="/blogs"
-            class="btn self-start text-primary underline"
-          >
-            Tampilkan lebih banyak Informasi Terbaru
-          </NuxtLink>
         </div>
 
         <div class="flex lg:hidden flex-col gap-8">
@@ -211,8 +204,8 @@
                     {{ blog.title }}
                   </h5>
                   <div class="text-sm text-gray-500 flex items-center divide-x divide-gray-400">
-                    <span class="pr-2">Kementrian Media dan Komunikasi</span>
-                    <time class="pl-2">{{ blog.createdAt.toLocaleDateString() }}</time>
+                    <span class="author">Kementrian Media dan Komunikasi</span>
+                    <time class="">{{ blog.createdAt.toLocaleDateString() }}</time>
                   </div>
                 </div>
               </NuxtLink>
@@ -234,15 +227,13 @@
             </h4>
             <time class="self-center text-sm text-gray-500 font-light mt-2">| 20 April 2022</time>
           </div>
-          <ul class="flex flex-col">
-            <li
-              v-for="blog in newestBlogs"
-              :key="blog.id"
-              class="group"
-            >
+          <div class="flex flex-col">
+            <article class="group">
               <NuxtLink
+                v-for="blog in newestBlogs"
+                :key="blog.id"
                 :to="{name: 'blogs-slug--id', params: {slug: blog.slug, id: blog.id}}"
-                class="flex gap-4 p-2 group-hover:bg-primary/5 rounded-lg"
+                class="group flex gap-4 p-2 hover:bg-primary/5 rounded-lg"
               >
                 <div class="shrink-0 h-24 aspect-[7/5] bg-gray-300 border border-primary-50 overflow-hidden rounded-md">
                   <img
@@ -256,13 +247,13 @@
                     {{ blog.title }}
                   </h5>
                   <div class="text-sm text-gray-500 flex items-center divide-x divide-gray-400">
-                    <span class="pr-2">Kementrian Media dan Komunikasi</span>
-                    <time class="pl-2">{{ blog.createdAt.toLocaleDateString() }}</time>
+                    <span class="author">Kementrian Media dan Komunikasi</span>
+                    <time class="">{{ blog.createdAt.toLocaleDateString() }}</time>
                   </div>
                 </div>
               </NuxtLink>
-            </li>
-          </ul>
+            </article>
+          </div>
 
           <NuxtLink
             to="/blogs"
@@ -274,38 +265,35 @@
 
         <div class="hidden lg:flex gap-8">
           <div class="grow flex flex-col gap-8">
-            <div class="flex gap-2">
-              <h4 class="text-2xl lg:text-3xl text-primary font-bold">
-                Lebih lama
-              </h4>
-            </div>
             <ul class="flex flex-col">
               <li
                 v-for="blog in newestBlogs"
                 :key="blog.id"
                 class="group"
               >
-                <NuxtLink
-                  :to="{name: 'blogs-slug--id', params: {slug: blog.slug, id: blog.id}}"
-                  class="flex gap-4 p-2 group-hover:bg-primary/5 rounded-lg"
-                >
-                  <div class="shrink-0 h-24 aspect-[7/5] bg-gray-300 border border-primary-50 overflow-hidden rounded-md">
-                    <img
-                      :src="`${blog.thumbnailUrl}?a`"
-                      :alt="blog.title"
-                      class="object-cover transition-transform group-hover:scale-110 group-hover:rotate-2"
-                    >
-                  </div>
-                  <div class="flex flex-col justify-center">
-                    <h5 class="text-gray-700 font-bold">
-                      {{ blog.title }}
-                    </h5>
-                    <div class="text-sm text-gray-500 flex items-center divide-x divide-gray-400">
-                      <span class="pr-2">Kementrian Media dan Komunikasi</span>
-                      <time class="pl-2">{{ blog.createdAt.toLocaleDateString() }}</time>
+                <article>
+                  <NuxtLink
+                    :to="{name: 'blogs-slug--id', params: {slug: blog.slug, id: blog.id}}"
+                    class="flex gap-4 p-2 group-hover:bg-secondary/5 rounded-lg focus:ring active:ring ring-secondary-100 transition"
+                  >
+                    <div class="shrink-0 h-24 lg:h-32 aspect-[7/5] lg:aspect-[9/5] bg-gray-300 border border-secondary-50 overflow-hidden rounded-md">
+                      <img
+                        :src="`${blog.thumbnailUrl}?a`"
+                        :alt="blog.title"
+                        class="object-cover transition-transform group-hover:scale-110 group-hover:rotate-2"
+                      >
                     </div>
-                  </div>
-                </NuxtLink>
+                    <div class="flex flex-col justify-center">
+                      <h5 class="text-gray-700 line-clamp-2 font-bold">
+                        {{ blog.title }}
+                      </h5>
+                      <div class="text-sm text-gray-500 flex items-center divide-x divide-gray-300">
+                        <span class="shrink break-all line-clamp-1 pr-2">Kementrian Media dan Komunikasi</span>
+                        <time class="shrink-0 pl-2 font-light">{{ blog.createdAt.toLocaleDateString() }}</time>
+                      </div>
+                    </div>
+                  </NuxtLink>
+                </article>
               </li>
             </ul>
 
@@ -320,14 +308,14 @@
           <div class="shrink-0 flex flex-col gap-4">
             <div class="flex gap-2">
               <h4 class="text-2xl lg:text-3xl text-primary font-bold">
-                Terbaru
+                Banyak dibaca
               </h4>
             </div>
         
             <article
               v-for="blog in mostReadBlogs"
               :key="blog.id"
-              class="blog-card"
+              class="blog-card blog-card--dense self-start"
             >
               <NuxtLink
                 :title="blog.title"
@@ -342,9 +330,9 @@
               <h5 class="title">
                 {{ blog.title }}
               </h5>
-              <div class="text-sm text-gray-500 flex items-center divide-x divide-gray-400">
-                <span class="pr-2">Kementrian Media dan Komunikasi</span>
-                <time class="pl-2">{{ blog.createdAt.toLocaleDateString() }}</time>
+              <div class="subtitle">
+                <span class="author">Kementrian Media dan Komunikasi</span>
+                <time class="">{{ blog.createdAt.toLocaleDateString() }}</time>
               </div>
             </article>
 
@@ -352,7 +340,7 @@
               to="/blogs"
               class="btn self-start text-primary underline"
             >
-              Tampilkan lebih banyak Informasi Terbaru
+              Tampilkan lebih banyak
             </NuxtLink>
           </div>
         </div>
@@ -439,21 +427,21 @@ const mostReadBlogs: Blog[] = [
   {
     id: nanoid(),
     title: 'Selamat Datang Mahasiswa Baru jalur SBMPTN Tahun 2022!',
-    thumbnailUrl: 'https://picsum.photos/300/300',
+    thumbnailUrl: 'https://picsum.photos/300/300?b',
     createdAt: new Date(),
     slug: 'terlalu-visioner-steve-jobs-tak-mau-iphone-pertama-punya-slot-kartu-sim',
   },
   {
     id: nanoid(),
     title: 'Selamat Datang Mahasiswa Baru jalur SBMPTN Tahun 2022!',
-    thumbnailUrl: 'https://picsum.photos/300/300',
+    thumbnailUrl: 'https://picsum.photos/300/300?b',
     createdAt: new Date(),
     slug: 'terlalu-visioner-steve-jobs-tak-mau-iphone-pertama-punya-slot-kartu-sim',
   },
   {
     id: nanoid(),
     title: 'Selamat Datang Mahasiswa Baru jalur SBMPTN Tahun 2022!',
-    thumbnailUrl: 'https://picsum.photos/300/300',
+    thumbnailUrl: 'https://picsum.photos/300/300?b',
     createdAt: new Date(),
     slug: 'terlalu-visioner-steve-jobs-tak-mau-iphone-pertama-punya-slot-kartu-sim',
   },
@@ -483,12 +471,33 @@ const slideBlogGallery = (reverse = false) => {
 
 <style lang="sass" scoped>
 .blog-card
-  @apply shrink-0 relative flex flex-col h-72 aspect-[6/5] p-4 bg-white rounded-lg border border-gray-50 shadow transition-shadow
-  @apply hover:shadow-lg
+  @apply shrink-0 relative flex flex-col overflow-hidden
+  @apply h-72 aspect-[6/5] px-4 py-3 bg-white rounded-lg border border-gray-50 shadow transition
+  &:hover
+    @apply bg-secondary-50 border-secondary-100 shadow-lg
+    .subtitle
+      @apply text-secondary-700 divide-secondary-300
+  &:focus,
+  &:active
+    @apply bg-secondary-100 border-secondary-300 ring ring-secondary-300
   .thumbnail
     @apply grow w-full rounded-md overflow-hidden object-cover
   .title
-    @apply text-ellipsis font-medium flex items-center h-20 mt-1 py-1 overflow-hidden
+    @apply shrink-0 text-ellipsis line-clamp-2 font-medium flex items-center pt-2 pb-1 overflow-hidden
+  .subtitle
+    @apply text-sm text-gray-500 flex items-center divide-x divide-gray-300
+    .author
+      @apply shrink break-all line-clamp-1 pr-2
+    time
+      @apply shrink-0 pl-2 font-light
+  &--dense
+    @apply h-52 aspect-[4/3] p-0
+    .thumbnail
+      @apply rounded-none
+    .title
+      @apply text-sm px-2 pt-1 pb-0.5
+    .subtitle
+      @apply px-2 pb-0.5
 
 .about-us-link
   @apply text-primary underline
