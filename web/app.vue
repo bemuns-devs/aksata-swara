@@ -53,7 +53,7 @@
     <WebNavbar />
 
     <NuxtPage class="grow" />
-  
+
     <WebFooter />
   </div>
 </template>

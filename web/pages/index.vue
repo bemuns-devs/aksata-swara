@@ -12,7 +12,7 @@
             <span>Kabinet 2022/2023</span>
           </p>
         </div>
-      
+
         <div class="flex gap-4">
           <NuxtLink
             to="/blogs?soryBy=createdAt&order=desc"
@@ -304,14 +304,14 @@
               Tampilkan lebih banyak
             </NuxtLink>
           </div>
-          
+
           <div class="shrink-0 flex flex-col gap-4">
             <div class="flex gap-2">
               <h4 class="text-2xl lg:text-3xl text-primary font-bold">
                 Banyak dibaca
               </h4>
             </div>
-        
+
             <article
               v-for="blog in mostReadBlogs"
               :key="blog.id"
@@ -466,7 +466,8 @@ const slideBlogGallery = (reverse = false) => {
       behavior: 'smooth',
     });
   }
-}
+  return undefined;
+};
 </script>
 
 <style lang="sass" scoped>

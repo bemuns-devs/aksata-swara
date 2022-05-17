@@ -4,7 +4,8 @@
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
-    "preview": "nuxt preview"
+    "preview": "nuxt preview",
+    "lint": "eslint {components,composables,layouts,middleware,pages,plugins,server}/**/*.{vue,js,ts} *.{vue,js,ts}  --fix"
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.1",
@@ -14,6 +15,8 @@
     "@vue/eslint-config-typescript": "^10.0.0",
     "autoprefixer": "^10.4.7",
     "eslint": "^8.15.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-vue": "^8.7.1",
     "nuxt": "3.0.0-rc.3",
     "postcss": "^8.4.13",

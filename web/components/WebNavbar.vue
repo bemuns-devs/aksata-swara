@@ -60,5 +60,5 @@
 import { MenuIcon } from '@heroicons/vue/solid';
 import { useWindowScroll } from '@vueuse/core';
 
-const {y} = useWindowScroll()
+const { y } = useWindowScroll();
 </script>

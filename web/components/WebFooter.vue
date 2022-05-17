@@ -27,7 +27,7 @@
               <NuxtLink to="/blogs">
                 Berita
               </NuxtLink>
-            </li>        
+            </li>
           </ul>
         </div>
 
@@ -43,7 +43,7 @@
               <a href="#">
                 Desamitra
               </a>
-            </li>       
+            </li>
           </ul>
         </div>
       </div>
@@ -64,7 +64,7 @@ footer
       @apply flex flex-col gap-2
       li
         @apply text-primary font-medium hover:underline
-  
+
   .legal
     @apply text-gray-700 font-normal
 </style>

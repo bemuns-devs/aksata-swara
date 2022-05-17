@@ -3,12 +3,13 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
-    node: true
+    node: true,
   },
   extends: [
     'plugin:vue/vue3-recommended',
-    'eslint:recommended',
-    '@vue/typescript/recommended'
+    // 'eslint:recommended',
+    'airbnb-base',
+    '@vue/typescript/recommended',
   ],
   parserOptions: {
     parser: '@typescript-eslint/parser',
@@ -18,11 +19,6 @@ module.exports = {
     '@typescript-eslint',
     'vue',
   ],
-  globals: {
-    useHead: true,
-    ref: true,
-    onMounted: true,
-  },
   rules: {
     // ts
     '@typescript-eslint/explicit-module-boundary-types': 'off',
@@ -45,5 +41,6 @@ module.exports = {
       ignorePattern: '[\\w-]+="([^"]*)"',
     }],
     'no-unused-vars': 'off',
-  }
-}
+    'no-undef': 'off',
+  },
+};
