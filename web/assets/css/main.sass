@@ -1,8 +1,12 @@
 @import tailwindcss/tailwind.css
 
-@layer
-body
-  @apply w-full max-w-full
+@layer base
+  *
+    @apply text-gray-700
+  body
+    @apply w-full max-w-full
+  .content-container
+    @apply w-full max-w-screen-lg
 
 @layer components
   .btn
@@ -17,6 +21,39 @@ body
       .disabled
         @apply bg-primary-300 text-neutral-50
         @apply hover:bg-primary-300
+      *
+        @apply text-white
 
-    &--rounded
+    &--round
       @apply rounded-full
+
+    &--outlined
+      @apply border border-primary-500
+
+  .blog-card
+    @apply shrink-0 relative flex flex-col overflow-hidden
+    @apply h-72 aspect-[6/5] px-4 py-3 bg-white rounded-lg border border-gray-50 shadow transition
+    &:hover
+      @apply bg-secondary-50 border-transparent shadow-lg
+      .subtitle
+        @apply text-secondary-700 divide-secondary-300
+      .thumbnail
+        img
+          @apply scale-105 rotate-2
+    &:focus,
+    &:active
+      @apply bg-secondary-100 border-secondary-300 ring ring-secondary-300
+    &:active
+      @apply shadow-none
+    .thumbnail
+      @apply grow w-full rounded-md overflow-hidden pointer-events-none
+      img
+        @apply object-cover transition-transform
+    .title
+      @apply shrink-0 text-ellipsis line-clamp-2 font-medium flex items-center pt-2 pb-1 overflow-hidden
+    .subtitle
+      @apply text-sm text-gray-500 flex items-center divide-x divide-gray-300
+      .author
+        @apply shrink break-all line-clamp-1 pr-2
+      time
+        @apply shrink-0 pl-2 font-light

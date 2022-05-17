@@ -5,11 +5,12 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "lint": "eslint {components,composables,layouts,middleware,pages,plugins,server}/**/*.{vue,js,ts} *.{vue,js,ts}  --fix"
+    "lint": "eslint {components,composables,layouts,middleware,pages,plugins,server}/**/*.{vue,js,ts} *.{vue,js,ts} --fix"
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.1",
     "@tailwindcss/line-clamp": "^0.4.0",
+    "@tailwindcss/typography": "^0.5.2",
     "@typescript-eslint/eslint-plugin": "^5.23.0",
     "@typescript-eslint/parser": "^5.23.0",
     "@vue/eslint-config-typescript": "^10.0.0",

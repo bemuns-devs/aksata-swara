@@ -48,11 +48,13 @@
               :to="{name: 'blogs-slug--id', params: {slug: blog.slug, id: blog.id}}"
               class="absolute inset-0 w-full h-full"
             />
-            <img
-              :src="blog.thumbnailUrl"
-              :alt="blog.title"
-              class="thumbnail"
-            >
+            <div class="thumbnail">
+              <img
+                :src="blog.thumbnailUrl"
+                :alt="blog.title"
+                class="thumbnail"
+              >
+            </div>
             <h5 class="title">
               {{ blog.title }}
             </h5>
@@ -73,13 +75,13 @@
 
         <div class="flex gap-4 p-2">
           <button
-            class="btn btn--rounded btn--filled"
+            class="btn btn--round btn--filled"
             @click="slideBlogGallery(true)"
           >
             <ArrowLeftIcon class="w-5 h-5" />
           </button>
           <button
-            class="btn btn--rounded btn--filled"
+            class="btn btn--round btn--filled"
             @click="slideBlogGallery()"
           >
             <ArrowRightIcon class="w-5 h-5" />
@@ -163,11 +165,13 @@
               :to="{name: 'blogs-slug--id', params: {slug: blog.slug, id: blog.id}}"
               class="absolute inset-0 w-full h-full"
             />
-            <img
-              :src="blog.thumbnailUrl"
-              :alt="blog.title"
-              class="thumbnail"
-            >
+            <div class="thumbnail">
+              <img
+                :src="blog.thumbnailUrl"
+                :alt="blog.title"
+                class="thumbnail"
+              >
+            </div>
             <h5 class="title">
               {{ blog.title }}
             </h5>
@@ -315,18 +319,20 @@
             <article
               v-for="blog in mostReadBlogs"
               :key="blog.id"
-              class="blog-card blog-card--dense self-start"
+              class="blog-card !h-64 self-start"
             >
               <NuxtLink
                 :title="blog.title"
                 :to="{name: 'blogs-slug--id', params: {slug: blog.slug, id: blog.id}}"
                 class="absolute inset-0 w-full h-full"
               />
-              <img
-                :src="blog.thumbnailUrl"
-                :alt="blog.title"
-                class="thumbnail"
-              >
+              <div class="thumbnail">
+                <img
+                  :src="blog.thumbnailUrl"
+                  :alt="blog.title"
+                  class="thumbnail"
+                >
+              </div>
               <h5 class="title">
                 {{ blog.title }}
               </h5>
@@ -471,35 +477,6 @@ const slideBlogGallery = (reverse = false) => {
 </script>
 
 <style lang="sass" scoped>
-.blog-card
-  @apply shrink-0 relative flex flex-col overflow-hidden
-  @apply h-72 aspect-[6/5] px-4 py-3 bg-white rounded-lg border border-gray-50 shadow transition
-  &:hover
-    @apply bg-secondary-50 border-secondary-100 shadow-lg
-    .subtitle
-      @apply text-secondary-700 divide-secondary-300
-  &:focus,
-  &:active
-    @apply bg-secondary-100 border-secondary-300 ring ring-secondary-300
-  .thumbnail
-    @apply grow w-full rounded-md overflow-hidden object-cover
-  .title
-    @apply shrink-0 text-ellipsis line-clamp-2 font-medium flex items-center pt-2 pb-1 overflow-hidden
-  .subtitle
-    @apply text-sm text-gray-500 flex items-center divide-x divide-gray-300
-    .author
-      @apply shrink break-all line-clamp-1 pr-2
-    time
-      @apply shrink-0 pl-2 font-light
-  &--dense
-    @apply h-52 aspect-[4/3] p-0
-    .thumbnail
-      @apply rounded-none
-    .title
-      @apply text-sm px-2 pt-1 pb-0.5
-    .subtitle
-      @apply px-2 pb-0.5
-
 .about-us-link
   @apply text-primary underline
   &:hover

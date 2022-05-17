@@ -1,7 +1,7 @@
 <template>
   <nav
-    class="sticky top-0 z-10 flex justify-between items-center bg-white bg-opacity-60 backdrop-blur px-6 py-4 transition duration-500"
-    :class="{'bg-primary-100 border-b border-primary-500 shadow': y > 0}"
+    class="sticky top-0 z-10 flex justify-between items-center bg-white/60 backdrop-blur px-6 py-4 transition duration-500"
+    :class="{'bg-primary-100/30 border-b border-primary-500 shadow': y > 0}"
   >
     <div>
       <NuxtLink
