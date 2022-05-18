@@ -113,24 +113,26 @@
           <!-- eslint-enable -->
         </main>
 
-        <aside class="lg:self-start lg:sticky top-1/4 flex lg:flex-col items-center gap-4 lg:pl-8 lg:pr-4 py-4 lg:py-6 border-t-2 lg:border-t-0 lg:border-l-2 border-primary-50">
-          <button
-            class="btn btn--round lg:btn--outlined"
+        <aside class="lg:self-start lg:sticky top-1/4 flex lg:flex-col items-center lg:items-end gap-4 lg:pl-8 lg:pr-4 py-4 lg:py-6 border-t-2 lg:border-t-0 lg:border-l-2 border-primary-50">
+          <Button
+            rounded
+            outlined
             @click="copy()"
           >
             <span>Salin</span>
-            <ClipboardCopyIcon class="w-5 h-5" />
-          </button>
+            <ClipboardCopyIcon class="icon" />
+          </Button>
 
-          <span class="text-center">atau</span>
+          <span class="lg:mr-4">atau</span>
 
-          <button
-            class="btn btn--round lg:btn--outlined"
+          <Button
+            rounded
+            outlined
             @click="onShareClick"
           >
             <span>Bagikan</span>
-            <ShareIcon class="w-5 h-5" />
-          </button>
+            <ShareIcon class="icon" />
+          </Button>
         </aside>
       </div>
     </section>
@@ -201,12 +203,13 @@
         </li>
       </ul>
 
-      <NuxtLink
+      <Button
         to="/blogs"
-        class="btn self-end text-primary underline"
+        link
+        class="self-end text-primary"
       >
         Lihat lebih banyak
-      </NuxtLink>
+      </Button>
     </section>
   </div>
 </template>

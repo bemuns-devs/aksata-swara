@@ -14,18 +14,15 @@
         </div>
 
         <div class="flex gap-4">
-          <NuxtLink
-            to="/blogs?soryBy=createdAt&order=desc"
-            class="btn btn--filled"
-          >
-            Informasi Terbaru
-          </NuxtLink>
-          <NuxtLink
-            to="/about"
-            class="btn"
-          >
-            Tentang Kami
-          </NuxtLink>
+          <Button
+            label="Informasi terbaru"
+            filled
+            :to="{hash: '#info'}"
+          />
+          <Button
+            label="Tentang kami"
+            :to="{name: 'about'}"
+          />
         </div>
       </div>
 
@@ -38,54 +35,33 @@
           ref="blogGalleryRef"
           class="grow max-w-full flex flex-nowrap items-center gap-4 p-8 overflow-x-auto overflow-y-hidden"
         >
-          <article
+          <BlogCard
             v-for="blog in pickedBlogs"
             :key="blog.id"
-            class="blog-card"
-          >
-            <NuxtLink
-              :title="blog.title"
-              :to="{name: 'blogs-slug--id', params: {slug: blog.slug, id: blog.id}}"
-              class="absolute inset-0 w-full h-full"
-            />
-            <div class="thumbnail">
-              <img
-                :src="blog.thumbnailUrl"
-                :alt="blog.title"
-                class="thumbnail"
-              >
-            </div>
-            <h5 class="title">
-              {{ blog.title }}
-            </h5>
-            <div class="subtitle">
-              <span class="author">Kementrian Media dan Komunikasi</span>
-              <time class="">{{ blog.createdAt.toLocaleDateString() }}</time>
-            </div>
-          </article>
+            v-bind="blog"
+          />
           <div class="blog-card justify-center">
-            <a
-              href="#blogs"
-              class="btn"
-            >
+            <Button :to="{hash: '#blogs'}">
               Lihat informasi lainnya...
-            </a>
+            </Button>
           </div>
         </div>
 
         <div class="flex gap-4 p-2">
-          <button
-            class="btn btn--round btn--filled"
+          <Button
+            filled
+            rounded
             @click="slideBlogGallery(true)"
           >
             <ArrowLeftIcon class="w-5 h-5" />
-          </button>
-          <button
-            class="btn btn--round btn--filled"
+          </Button>
+          <Button
+            filled
+            rounded
             @click="slideBlogGallery()"
           >
             <ArrowRightIcon class="w-5 h-5" />
-          </button>
+          </Button>
         </div>
       </div>
     </header>
@@ -94,10 +70,10 @@
       <section class="relative flex flex-col lg:flex-row justify-center items-stretch gap-4 lg:gap-16 bg-secondary-50 h-[80vh] px-4 py-8 lg:px-24 lg:py-16 overflow-hidden">
         <BrandSVG class="absolute inset-1/2 left-[10%] opacity-10 -translate-y-1/2 -rotate-12 z-0" />
 
-        <h3 class="text-sm lg:text-base text-gray-700 font-light">
+        <h3 class="z-[1] text-sm lg:text-base text-gray-700 font-light">
           Sekilas tentang kami
         </h3>
-        <div class="flex flex-col lg:p-2.5">
+        <div class="z-[1] flex flex-col lg:p-2.5">
           <h2 class="text-base lg:text-xl text-primary font-bold">
             <span>BEM UNS kabinet &ldquo;AKSATA SWARA&rdquo;</span>
           </h2>
@@ -110,39 +86,46 @@
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
           </p>
           <div class="flex flex-wrap gap-2 lg:gap-4">
-            <NuxtLink
+            <Button
               to="/about"
-              class="btn about-us-link"
+              link
+              class="!text-primary hover:!text-primary-800 hover:!bg-secondary-100/80"
             >
-              <span>Visi Misi</span>
+              <span class="text-primary">Visi Misi</span>
               <ExternalLinkIcon class="icon" />
-            </NuxtLink>
-            <NuxtLink
+            </Button>
+            <Button
               to="/about"
-              class="btn about-us-link"
+              link
+              class="!text-primary hover:!text-primary-800 hover:!bg-secondary-100/80"
             >
-              <span>Nilai dan Budaya Kerja</span>
+              <span class="text-primary">Nilai dan Budaya Kerja</span>
               <ExternalLinkIcon class="icon" />
-            </NuxtLink>
-            <NuxtLink
+            </Button>
+            <Button
               to="/about"
-              class="btn about-us-link"
+              link
+              class="!text-primary hover:!text-primary-800 hover:!bg-secondary-100/80"
             >
-              <span>Filosofi</span>
+              <span class="text-primary">Filosofi</span>
               <ExternalLinkIcon class="icon" />
-            </NuxtLink>
-            <NuxtLink
+            </Button>
+            <Button
               to="/about"
-              class="btn about-us-link"
+              link
+              class="!text-primary hover:!text-primary-800 hover:!bg-secondary-100/80"
             >
-              <span>Struktur Organisasi</span>
+              <span class="text-primary">Struktur Organisasi</span>
               <ExternalLinkIcon class="icon" />
-            </NuxtLink>
+            </Button>
           </div>
         </div>
       </section>
 
-      <section class="flex flex-col gap-8 px-4 lg:px-20 py-8 lg:py-12">
+      <section
+        id="info"
+        class="flex flex-col gap-8 px-4 lg:px-20 py-8 lg:py-12"
+      >
         <h3 class="text-sm lg:text-base text-gray-500 font-light">
           Portal Informasi
         </h3>
@@ -151,68 +134,30 @@
           <h4 class="text-2xl lg:text-3xl text-primary font-bold">
             Terbaru
           </h4>
-          <time class="self-center text-sm text-gray-500 font-light mt-2">| 20 April 2022</time>
+          <p class="self-center text-sm text-gray-500 font-light mt-2">
+            | Ikuti perkembangan informasi dari kami
+          </p>
         </div>
 
         <div class="hidden lg:flex justify-center gap-4">
-          <article
+          <BlogCard
             v-for="blog in newestBlogs.slice(0, 4)"
             :key="blog.id"
-            class="blog-card"
-          >
-            <NuxtLink
-              :title="blog.title"
-              :to="{name: 'blogs-slug--id', params: {slug: blog.slug, id: blog.id}}"
-              class="absolute inset-0 w-full h-full"
-            />
-            <div class="thumbnail">
-              <img
-                :src="blog.thumbnailUrl"
-                :alt="blog.title"
-                class="thumbnail"
-              >
-            </div>
-            <h5 class="title">
-              {{ blog.title }}
-            </h5>
-            <div class="subtitle">
-              <span class="author">Kementrian Media dan Komunikasi</span>
-              <time class="">{{ blog.createdAt.toLocaleDateString() }}</time>
-            </div>
-          </article>
+            v-bind="blog"
+          />
         </div>
 
         <div class="flex lg:hidden flex-col gap-8">
           <h4 class="text-2xl lg:text-3xl text-primary font-bold">
             Pilihan
           </h4>
+
           <ul class="flex flex-col">
             <li
-              v-for="blog in pickedBlogs"
+              v-for="blog in pickedBlogs.slice(0, 4)"
               :key="blog.id"
-              class="group"
             >
-              <NuxtLink
-                :to="{name: 'blogs-slug--id', params: {slug: blog.slug, id: blog.id}}"
-                class="flex gap-4 p-2 group-hover:bg-primary/5 rounded-lg"
-              >
-                <div class="shrink-0 h-24 aspect-[7/5] bg-gray-300 border border-primary-50 overflow-hidden rounded-md">
-                  <img
-                    :src="blog.thumbnailUrl"
-                    :alt="blog.title"
-                    class="object-cover transition-transform group-hover:scale-110 group-hover:rotate-2"
-                  >
-                </div>
-                <div class="flex flex-col justify-center">
-                  <h5 class="text-gray-700 font-bold">
-                    {{ blog.title }}
-                  </h5>
-                  <div class="text-sm text-gray-500 flex items-center divide-x divide-gray-400">
-                    <span class="author">Kementrian Media dan Komunikasi</span>
-                    <time class="">{{ blog.createdAt.toLocaleDateString() }}</time>
-                  </div>
-                </div>
-              </NuxtLink>
+              <BlogListItem v-bind="blog" />
             </li>
           </ul>
 
@@ -232,31 +177,14 @@
             <time class="self-center text-sm text-gray-500 font-light mt-2">| 20 April 2022</time>
           </div>
           <div class="flex flex-col">
-            <article class="group">
-              <NuxtLink
+            <ul class="flex flex-col">
+              <li
                 v-for="blog in newestBlogs"
                 :key="blog.id"
-                :to="{name: 'blogs-slug--id', params: {slug: blog.slug, id: blog.id}}"
-                class="group flex gap-4 p-2 hover:bg-primary/5 rounded-lg"
               >
-                <div class="shrink-0 h-24 aspect-[7/5] bg-gray-300 border border-primary-50 overflow-hidden rounded-md">
-                  <img
-                    :src="`${blog.thumbnailUrl}?a`"
-                    :alt="blog.title"
-                    class="object-cover transition-transform group-hover:scale-110 group-hover:rotate-2"
-                  >
-                </div>
-                <div class="flex flex-col justify-center">
-                  <h5 class="text-gray-700 font-bold">
-                    {{ blog.title }}
-                  </h5>
-                  <div class="text-sm text-gray-500 flex items-center divide-x divide-gray-400">
-                    <span class="author">Kementrian Media dan Komunikasi</span>
-                    <time class="">{{ blog.createdAt.toLocaleDateString() }}</time>
-                  </div>
-                </div>
-              </NuxtLink>
-            </article>
+                <BlogListItem v-bind="blog" />
+              </li>
+            </ul>
           </div>
 
           <NuxtLink
@@ -273,36 +201,13 @@
               <li
                 v-for="blog in newestBlogs"
                 :key="blog.id"
-                class="group"
               >
-                <article>
-                  <NuxtLink
-                    :to="{name: 'blogs-slug--id', params: {slug: blog.slug, id: blog.id}}"
-                    class="flex gap-4 p-2 group-hover:bg-secondary/5 rounded-lg focus:ring active:ring ring-secondary-100 transition"
-                  >
-                    <div class="shrink-0 h-24 lg:h-32 aspect-[7/5] lg:aspect-[9/5] bg-gray-300 border border-secondary-50 overflow-hidden rounded-md">
-                      <img
-                        :src="`${blog.thumbnailUrl}?a`"
-                        :alt="blog.title"
-                        class="object-cover transition-transform group-hover:scale-110 group-hover:rotate-2"
-                      >
-                    </div>
-                    <div class="flex flex-col justify-center">
-                      <h5 class="text-gray-700 line-clamp-2 font-bold">
-                        {{ blog.title }}
-                      </h5>
-                      <div class="text-sm text-gray-500 flex items-center divide-x divide-gray-300">
-                        <span class="shrink break-all line-clamp-1 pr-2">Kementrian Media dan Komunikasi</span>
-                        <time class="shrink-0 pl-2 font-light">{{ blog.createdAt.toLocaleDateString() }}</time>
-                      </div>
-                    </div>
-                  </NuxtLink>
-                </article>
+                <BlogListItem v-bind="blog" />
               </li>
             </ul>
 
             <NuxtLink
-              to="/blogs"
+              :to="{name: 'blogs'}"
               class="btn self-start text-primary underline"
             >
               Tampilkan lebih banyak
@@ -316,34 +221,15 @@
               </h4>
             </div>
 
-            <article
+            <BlogCard
               v-for="blog in mostReadBlogs"
               :key="blog.id"
-              class="blog-card !h-64 self-start"
-            >
-              <NuxtLink
-                :title="blog.title"
-                :to="{name: 'blogs-slug--id', params: {slug: blog.slug, id: blog.id}}"
-                class="absolute inset-0 w-full h-full"
-              />
-              <div class="thumbnail">
-                <img
-                  :src="blog.thumbnailUrl"
-                  :alt="blog.title"
-                  class="thumbnail"
-                >
-              </div>
-              <h5 class="title">
-                {{ blog.title }}
-              </h5>
-              <div class="subtitle">
-                <span class="author">Kementrian Media dan Komunikasi</span>
-                <time class="">{{ blog.createdAt.toLocaleDateString() }}</time>
-              </div>
-            </article>
+              v-bind="blog"
+              class="!h-64 self-start"
+            />
 
             <NuxtLink
-              to="/blogs"
+              :to="{name: 'blogs', query: {category: 'most-read'}}"
               class="btn self-start text-primary underline"
             >
               Tampilkan lebih banyak
@@ -475,12 +361,3 @@ const slideBlogGallery = (reverse = false) => {
   return undefined;
 };
 </script>
-
-<style lang="sass" scoped>
-.about-us-link
-  @apply text-primary underline
-  &:hover
-    @apply text-primary-800 bg-secondary-100
-  .icon
-    @apply w-4 h-4
-</style>

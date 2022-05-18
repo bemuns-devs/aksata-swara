@@ -3,7 +3,7 @@
     <div class="flex flex-col gap-8 w-full max-w-screen-xl mx-auto py-8">
       <form
         class="flex gap-4"
-        @submit.prevent=""
+        @submit.prevent="onSubmit"
       >
         <div class="grow flex">
           <input
@@ -13,9 +13,9 @@
             class="w-full"
           >
         </div>
-        <select name="kategori">
+        <select>
           <option
-            selected
+            :selected="!categories.includes(String($route.params.blogs))"
             value=""
           >
             Pilih kategori...
@@ -23,63 +23,42 @@
           <option
             v-for="category in categories"
             :key="category"
-            :value="category"
+            :value="sentenceCase(category)"
+            :selected="$route.params.blogs === category"
           >
-            {{ category }}
+            {{ sentenceCase(category) }}
           </option>
         </select>
-        <button
+        <Button
+          label="Cari"
           type="submit"
-          class="btn btn--filled"
-        >
-          Cari
-        </button>
+          filled
+        />
       </form>
 
       <ul class="flex flex-col">
         <li
           v-for="blog in blogs"
           :key="blog.id"
-          class="group"
         >
-          <article>
-            <NuxtLink
-              :to="{name: 'blogs-slug--id', params: {slug: blog.slug, id: blog.id}}"
-              class="flex gap-4 p-2 group-hover:bg-secondary/5 rounded-lg focus:ring active:ring ring-secondary-100 transition"
-            >
-              <div class="shrink-0 h-24 lg:h-32 aspect-[7/5] lg:aspect-[9/5] bg-gray-300 border border-secondary-50 overflow-hidden rounded-md">
-                <img
-                  :src="`${blog.thumbnailUrl}?a`"
-                  :alt="blog.title"
-                  class="object-cover transition-transform group-hover:scale-110 group-hover:rotate-2"
-                >
-              </div>
-              <div class="flex flex-col justify-center">
-                <h5 class="text-gray-700 line-clamp-2 font-bold">
-                  {{ blog.title }}
-                </h5>
-                <div class="text-sm text-gray-500 flex items-center divide-x divide-gray-300">
-                  <span class="shrink break-all line-clamp-1 pr-2">Kementrian Media dan Komunikasi</span>
-                  <time class="shrink-0 pl-2 font-light">{{ blog.createdAt.toLocaleDateString() }}</time>
-                </div>
-              </div>
-            </NuxtLink>
-          </article>
+          <BlogListItem v-bind="blog" />
         </li>
       </ul>
 
-      <NuxtLink
+      <Button
         to="/blogs"
-        class="btn self-start text-primary underline"
+        link
+        class="self-start text-primary"
       >
         Tampilkan lebih banyak
-      </NuxtLink>
+      </Button>
     </div>
   </main>
 </template>
 
 <script lang="ts" setup>
 import { nanoid } from 'nanoid';
+import { sentenceCase } from 'change-case';
 
 interface Blog {
   id: string;
@@ -120,10 +99,14 @@ const blogs: Blog[] = [
   },
 ];
 
-const categories = ['Komunikasi',
-  'Media',
-  'Pemerintahan',
-  'Pendidikan',
-  'Sosial',
+const categories = [
+  'komunikasi',
+  'politik',
+  'pendidikan',
+  'sosial',
 ];
+
+const onSubmit = (e: Event) => {
+  console.log(e);
+};
 </script>

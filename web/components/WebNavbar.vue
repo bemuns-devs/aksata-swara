@@ -14,43 +14,43 @@
     </div>
 
     <div class="lg:hidden">
-      <button class="btn">
+      <Button>
         <MenuIcon class="w-6 h-6 text-gray-700" />
-      </button>
+      </Button>
     </div>
 
     <ul class="hidden lg:flex items-center gap-4">
       <li>
-        <NuxtLink
+        <Button
+          label="Beranda"
           to="/"
-          class="btn"
-        >
-          Beranda
-        </NuxtLink>
+        />
       </li>
 
       <li>
-        <NuxtLink
+        <Button
+          label="Tentang"
           to="/about"
-          class="btn"
-        >
-          Tentang
-        </NuxtLink>
+        />
       </li>
 
       <li>
-        <button class="btn">
-          Unit
-        </button>
+        <Button
+          label="Informasi"
+          :to="{name: 'blogs'}"
+        />
+      </li>
+
+      <li>
+        <Button label="Unit" />
       </li>
 
       <li class="ml-4">
-        <a
-          href="#"
-          class="btn btn--filled"
-        >
-          Masukkan Kode Info
-        </a>
+        <Button
+          label="Masukkan Kode Info"
+          to="#"
+          filled
+        />
       </li>
     </ul>
   </nav>
