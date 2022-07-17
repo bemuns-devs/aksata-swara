@@ -1,0 +1,6 @@
+{
+  "files.exclude": {
+    "admin-dashboard/": true,
+    "web/": true,
+  }
+}

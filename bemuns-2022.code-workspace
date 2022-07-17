@@ -1,0 +1,19 @@
+{
+  "folders": [
+    {
+      "path": "web"
+    },
+    {
+      "path": "admin-dashboard"
+    },
+    {
+      "path": ".",
+      "name": "$root"
+    }
+  ],
+  "settings": {
+    "conventionalCommits.scopes": [
+      "cms"
+    ]
+  }
+}
