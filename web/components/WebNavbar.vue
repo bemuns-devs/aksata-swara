@@ -15,7 +15,10 @@
 
     <div class="lg:hidden">
       <Button>
-        <MenuIcon class="w-6 h-6 text-gray-700" />
+        <Icon
+          icon="heroicons-solid:menu"
+          class="w-6 h-6 text-gray-700"
+        />
       </Button>
     </div>
 
@@ -57,7 +60,7 @@
 </template>
 
 <script lang="ts" setup>
-import { MenuIcon } from '@heroicons/vue/solid';
+import { Icon } from '@iconify/vue';
 import { useWindowScroll } from '@vueuse/core';
 
 const { y } = useWindowScroll();

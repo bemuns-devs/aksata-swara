@@ -15,18 +15,18 @@
         </div>
         <select>
           <option
-            :selected="!categories.includes(String($route.params.blogs))"
+            :selected="!categoriesName.includes(String($route.query.category))"
             value=""
           >
             Pilih kategori...
           </option>
           <option
             v-for="category in categories"
-            :key="category"
-            :value="sentenceCase(category)"
-            :selected="$route.params.blogs === category"
+            :key="category.id"
+            :value="sentenceCase(category.name)"
+            :selected="$route.params.blogs === category.name"
           >
-            {{ sentenceCase(category) }}
+            {{ sentenceCase(category.name) }}
           </option>
         </select>
         <Button
@@ -36,77 +36,61 @@
         />
       </form>
 
-      <ul class="flex flex-col">
-        <li
-          v-for="blog in blogs"
-          :key="blog.id"
-        >
-          <BlogListItem v-bind="blog" />
-        </li>
-      </ul>
+      <template v-if="blogsLoading">
+        <p>Loading...</p>
+      </template>
 
-      <Button
-        to="/blogs"
-        link
-        class="self-start text-primary"
+      <template v-else-if="blogs?.length">
+        <ul class="flex flex-col">
+          <li
+            v-for="blog in blogs"
+            :key="blog.id"
+          >
+            <BlogListItem
+              :title="blog.title"
+              :img-src="blog.featured_image"
+              :slug="blog.slug"
+              :date="blog.date_created"
+            />
+          </li>
+        </ul>
+
+        <Button
+          to="/blogs"
+          link
+          class="self-start text-primary"
+        >
+          Tampilkan lebih banyak
+        </Button>
+      </template>
+
+      <div
+        v-else
+        class="min-h-[40vh]"
       >
-        Tampilkan lebih banyak
-      </Button>
+        <p class="text-xl text-center text-gray-500 mt-20">
+          Tidak ada artikel yang dapat ditampilkan 🙏
+        </p>
+      </div>
     </div>
   </main>
 </template>
 
 <script lang="ts" setup>
-import { nanoid } from 'nanoid';
 import { sentenceCase } from 'change-case';
+import { FromAPI } from '~~/api/types';
 
-interface Blog {
-  id: string;
-  title: string;
-  thumbnailUrl: string;
-  createdAt: Date;
-  slug: string;
-}
+const { data: blogs, loading: blogsLoading } = useBlog();
 
-const blogs: Blog[] = [
-  {
-    id: nanoid(),
-    title: 'Terlalu Visioner, Steve Jobs Tak Mau iPhone Pertama Punya Slot Kartu SIM',
-    thumbnailUrl: 'https://picsum.photos/300/300',
-    createdAt: new Date(),
-    slug: 'terlalu-visioner-steve-jobs-tak-mau-iphone-pertama-punya-slot-kartu-sim',
-  },
-  {
-    id: nanoid(),
-    title: 'Terlalu Visioner, Steve Jobs Tak Mau iPhone Pertama Punya Slot Kartu SIM',
-    thumbnailUrl: 'https://picsum.photos/300/300',
-    createdAt: new Date(),
-    slug: 'terlalu-visioner-steve-jobs-tak-mau-iphone-pertama-punya-slot-kartu-sim',
-  },
-  {
-    id: nanoid(),
-    title: 'Terlalu Visioner, Steve Jobs Tak Mau iPhone Pertama Punya Slot Kartu SIM',
-    thumbnailUrl: 'https://picsum.photos/300/300',
-    createdAt: new Date(),
-    slug: 'terlalu-visioner-steve-jobs-tak-mau-iphone-pertama-punya-slot-kartu-sim',
-  },
-  {
-    id: nanoid(),
-    title: 'Terlalu Visioner, Steve Jobs Tak Mau iPhone Pertama Punya Slot Kartu SIM',
-    thumbnailUrl: 'https://picsum.photos/300/300',
-    createdAt: new Date(),
-    slug: 'terlalu-visioner-steve-jobs-tak-mau-iphone-pertama-punya-slot-kartu-sim',
-  },
-];
+const categories: FromAPI.BlogCategory[] = [];
 
-const categories = [
-  'komunikasi',
-  'politik',
-  'pendidikan',
-  'sosial',
-];
+const categoriesName = computed(() => categories.map((el) => el.name));
 
 const onSubmit = (e: Event) => {
   console.log(e);
 };
+
+useHead({
+  title: 'Informasi',
+});
 </script>

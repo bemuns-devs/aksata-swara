@@ -31,21 +31,44 @@
           — Informasi pilihan
         </h2>
 
-        <div
+        <ul
           ref="blogGalleryRef"
-          class="grow max-w-full flex flex-nowrap items-center gap-4 p-8 overflow-x-auto overflow-y-hidden"
+          class="w-full flex flex-nowrap items-center gap-4 p-8 overflow-x-auto overflow-y-hidden"
         >
-          <BlogCard
-            v-for="blog in pickedBlogs"
-            :key="blog.id"
-            v-bind="blog"
-          />
-          <div class="blog-card justify-center">
-            <Button :to="{hash: '#blogs'}">
-              Lihat informasi lainnya...
-            </Button>
+          <template v-if="featuredBlogs.length">
+            <li
+              v-for="blog in featuredBlogs"
+              :key="blog.id"
+            >
+              <BlogCard
+                :title="blog.title"
+                :img-src="blog.featured_image"
+                :slug="blog.slug"
+                :date="blog.date_created"
+              />
+            </li>
+          </template>
+
+          <div
+            class="blog-card justify-center hover:!bg-gray-50"
+            :class="{'w-full max-w-md mx-auto aspect-none': !featuredBlogs.length}"
+          >
+            <div
+              v-if="!featuredBlogs.length"
+              class="py-4"
+            >
+              <p class="text-center">
+                Tidak ada informasi yang ditampilkan untuk saat ini 🙏
+              </p>
+            </div>
+
+            <Button
+              label="Lihat informasi lainnya..."
+              :to="{name: 'blogs'}"
+              filled
+            />
           </div>
-        </div>
+        </ul>
 
         <div class="flex gap-4 p-2">
           <Button
@@ -53,14 +76,20 @@
             rounded
             @click="slideBlogGallery(true)"
           >
-            <ArrowLeftIcon class="w-5 h-5" />
+            <Icon
+              icon="heroicons-solid:arrow-left"
+              class="w-5 h-5"
+            />
           </Button>
           <Button
             filled
             rounded
             @click="slideBlogGallery()"
           >
-            <ArrowRightIcon class="w-5 h-5" />
+            <Icon
+              icon="heroicons-solid:arrow-light"
+              class="w-5 h-5"
+            />
           </Button>
         </div>
       </div>
@@ -92,7 +121,10 @@
               class="!text-primary hover:!text-primary-800 hover:!bg-secondary-100/80"
             >
               <span class="text-primary">Visi Misi</span>
-              <ExternalLinkIcon class="icon" />
+              <Icon
+                icon="heroicons-solid:external-link"
+                class="icon"
+              />
             </Button>
             <Button
               to="/about"
@@ -100,7 +132,10 @@
               class="!text-primary hover:!text-primary-800 hover:!bg-secondary-100/80"
             >
               <span class="text-primary">Nilai dan Budaya Kerja</span>
-              <ExternalLinkIcon class="icon" />
+              <Icon
+                icon="heroicons-solid:external-link"
+                class="icon"
+              />
             </Button>
             <Button
               to="/about"
@@ -108,7 +143,10 @@
               class="!text-primary hover:!text-primary-800 hover:!bg-secondary-100/80"
             >
               <span class="text-primary">Filosofi</span>
-              <ExternalLinkIcon class="icon" />
+              <Icon
+                icon="heroicons-solid:external-link"
+                class="icon"
+              />
             </Button>
             <Button
               to="/about"
@@ -116,7 +154,10 @@
               class="!text-primary hover:!text-primary-800 hover:!bg-secondary-100/80"
             >
               <span class="text-primary">Struktur Organisasi</span>
-              <ExternalLinkIcon class="icon" />
+              <Icon
+                icon="heroicons-solid:external-link"
+                class="icon"
+              />
             </Button>
           </div>
         </div>
@@ -139,12 +180,28 @@
           </p>
         </div>
 
-        <div class="hidden lg:flex justify-center gap-4">
-          <BlogCard
-            v-for="blog in newestBlogs.slice(0, 4)"
+        <ol
+          v-if="newestBlogs.length"
+          class="hidden lg:flex justify-start gap-4"
+        >
+          <li
+            v-for="blog in newestBlogsParts.top4"
             :key="blog.id"
-            v-bind="blog"
-          />
+          >
+            <BlogCard
+              :title="blog.title"
+              :img-src="blog.featured_image"
+              :slug="blog.slug"
+              :date="blog.date_created"
+            />
+          </li>
+        </ol>
+
+        <div
+          v-else
+          class="hidden lg:flex"
+        >
+          <p>Tidak ada informasi yang dapat ditampilkan 🙏</p>
         </div>
 
         <div class="flex lg:hidden flex-col gap-8">
@@ -154,19 +211,23 @@
 
           <ul class="flex flex-col">
             <li
-              v-for="blog in pickedBlogs.slice(0, 4)"
+              v-for="blog in featuredBlogs.slice(0, 4)"
               :key="blog.id"
             >
-              <BlogListItem v-bind="blog" />
+              <BlogListItem
+                :title="blog.title"
+                :img-src="blog.featured_image"
+                :slug="blog.slug"
+                :date="blog.date_created"
+              />
             </li>
           </ul>
 
-          <NuxtLink
+          <Button
+            label="Lihat informasi pilihan lainnya"
             to="/blogs"
-            class="btn self-start text-primary underline"
-          >
-            Lihat informasi pilihan lainnya
-          </NuxtLink>
+            link
+          />
         </div>
 
         <div class="flex lg:hidden flex-col gap-8">
@@ -182,36 +243,48 @@
                 v-for="blog in newestBlogs"
                 :key="blog.id"
               >
-                <BlogListItem v-bind="blog" />
+                <BlogListItem
+                  :title="blog.title"
+                  :img-src="blog.featured_image"
+                  :slug="blog.slug"
+                  :date="blog.date_created"
+                />
               </li>
             </ul>
           </div>
 
-          <NuxtLink
+          <Button
+            label="Tampilkan lebih banyak"
             to="/blogs"
-            class="btn self-start text-primary underline"
-          >
-            Tampilkan lebih banyak
-          </NuxtLink>
+            link
+          />
         </div>
 
         <div class="hidden lg:flex gap-8">
           <div class="grow flex flex-col gap-8">
-            <ul class="flex flex-col">
+            <ol
+              v-if="newestBlogsParts.rest.length"
+              class="flex flex-col"
+            >
               <li
-                v-for="blog in newestBlogs"
+                v-for="blog in newestBlogsParts.rest"
                 :key="blog.id"
               >
-                <BlogListItem v-bind="blog" />
+                <BlogListItem
+                  :title="blog.title"
+                  :img-src="blog.featured_image"
+                  :slug="blog.slug"
+                  :date="blog.date_created"
+                />
               </li>
-            </ul>
+            </ol>
 
-            <NuxtLink
+            <Button
+              label="Lihat lebih banyak"
               :to="{name: 'blogs'}"
-              class="btn self-start text-primary underline"
-            >
-              Tampilkan lebih banyak
-            </NuxtLink>
+              link
+              class="self-start"
+            />
           </div>
 
           <div class="shrink-0 flex flex-col gap-4">
@@ -221,19 +294,35 @@
               </h4>
             </div>
 
-            <BlogCard
-              v-for="blog in mostReadBlogs"
-              :key="blog.id"
-              v-bind="blog"
-              class="!h-64 self-start"
-            />
+            <template v-if="mostReadBlogs.length">
+              <ol>
+                <li
+                  v-for="blog in mostReadBlogs"
+                  :key="blog.id"
+                  class="!h-64 self-start"
+                >
+                  <BlogCard
+                    :title="blog.title"
+                    :img-src="blog.featured_image"
+                    :slug="blog.slug"
+                    :date="blog.date_created"
+                  />
+                </li>
+              </ol>
 
-            <NuxtLink
-              :to="{name: 'blogs', query: {category: 'most-read'}}"
-              class="btn self-start text-primary underline"
-            >
-              Tampilkan lebih banyak
-            </NuxtLink>
+              <Button
+                label="Lihat lebih banyak"
+                :to="{name: 'blogs', query: {category: 'most-read'}}"
+                link
+                class="self-start"
+              />
+            </template>
+
+            <template v-else>
+              <p class="text-gray-500 text-center">
+                Belum ada informasi yang dapat ditampilkan 🙏
+              </p>
+            </template>
           </div>
         </div>
       </section>
@@ -242,102 +331,19 @@
 </template>
 
 <script lang="ts" setup>
-import { ArrowLeftIcon, ArrowRightIcon, ExternalLinkIcon } from '@heroicons/vue/solid';
-import { nanoid } from 'nanoid';
+import { Icon } from '@iconify/vue';
+import { Blog } from '~~/api/models/Blog';
 
-interface Blog {
-  id: string;
-  title: string;
-  thumbnailUrl: string;
-  createdAt: Date;
-  slug: string;
-}
+const featuredBlogs = ref<Blog[]>([]);
 
-const pickedBlogs: Blog[] = [
-  {
-    id: nanoid(),
-    title: 'Terlalu Visioner, Steve Jobs Tak Mau iPhone Pertama Punya Slot Kartu SIM',
-    thumbnailUrl: 'https://picsum.photos/300/300',
-    createdAt: new Date(),
-    slug: 'terlalu-visioner-steve-jobs-tak-mau-iphone-pertama-punya-slot-kartu-sim',
-  },
-  {
-    id: nanoid(),
-    title: 'Terlalu Visioner, Steve Jobs Tak Mau iPhone Pertama Punya Slot Kartu SIM',
-    thumbnailUrl: 'https://picsum.photos/300/300',
-    createdAt: new Date(),
-    slug: 'terlalu-visioner-steve-jobs-tak-mau-iphone-pertama-punya-slot-kartu-sim',
-  },
-  {
-    id: nanoid(),
-    title: 'Terlalu Visioner, Steve Jobs Tak Mau iPhone Pertama Punya Slot Kartu SIM',
-    thumbnailUrl: 'https://picsum.photos/300/300',
-    createdAt: new Date(),
-    slug: 'terlalu-visioner-steve-jobs-tak-mau-iphone-pertama-punya-slot-kartu-sim',
-  },
-  {
-    id: nanoid(),
-    title: 'Terlalu Visioner, Steve Jobs Tak Mau iPhone Pertama Punya Slot Kartu SIM',
-    thumbnailUrl: 'https://picsum.photos/300/300',
-    createdAt: new Date(),
-    slug: 'terlalu-visioner-steve-jobs-tak-mau-iphone-pertama-punya-slot-kartu-sim',
-  },
-];
+const newestBlogs = ref<Blog[]>([]);
 
-const newestBlogs: Blog[] = [
-  {
-    id: nanoid(),
-    title: 'Selamat Datang Mahasiswa Baru jalur SBMPTN Tahun 2022!',
-    thumbnailUrl: 'https://picsum.photos/300/300',
-    createdAt: new Date(),
-    slug: 'terlalu-visioner-steve-jobs-tak-mau-iphone-pertama-punya-slot-kartu-sim',
-  },
-  {
-    id: nanoid(),
-    title: 'Selamat Datang Mahasiswa Baru jalur SBMPTN Tahun 2022!',
-    thumbnailUrl: 'https://picsum.photos/300/300',
-    createdAt: new Date(),
-    slug: 'terlalu-visioner-steve-jobs-tak-mau-iphone-pertama-punya-slot-kartu-sim',
-  },
-  {
-    id: nanoid(),
-    title: 'Selamat Datang Mahasiswa Baru jalur SBMPTN Tahun 2022!',
-    thumbnailUrl: 'https://picsum.photos/300/300',
-    createdAt: new Date(),
-    slug: 'terlalu-visioner-steve-jobs-tak-mau-iphone-pertama-punya-slot-kartu-sim',
-  },
-  {
-    id: nanoid(),
-    title: 'Selamat Datang Mahasiswa Baru jalur SBMPTN Tahun 2022!',
-    thumbnailUrl: 'https://picsum.photos/300/300',
-    createdAt: new Date(),
-    slug: 'terlalu-visioner-steve-jobs-tak-mau-iphone-pertama-punya-slot-kartu-sim',
-  },
-];
+const mostReadBlogs = ref<Blog[]>([]);
 
-const mostReadBlogs: Blog[] = [
-  {
-    id: nanoid(),
-    title: 'Selamat Datang Mahasiswa Baru jalur SBMPTN Tahun 2022!',
-    thumbnailUrl: 'https://picsum.photos/300/300?b',
-    createdAt: new Date(),
-    slug: 'terlalu-visioner-steve-jobs-tak-mau-iphone-pertama-punya-slot-kartu-sim',
-  },
-  {
-    id: nanoid(),
-    title: 'Selamat Datang Mahasiswa Baru jalur SBMPTN Tahun 2022!',
-    thumbnailUrl: 'https://picsum.photos/300/300?b',
-    createdAt: new Date(),
-    slug: 'terlalu-visioner-steve-jobs-tak-mau-iphone-pertama-punya-slot-kartu-sim',
-  },
-  {
-    id: nanoid(),
-    title: 'Selamat Datang Mahasiswa Baru jalur SBMPTN Tahun 2022!',
-    thumbnailUrl: 'https://picsum.photos/300/300?b',
-    createdAt: new Date(),
-    slug: 'terlalu-visioner-steve-jobs-tak-mau-iphone-pertama-punya-slot-kartu-sim',
-  },
-];
+const newestBlogsParts = computed(() => ({
+  top4: newestBlogs.value.slice(0, 4),
+  rest: newestBlogs.value.slice(4),
+}));
 
 const blogGalleryRef = ref<HTMLDivElement | null>(null);
 

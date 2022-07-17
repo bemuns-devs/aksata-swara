@@ -2,14 +2,13 @@
   <article class="blog-card">
     <NuxtLink
       :title="title"
-      :to="{name: 'blogs-slug--id', params: {blogs: 'blogs', slug: slug, id: id}}"
+      :to="{name: 'blogs-slug', params: {slug}}"
       class="click-helper"
     />
     <div class="thumbnail">
       <img
-        :src="thumbnailUrl"
+        :src="`${imgSrc}?width=500`"
         :alt="title"
-        class="thumbnail"
       >
     </div>
     <h5 class="title">
@@ -17,28 +16,24 @@
     </h5>
     <div class="subtitle">
       <span class="author">Kementrian Media dan Komunikasi</span>
-      <time class="">{{ createdAt.toLocaleDateString() }}</time>
+      <time class="">{{ date.toLocaleDateString() }}</time>
     </div>
   </article>
 </template>
 
 <script lang="ts" setup>
-import { paramCase } from 'change-case';
-
-const props = defineProps<{
-  id: string;
+defineProps<{
   title: string;
-  thumbnailUrl: string;
-  createdAt: Date;
+  imgSrc: string;
+  slug: string;
+  date: Date;
 }>();
-
-const slug = computed(() => paramCase(props.title));
 </script>
 
 <style lang="sass">
 .blog-card
   @apply shrink-0 relative flex flex-col overflow-hidden
-  @apply h-72 aspect-[6/5] px-4 py-3 bg-white rounded-lg border border-gray-50 shadow transition
+  @apply h-72 max-h-full aspect-[6/5] px-4 py-3 bg-white rounded-lg border border-gray-50 shadow transition
   &:hover
     @apply bg-secondary-50 border-transparent shadow-lg
     .subtitle
@@ -56,7 +51,7 @@ const slug = computed(() => paramCase(props.title));
   .thumbnail
     @apply grow w-full rounded-md overflow-hidden pointer-events-none
     img
-      @apply object-cover transition-transform
+      @apply h-full object-cover transition-transform
   .title
     @apply shrink-0 text-ellipsis line-clamp-2 font-medium flex items-center pt-2 pb-1 overflow-hidden
   .subtitle
