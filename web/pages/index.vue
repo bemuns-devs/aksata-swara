@@ -42,8 +42,8 @@
             >
               <BlogCard
                 :title="blog.title"
-                :img-src="blog.featured_image"
-                :slug="blog.slug"
+                :img-src="getAssetUrl(blog.featured_image)"
+                :slug="blogFormatter.getSlug(blog)"
                 :date="blog.date_created"
               />
             </li>
@@ -190,8 +190,8 @@
           >
             <BlogCard
               :title="blog.title"
-              :img-src="blog.featured_image"
-              :slug="blog.slug"
+              :img-src="getAssetUrl(blog.featured_image)"
+              :slug="blogFormatter.getSlug(blog)"
               :date="blog.date_created"
             />
           </li>
@@ -216,8 +216,8 @@
             >
               <BlogListItem
                 :title="blog.title"
-                :img-src="blog.featured_image"
-                :slug="blog.slug"
+                :img-src="getAssetUrl(blog.featured_image)"
+                :slug="blogFormatter.getSlug(blog)"
                 :date="blog.date_created"
               />
             </li>
@@ -245,8 +245,8 @@
               >
                 <BlogListItem
                   :title="blog.title"
-                  :img-src="blog.featured_image"
-                  :slug="blog.slug"
+                  :img-src="getAssetUrl(blog.featured_image)"
+                  :slug="blogFormatter.getSlug(blog)"
                   :date="blog.date_created"
                 />
               </li>
@@ -272,8 +272,8 @@
               >
                 <BlogListItem
                   :title="blog.title"
-                  :img-src="blog.featured_image"
-                  :slug="blog.slug"
+                  :img-src="getAssetUrl(blog.featured_image)"
+                  :slug="blogFormatter.getSlug(blog)"
                   :date="blog.date_created"
                 />
               </li>
@@ -303,8 +303,8 @@
                 >
                   <BlogCard
                     :title="blog.title"
-                    :img-src="blog.featured_image"
-                    :slug="blog.slug"
+                    :img-src="getAssetUrl(blog.featured_image)"
+                    :slug="blogFormatter.getSlug(blog)"
                     :date="blog.date_created"
                   />
                 </li>
@@ -319,7 +319,7 @@
             </template>
 
             <template v-else>
-              <p class="text-gray-500 text-center">
+              <p class="text-gray-500 h-[40vh] text-center align-middle">
                 Belum ada informasi yang dapat ditampilkan 🙏
               </p>
             </template>
@@ -332,11 +332,13 @@
 
 <script lang="ts" setup>
 import { Icon } from '@iconify/vue';
-import { Blog } from '~~/api/models/Blog';
+import {
+  Blog, blogFormatter, Blogs, getAssetUrl,
+} from '~~/services/cms';
 
-const featuredBlogs = ref<Blog[]>([]);
+const { data: featuredBlogs } = useLazyAsyncData(() => Blogs.featured(), { default: () => [] as Blog[] });
 
-const newestBlogs = ref<Blog[]>([]);
+const { data: newestBlogs } = useLazyAsyncData(() => Blogs.list({ sort: ['date_created'] }), { default: () => [] as Blog[] });
 
 const mostReadBlogs = ref<Blog[]>([]);
 

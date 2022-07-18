@@ -49,9 +49,9 @@ defineProps<{
   .click-helper
     @apply absolute inset-0 w-full h-full
   .thumbnail
-    @apply grow w-full rounded-md overflow-hidden pointer-events-none
+    @apply grow w-full bg-primary-900/20 rounded-md overflow-hidden pointer-events-none
     img
-      @apply h-full object-cover transition-transform
+      @apply h-full object-cover mx-auto transition-transform
   .title
     @apply shrink-0 text-ellipsis line-clamp-2 font-medium flex items-center pt-2 pb-1 overflow-hidden
   .subtitle

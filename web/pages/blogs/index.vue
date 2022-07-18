@@ -8,23 +8,24 @@
         <div class="grow flex">
           <input
             type="search"
-            name="k"
+            name="search"
             placeholder="Cari informasi disini..."
+            :value="qSearch"
             class="w-full"
           >
         </div>
-        <select>
+        <select name="category">
           <option
-            :selected="!categoriesName.includes(String($route.query.category))"
+            :selected="!categoriesName.includes(qCategory)"
             value=""
           >
-            Pilih kategori...
+            Semua
           </option>
           <option
             v-for="category in categories"
             :key="category.id"
-            :value="sentenceCase(category.name)"
-            :selected="$route.params.blogs === category.name"
+            :value="category.name"
+            :selected="qCategory === category.name"
           >
             {{ sentenceCase(category.name) }}
           </option>
@@ -48,8 +49,8 @@
           >
             <BlogListItem
               :title="blog.title"
-              :img-src="blog.featured_image"
-              :slug="blog.slug"
+              :img-src="getAssetUrl(blog.featured_image)"
+              :slug="blogFormatter.getSlug(blog)"
               :date="blog.date_created"
             />
           </li>
@@ -78,16 +79,34 @@
 
 <script lang="ts" setup>
 import { sentenceCase } from 'change-case';
-import { FromAPI } from '~~/api/types';
+import {
+  BlogCategories, BlogCategoryInList, blogFormatter, Blogs, getAssetUrl,
+} from '~~/services/cms';
 
-const { data: blogs, loading: blogsLoading } = useBlog();
+const route = useRoute();
+const router = useRouter();
 
-const categories: FromAPI.BlogCategory[] = [];
+const qSearch = computed(() => route.query.search && String(route.query.search));
+const qCategory = computed(() => route.query.category && String(route.query.category));
+const { data: blogs, pending: blogsLoading } = useLazyAsyncData(() => Blogs
+  .list({ filter: qCategory.value && ({ category: { name: qCategory.value } }), search: qSearch.value }), {
+  watch: [qSearch, qCategory],
+});
 
-const categoriesName = computed(() => categories.map((el) => el.name));
+const { data: categories } = useLazyAsyncData(() => BlogCategories.list(), { default: () => [] as BlogCategoryInList[] });
 
-const onSubmit = (e: Event) => {
-  console.log(e);
+const categoriesName = computed(() => categories.value.map((el) => el.name));
+
+const onSubmit = (e: FormDataEvent) => {
+  const formElm = e.target as HTMLFormElement;
+  const category = (formElm.elements.namedItem('category') as HTMLSelectElement).value;
+  const search = (formElm.elements.namedItem('search') as HTMLSelectElement).value;
+  router.push({
+    query: {
+      search,
+      category,
+    },
+  });
 };
 
 useHead({

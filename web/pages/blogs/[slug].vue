@@ -27,7 +27,7 @@
           </div>
 
           <img
-            :src="`${blog.featured_image}?width=900`"
+            :src="`${getAssetUrl(blog.featured_image)}?width=900`"
             :alt="blog.title"
             class="w-full h-[50vh] lg:h-[70vh] object-cover bg-gray-300 shadow-lg"
           >
@@ -38,7 +38,7 @@
         <!-- eslint-disable vue/no-v-html -->
         <main
           class="prose lg:prose-lg"
-          v-html="marked(blog.content)"
+          v-html="marked(blog.content || '')"
         />
         <!-- eslint-enable vue/no-v-html -->
 
@@ -87,7 +87,7 @@
           <BlogCard
             :title="blog.title"
             :img-src="blog.featured_image"
-            :slug="blog.slug"
+            :slug="blogFormatter.getSlug(blog)"
             :date="blog.date_created"
           />
         </li>
@@ -100,7 +100,7 @@
           class="group"
         >
           <NuxtLink
-            :to="{name: 'blogs-slug', params: {slug: el.slug}}"
+            :to="{name: 'blogs-slug', params: {slug: blogFormatter.getSlug(el)}}"
             class="flex gap-4 p-2 group-hover:bg-primary/5 rounded-lg"
           >
             <div class="shrink-0 h-24 aspect-[7/5] bg-gray-300 border border-primary-50 overflow-hidden rounded-md">
@@ -137,6 +137,9 @@
 <script lang="ts" setup>
 import { Icon } from '@iconify/vue';
 import { marked } from 'marked';
+import {
+  Blog, blogFormatter, Blogs, getAssetUrl,
+} from '~~/services/cms';
 
 const route = useRoute();
 
@@ -144,9 +147,9 @@ const route = useRoute();
 const shareUrl = computed(() => location?.href);
 const { copy } = useClipboard({ source: shareUrl });
 
-const { data: blog } = useBlogBySlug(route.params.slug as string);
+const { data: blog } = useLazyAsyncData(() => Blogs.bySlug(String(route.params.slug)), { default: () => ({} as Blog) });
 
-const { data: relatedBlogs } = useBlog();
+const relatedBlogs = ref<Blog[]>([]);
 
 const onCopy = () => copy()
   .then(() => alert('Link berhasil disalin!'));
@@ -163,7 +166,7 @@ const onShareClick = () => {
 };
 
 useHead(({
-  title: () => blog.value?.title,
+  title: (() => blog.value.title) as unknown as string,
 }));
 </script>
 

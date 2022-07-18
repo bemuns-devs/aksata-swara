@@ -7,17 +7,17 @@ module.exports = {
   },
   extends: [
     'plugin:vue/vue3-recommended',
-    // 'eslint:recommended',
     'airbnb-base',
-    '@vue/typescript/recommended',
+    // '@vue/typescript/recommended',
   ],
   parserOptions: {
+    ecmaVersion: 'latest',
     parser: '@typescript-eslint/parser',
-    ecmaVersion: 2021,
+    sourceType: 'module',
   },
   plugins: [
-    '@typescript-eslint',
     'vue',
+    '@typescript-eslint',
   ],
   rules: {
     // ts
@@ -43,5 +43,7 @@ module.exports = {
     }],
     'no-unused-vars': 'off',
     'no-undef': 'off',
+
+    'no-underscore-dangle': 'off',
   },
 };

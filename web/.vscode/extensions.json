@@ -1,11 +1,9 @@
 {
   "recommendations": [
-    "vue.volar",
-    "editorconfig.editorconfig",
-    "vivaxy.vscode-conventional-commits",
     "dbaeumer.vscode-eslint",
+    "csstools.postcss",
     "syler.sass-indented",
-    "jcbuisson.vue",
-    "bradlc.vscode-tailwindcss"
-  ],
+    "bradlc.vscode-tailwindcss",
+    "Vue.volar"
+  ]
 }

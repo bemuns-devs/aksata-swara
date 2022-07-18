@@ -61,7 +61,6 @@
 
 <script lang="ts" setup>
 import { Icon } from '@iconify/vue';
-import { useWindowScroll } from '@vueuse/core';
 
 const { y } = useWindowScroll();
 </script>

@@ -4,11 +4,12 @@ import { defineNuxtConfig } from 'nuxt';
 export default defineNuxtConfig({
   runtimeConfig: {
     public: {
-      APIBaseUrl: process.env.DIRECTUS_URL,
+      DirectusURL: process.env.NUXT_DIRECTUS_URL,
+      DirectusToken: process.env.NUXT_DIRECTUS_TOKEN,
     },
   },
   css: [
-    '@/assets/css/main.sass',
+    '@/assets/styles/main.sass',
   ],
   modules: [
     '@nuxtjs/tailwindcss',

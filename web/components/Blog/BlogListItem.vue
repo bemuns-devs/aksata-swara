@@ -4,11 +4,11 @@
       :to="{name: 'blogs-slug', params: {slug}}"
       class="flex gap-4 p-2 group-hover:bg-secondary/5 rounded-lg focus:ring active:ring ring-secondary-100 transition"
     >
-      <div class="shrink-0 h-24 lg:h-32 aspect-[7/5] lg:aspect-[9/5] bg-gray-300 border border-secondary-50 overflow-hidden rounded-md">
+      <div class="shrink-0 h-24 lg:h-32 aspect-[7/5] lg:aspect-[9/5] bg-primary-900/20 border border-secondary-50 overflow-hidden rounded-md">
         <img
           :src="`${imgSrc}?width=500`"
           :alt="title"
-          class="h-full object-cover transition-transform group-hover:scale-110 group-hover:rotate-2"
+          class="h-full mx-auto object-cover transition-transform group-hover:scale-110 group-hover:rotate-2"
         >
       </div>
       <div class="flex flex-col justify-center">
