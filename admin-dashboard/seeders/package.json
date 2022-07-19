@@ -1,20 +1,15 @@
 {
-  "name": "admin-dashboard",
+  "name": "seeders",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.mjs",
   "scripts": {
-    "start": "directus start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "directus": "^9.14.1",
-    "mysql": "^2.18.1"
-  },
-  "workspaces": [
-    "seeders"
-  ]
+    "@directus/sdk": "^10.1.1"
+  }
 }

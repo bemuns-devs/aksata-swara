@@ -1,0 +1,74 @@
+[
+  {
+    "id": "anpekot",
+    "fullname": "Kementrian Analisis dan Pengembangan Kota"
+  },
+  {
+    "id": "akspro",
+    "fullname": "Kementrian Aksi Kreatif dan Propaganda"
+  },
+  {
+    "id": "anstrat",
+    "fullname": "Kementrian Analisis dan Strategis"
+  },
+  {
+    "id": "akpt",
+    "fullname": "Kementrian Analisis Kampus dan Pendidikan Tinggi"
+  },
+  {
+    "id": "pemper",
+    "fullname": "Kementrian Pemberdayaan Perempuan"
+  },
+  {
+    "id": "pedesmit",
+    "fullname": "Kementrian Pengembangan Desa Mitra"
+  },
+  {
+    "id": "sosma",
+    "fullname": "Kementrian Sosial Masyarakat"
+  },
+  {
+    "id": "kkm",
+    "fullname": "Kementrian Kreasi dan Karya Mahasiswa"
+  },
+  {
+    "id": "psdm",
+    "fullname": "Kementrian Pengembangan Sumber Daya Mahasiswa"
+  },
+  {
+    "id": "adkesma",
+    "fullname": "Kementrian Advokasi Kesejahteraan Mahasiswa"
+  },
+  {
+    "id": "medkom",
+    "fullname": "Kementrian Media Komunikasi dan Branding"
+  },
+  {
+    "id": "bismit",
+    "fullname": "Kementrian Bisnis dan Kemitraan"
+  },
+  {
+    "id": "rnd",
+    "fullname": "Kementrian Riset dan Data"
+  },
+  {
+    "id": "rdp",
+    "fullname": "Kementrian Relasi dan Diplomasi"
+  },
+  {
+    "id": "pik",
+    "fullname": "Kementrian Pendayagunaan Insan Kabinet"
+  },
+  {
+    "id": "jamur",
+    "fullname": "Kementrian Jaminan Mutu Organisasi"
+  },
+  {
+    "id": "sekbin",
+    "fullname": "Kementrian Keuangan Kabinet"
+  },
+  {
+    "id": "keubin",
+    "fullname": "Kementrian Sekretaris Kabinet"
+  }
+]
