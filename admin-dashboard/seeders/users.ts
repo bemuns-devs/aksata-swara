@@ -1,5 +1,6 @@
 import { DefaultType, UserType } from '@directus/sdk';
 import sdk from './sdk';
+import run from './utils/run';
 
 const createRole = async () => {
   const role = (await sdk.roles.readByQuery({
@@ -36,10 +37,9 @@ const createUsers = async (role: DefaultType) => {
   throw new Error("Failed to create Users!");
 }
 
-
-(async () => {
+run(async () => {
   const role = await createRole();
   const createdUsers = await createUsers(role);
 
   console.log(createdUsers);
-})();
+});
