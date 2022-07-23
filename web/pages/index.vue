@@ -45,6 +45,7 @@
                 :img-src="getAssetUrl(blog.featured_image)"
                 :slug="blogFormatter.getSlug(blog)"
                 :date="blog.date_created"
+                :publisher="blog.user_created.first_name"
               />
             </li>
           </template>
@@ -87,7 +88,7 @@
             @click="slideBlogGallery()"
           >
             <Icon
-              icon="heroicons-solid:arrow-light"
+              icon="heroicons-solid:arrow-right"
               class="w-5 h-5"
             />
           </Button>
@@ -193,6 +194,7 @@
               :img-src="getAssetUrl(blog.featured_image)"
               :slug="blogFormatter.getSlug(blog)"
               :date="blog.date_created"
+              :publisher="blog.user_created.first_name"
             />
           </li>
         </ol>
@@ -219,6 +221,7 @@
                 :img-src="getAssetUrl(blog.featured_image)"
                 :slug="blogFormatter.getSlug(blog)"
                 :date="blog.date_created"
+                :publisher="blog.user_created.first_name"
               />
             </li>
           </ul>
@@ -248,6 +251,7 @@
                   :img-src="getAssetUrl(blog.featured_image)"
                   :slug="blogFormatter.getSlug(blog)"
                   :date="blog.date_created"
+                  :publisher="blog.user_created.first_name"
                 />
               </li>
             </ul>
@@ -275,6 +279,7 @@
                   :img-src="getAssetUrl(blog.featured_image)"
                   :slug="blogFormatter.getSlug(blog)"
                   :date="blog.date_created"
+                  :publisher="blog.user_created.first_name"
                 />
               </li>
             </ol>
@@ -306,6 +311,7 @@
                     :img-src="getAssetUrl(blog.featured_image)"
                     :slug="blogFormatter.getSlug(blog)"
                     :date="blog.date_created"
+                    :publisher="blog.user_created.first_name"
                   />
                 </li>
               </ol>
@@ -338,7 +344,7 @@ import {
 
 const { data: featuredBlogs } = useLazyAsyncData(() => Blogs.featured(), { default: () => [] as Blog[] });
 
-const { data: newestBlogs } = useLazyAsyncData(() => Blogs.list({ sort: ['date_created'] }), { default: () => [] as Blog[] });
+const { data: newestBlogs } = useLazyAsyncData(() => Blogs.list(), { default: () => [] as Blog[] });
 
 const mostReadBlogs = ref<Blog[]>([]);
 

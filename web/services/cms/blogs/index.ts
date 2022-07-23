@@ -10,16 +10,22 @@ const DEFAULT_FILTER: QueryMany<BlogRaw>['filter'] = {
   status: 'published',
 };
 
+const DEFAULT_SORT: QueryMany<BlogRaw>['sort'] = ['-date_created'];
+
+const NESTED_FIELDS: QueryMany<BlogRaw>['fields'] = [
+  'category.id',
+  'category.name',
+  'user_created.id',
+  'user_created.first_name',
+];
+
 const LIST_FIELDS: QueryMany<BlogRaw>['fields'] = [
   'id',
   'title',
   'featured_image',
-  'category.id',
-  'category.name',
   'info_code',
-  'user_created.id',
-  'user_created.first_name',
   'date_created',
+  ...NESTED_FIELDS,
 ];
 
 const FEATURED_FIELDS: QueryMany<FeaturedBlogInListRaw>['fields'] = LIST_FIELDS
@@ -30,6 +36,7 @@ const mergeListQuery = (source: QueryMany<BlogRaw>): QueryMany<BlogRaw> => ({
   filter: { ...DEFAULT_FILTER, ...source.filter },
   limit: source.limit || PAGINATION_PERPAGE,
   fields: source.fields || LIST_FIELDS,
+  sort: source.sort || DEFAULT_SORT,
 });
 
 const list = async (query: QueryMany<BlogRaw> = {}): Promise<BlogInList[]> => {
@@ -43,7 +50,9 @@ const list = async (query: QueryMany<BlogRaw> = {}): Promise<BlogInList[]> => {
  */
 const bySlug = async (slug: string): Promise<Blog> => {
   const { id } = extractSlug(slug);
-  const data = await sdk().items('blogs').readOne(id);
+  const data = await sdk().items('blogs').readOne(id, {
+    fields: ['*', ...NESTED_FIELDS],
+  });
   return fromInListRaw(data as BlogRaw) as Blog;
 };
 
@@ -56,6 +65,9 @@ export default {
   list,
   bySlug,
   featured: featuredBlogs,
+  DEFAULT_FILTER,
+  DEFAULT_SORT,
+  LIST_FIELDS,
 };
 
 export * as blogFormatter from './formatter';

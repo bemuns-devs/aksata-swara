@@ -5,19 +5,14 @@
         <div class="absolute z-0 inset-x-0 bottom-0 h-28 bg-white" />
 
         <div class="content-container z-[1] flex flex-col gap-8 px-4 py-12">
-          <ul class="flex gap-4">
-            <li
-              v-for="tag in blog.tags"
-              :key="tag"
+          <div class="flex">
+            <NuxtLink
+              :to="{name: 'blogs', query: {category: blog.category.name}}"
+              class="text-sm text-gray-700 capitalize bg-white hover:bg-secondary-50 px-2 py-0.5 rounded-full border border-secondary-300 ring focus:ring-1 ring-secondary transition"
             >
-              <NuxtLink
-                :to="{name: 'blogs', query: {tags: [tag]}}"
-                class="text-sm text-gray-700 capitalize bg-white hover:bg-secondary-50 px-2 py-0.5 rounded-full border border-secondary-300 ring focus:ring-1 ring-secondary transition"
-              >
-                {{ tag }}
-              </NuxtLink>
-            </li>
-          </ul>
+              {{ blog.category.name }}
+            </NuxtLink>
+          </div>
 
           <div class="flex flex-col gap-2">
             <h1 class="text-3xl lg:text-5xl text-gray-900 font-bold tracking-wide">
@@ -35,12 +30,24 @@
       </div>
 
       <div class="content-container flex flex-col lg:flex-row justify-between gap-8 bg-white px-4 pt-4 pb-12">
-        <!-- eslint-disable vue/no-v-html -->
-        <main
-          class="prose lg:prose-lg"
-          v-html="marked(blog.content || '')"
-        />
-        <!-- eslint-enable vue/no-v-html -->
+        <main class="prose lg:prose-lg">
+          <!-- eslint-disable vue/no-v-html -->
+          <div v-html="marked(blog.content || '')" />
+          <!-- eslint-enable vue/no-v-html -->
+          <ul class="list-none flex !px-0 mt-8 gap-x-2">
+            <li
+              v-for="tag in blog.tags"
+              :key="tag"
+            >
+              <NuxtLink
+                :to="{name: 'blogs', query: {tags: [tag]}}"
+                class="!text-violet-500 hover:!text-violet-700"
+              >
+                #{{ tag }}
+              </NuxtLink>
+            </li>
+          </ul>
+        </main>
 
         <aside class="lg:self-start lg:sticky top-1/4 flex lg:flex-col items-center lg:items-end gap-4 lg:pl-8 lg:pr-4 py-4 lg:py-6 border-t-2 lg:border-t-0 lg:border-l-2 border-primary-50">
           <Button
@@ -79,56 +86,51 @@
         </h4>
       </div>
 
-      <ul class="hidden lg:flex gap-4">
-        <li
-          v-for="el in relatedBlogs"
-          :key="el.id"
-        >
-          <BlogCard
-            :title="blog.title"
-            :img-src="blog.featured_image"
-            :slug="blogFormatter.getSlug(blog)"
-            :date="blog.date_created"
-          />
-        </li>
-      </ul>
-
-      <ul class="flex lg:hidden flex-col">
-        <li
-          v-for="el in relatedBlogs"
-          :key="el.id"
-          class="group"
-        >
-          <NuxtLink
-            :to="{name: 'blogs-slug', params: {slug: blogFormatter.getSlug(el)}}"
-            class="flex gap-4 p-2 group-hover:bg-primary/5 rounded-lg"
+      <template v-if="relatedBlogs.length">
+        <ul class="hidden lg:flex gap-4">
+          <li
+            v-for="el in relatedBlogs"
+            :key="el.id"
           >
-            <div class="shrink-0 h-24 aspect-[7/5] bg-gray-300 border border-primary-50 overflow-hidden rounded-md">
-              <img
-                :src="el.featured_image"
-                :alt="el.title"
-                class="object-cover transition-transform group-hover:scale-110 group-hover:rotate-2"
-              >
-            </div>
-            <div class="flex flex-col justify-center">
-              <h5 class="text-gray-700 font-bold">
-                {{ el.title }}
-              </h5>
-              <div class="text-sm text-gray-500 flex items-center divide-x divide-gray-400">
-                <span class="author">Kementrian Media dan Komunikasi</span>
-                <time class="">{{ el.date_created.toLocaleDateString() }}</time>
-              </div>
-            </div>
-          </NuxtLink>
-        </li>
-      </ul>
+            <BlogCard
+              :title="el.title"
+              :img-src="getAssetUrl(el.featured_image)"
+              :slug="blogFormatter.getSlug(el)"
+              :date="el.date_created"
+              :publisher="el.user_created.first_name"
+            />
+          </li>
+        </ul>
+
+        <ul class="flex lg:hidden flex-col">
+          <li
+            v-for="el in relatedBlogs"
+            :key="el.id"
+            class="group"
+          >
+            <BlogListItem
+              :title="el.title"
+              :img-src="getAssetUrl(el.featured_image)"
+              :slug="blogFormatter.getSlug(el)"
+              :date="el.date_created"
+              :publisher="el.user_created.first_name"
+            />
+          </li>
+        </ul>
+      </template>
+
+      <template v-else>
+        <p class="text-gray-500">
+          Belum ada informasi terkait.
+        </p>
+      </template>
 
       <Button
-        to="/blogs"
+        :to="{name: 'blogs'}"
         link
-        class="self-end text-primary"
+        class="text-primary"
       >
-        Lihat lebih banyak
+        Lihat informasi lainnya
       </Button>
     </section>
   </div>
@@ -142,14 +144,30 @@ import {
 } from '~~/services/cms';
 
 const route = useRoute();
+const slug = computed(() => String(route.params.slug));
 
 // eslint-disable-next-line no-restricted-globals
 const shareUrl = computed(() => location?.href);
 const { copy } = useClipboard({ source: shareUrl });
 
-const { data: blog } = useLazyAsyncData(() => Blogs.bySlug(String(route.params.slug)), { default: () => ({} as Blog) });
+const { data: blog, pending: isBlogLoading } = useLazyAsyncData(
+  `blog_${slug.value}`,
+  () => Blogs.bySlug(slug.value),
+  { default: () => ({} as Blog) },
+);
 
-const relatedBlogs = ref<Blog[]>([]);
+// blog.value ? `related-blogs_${slug.value}` : null,
+const relatedBlogs = computedAsync(
+  () => (blog.value.tags
+    ? Blogs.list({
+      filter: {
+        id: { _neq: blog.value.id },
+        _or: blog.value.tags.map((tag) => ({ tags: { _contains: tag } })),
+      },
+    })
+    : Promise.resolve([] as Blog[])),
+  [],
+);
 
 const onCopy = () => copy()
   .then(() => alert('Link berhasil disalin!'));
@@ -164,6 +182,10 @@ const onShareClick = () => {
 
   return onCopy();
 };
+
+whenever(slug, () => {
+  window.scrollTo({ top: 0 });
+});
 
 useHead(({
   title: (() => blog.value.title) as unknown as string,

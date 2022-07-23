@@ -7,7 +7,7 @@
     />
     <div class="thumbnail">
       <img
-        :src="`${imgSrc}?width=500`"
+        :src="`${imgSrc}?width=300`"
         :alt="title"
       >
     </div>
@@ -15,7 +15,7 @@
       {{ title }}
     </h5>
     <div class="subtitle">
-      <span class="author">Kementrian Media dan Komunikasi</span>
+      <span class="author">{{ publisher }}</span>
       <time class="">{{ date.toLocaleDateString() }}</time>
     </div>
   </article>
@@ -27,13 +27,14 @@ defineProps<{
   imgSrc: string;
   slug: string;
   date: Date;
+  publisher: string;
 }>();
 </script>
 
 <style lang="sass">
 .blog-card
   @apply shrink-0 relative flex flex-col overflow-hidden
-  @apply h-72 max-h-full aspect-[6/5] px-4 py-3 bg-white rounded-lg border border-gray-50 shadow transition
+  @apply h-72 max-h-full aspect-[6/5] px-4 py-3 bg-white rounded-lg border border-gray-100 shadow transition
   &:hover
     @apply bg-secondary-50 border-transparent shadow-lg
     .subtitle

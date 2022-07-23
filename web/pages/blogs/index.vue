@@ -52,6 +52,7 @@
               :img-src="getAssetUrl(blog.featured_image)"
               :slug="blogFormatter.getSlug(blog)"
               :date="blog.date_created"
+              :publisher="blog.user_created.first_name"
             />
           </li>
         </ul>
@@ -88,8 +89,10 @@ const router = useRouter();
 
 const qSearch = computed(() => route.query.search && String(route.query.search));
 const qCategory = computed(() => route.query.category && String(route.query.category));
-const { data: blogs, pending: blogsLoading } = useLazyAsyncData(() => Blogs
-  .list({ filter: qCategory.value && ({ category: { name: qCategory.value } }), search: qSearch.value }), {
+const { data: blogs, pending: blogsLoading } = useLazyAsyncData(() => Blogs.list({
+  filter: qCategory.value && ({ category: { name: qCategory.value } }),
+  search: qSearch.value,
+}), {
   watch: [qSearch, qCategory],
 });
 
