@@ -1,0 +1,9 @@
+service: cms
+runtime: nodejs16
+instance_class: F1
+service_account: web-cms@bem-uns-gcp.iam.gserviceaccount.com
+automatic_scaling:
+  max_instances: 3
+  target_cpu_utilization: 0.8
+env_variables:
+  CONFIG_PATH: ./config.js

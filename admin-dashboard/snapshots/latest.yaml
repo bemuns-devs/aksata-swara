@@ -1,0 +1,911 @@
+version: 1
+directus: 9.14.5
+collections:
+  - collection: blog_categories
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: blog_categories
+      color: null
+      display_template: null
+      group: null
+      hidden: false
+      icon: null
+      item_duplication_fields: null
+      note: null
+      singleton: false
+      sort: 2
+      sort_field: null
+      translations: null
+      unarchive_value: null
+    schema:
+      collation: utf8mb4_general_ci
+      comment: ''
+      engine: InnoDB
+      name: blog_categories
+      schema: aksata-labs
+  - collection: blogs
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: status
+      archive_value: archived
+      collapse: open
+      collection: blogs
+      color: null
+      display_template: null
+      group: null
+      hidden: false
+      icon: null
+      item_duplication_fields:
+        - category
+        - content
+        - featured_image
+        - tags
+        - title
+      note: null
+      singleton: false
+      sort: 1
+      sort_field: null
+      translations: null
+      unarchive_value: draft
+    schema:
+      collation: utf8mb4_general_ci
+      comment: ''
+      engine: InnoDB
+      name: blogs
+      schema: aksata-labs
+  - collection: featured_blogs
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: featured_blogs
+      color: null
+      display_template: null
+      group: null
+      hidden: false
+      icon: null
+      item_duplication_fields: null
+      note: null
+      singleton: false
+      sort: null
+      sort_field: sort
+      translations: null
+      unarchive_value: null
+    schema:
+      collation: utf8mb4_general_ci
+      comment: ''
+      engine: InnoDB
+      name: featured_blogs
+      schema: aksata-labs
+fields:
+  - collection: blog_categories
+    field: id
+    meta:
+      collection: blog_categories
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: true
+      required: false
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      comment: ''
+      data_type: int unsigned
+      default_value: null
+      foreign_key_column: null
+      foreign_key_table: null
+      generation_expression: null
+      has_auto_increment: true
+      is_generated: false
+      is_nullable: false
+      is_primary_key: true
+      is_unique: false
+      max_length: null
+      name: id
+      numeric_precision: 10
+      numeric_scale: 0
+      table: blog_categories
+    type: integer
+  - collection: blog_categories
+    field: name
+    meta:
+      collection: blog_categories
+      conditions: null
+      display: null
+      display_options: null
+      field: name
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options:
+        trim: true
+      readonly: false
+      required: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      comment: ''
+      data_type: varchar
+      default_value: null
+      foreign_key_column: null
+      foreign_key_table: null
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: false
+      is_primary_key: false
+      is_unique: true
+      max_length: 255
+      name: name
+      numeric_precision: null
+      numeric_scale: null
+      table: blog_categories
+    type: string
+  - collection: blogs
+    field: category
+    meta:
+      collection: blogs
+      conditions: null
+      display: related-values
+      display_options:
+        template: '{{name}}'
+      field: category
+      group: null
+      hidden: false
+      interface: select-dropdown-m2o
+      note: null
+      options:
+        template: '{{name}}'
+      readonly: false
+      required: true
+      sort: 8
+      special:
+        - m2o
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      comment: ''
+      data_type: int unsigned
+      default_value: null
+      foreign_key_column: id
+      foreign_key_table: blog_categories
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      max_length: null
+      name: category
+      numeric_precision: 10
+      numeric_scale: 0
+      table: blogs
+    type: integer
+  - collection: blogs
+    field: content
+    meta:
+      collection: blogs
+      conditions: null
+      display: null
+      display_options: null
+      field: content
+      group: null
+      hidden: false
+      interface: input-rich-text-md
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 10
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      comment: ''
+      data_type: text
+      default_value: null
+      foreign_key_column: null
+      foreign_key_table: null
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      max_length: 65535
+      name: content
+      numeric_precision: null
+      numeric_scale: null
+      table: blogs
+    type: text
+  - collection: blogs
+    field: date_created
+    meta:
+      collection: blogs
+      conditions: null
+      display: datetime
+      display_options:
+        relative: true
+      field: date_created
+      group: null
+      hidden: false
+      interface: datetime
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 4
+      special:
+        - date-created
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      comment: ''
+      data_type: timestamp
+      default_value: null
+      foreign_key_column: null
+      foreign_key_table: null
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      max_length: null
+      name: date_created
+      numeric_precision: null
+      numeric_scale: null
+      table: blogs
+    type: timestamp
+  - collection: blogs
+    field: date_updated
+    meta:
+      collection: blogs
+      conditions: null
+      display: datetime
+      display_options:
+        relative: true
+      field: date_updated
+      group: null
+      hidden: true
+      interface: datetime
+      note: null
+      options: null
+      readonly: true
+      required: false
+      sort: 6
+      special:
+        - date-updated
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      comment: ''
+      data_type: timestamp
+      default_value: null
+      foreign_key_column: null
+      foreign_key_table: null
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      max_length: null
+      name: date_updated
+      numeric_precision: null
+      numeric_scale: null
+      table: blogs
+    type: timestamp
+  - collection: blogs
+    field: featured_image
+    meta:
+      collection: blogs
+      conditions: null
+      display: image
+      display_options: {}
+      field: featured_image
+      group: null
+      hidden: false
+      interface: file-image
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 9
+      special:
+        - file
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      comment: ''
+      data_type: char
+      default_value: null
+      foreign_key_column: id
+      foreign_key_table: directus_files
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      max_length: 36
+      name: featured_image
+      numeric_precision: null
+      numeric_scale: null
+      table: blogs
+    type: uuid
+  - collection: blogs
+    field: id
+    meta:
+      collection: blogs
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: true
+      required: false
+      sort: 1
+      special:
+        - uuid
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      comment: ''
+      data_type: char
+      default_value: null
+      foreign_key_column: null
+      foreign_key_table: null
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: false
+      is_primary_key: true
+      is_unique: false
+      max_length: 36
+      name: id
+      numeric_precision: null
+      numeric_scale: null
+      table: blogs
+    type: uuid
+  - collection: blogs
+    field: info_code
+    meta:
+      collection: blogs
+      conditions: null
+      display: null
+      display_options: null
+      field: info_code
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 12
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      comment: ''
+      data_type: varchar
+      default_value: null
+      foreign_key_column: null
+      foreign_key_table: null
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      max_length: 255
+      name: info_code
+      numeric_precision: null
+      numeric_scale: null
+      table: blogs
+    type: string
+  - collection: blogs
+    field: status
+    meta:
+      collection: blogs
+      conditions: null
+      display: labels
+      display_options:
+        choices:
+          - text: $t:published
+            value: published
+            foreground: '#FFFFFF'
+            background: var(--primary)
+          - text: $t:draft
+            value: draft
+            foreground: '#18222F'
+            background: '#D3DAE4'
+          - text: $t:archived
+            value: archived
+            foreground: '#FFFFFF'
+            background: var(--warning)
+        showAsDot: true
+      field: status
+      group: null
+      hidden: false
+      interface: select-dropdown
+      note: null
+      options:
+        choices:
+          - text: $t:published
+            value: published
+          - text: $t:draft
+            value: draft
+          - text: $t:archived
+            value: archived
+      readonly: false
+      required: false
+      sort: 2
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      comment: ''
+      data_type: varchar
+      default_value: draft
+      foreign_key_column: null
+      foreign_key_table: null
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: false
+      is_primary_key: false
+      is_unique: false
+      max_length: 255
+      name: status
+      numeric_precision: null
+      numeric_scale: null
+      table: blogs
+    type: string
+  - collection: blogs
+    field: tags
+    meta:
+      collection: blogs
+      conditions: null
+      display: null
+      display_options: null
+      field: tags
+      group: null
+      hidden: false
+      interface: tags
+      note: null
+      options:
+        whitespace: _
+      readonly: false
+      required: false
+      sort: 11
+      special:
+        - cast-json
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      comment: ''
+      data_type: longtext
+      default_value: null
+      foreign_key_column: null
+      foreign_key_table: null
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      max_length: 4294967295
+      name: tags
+      numeric_precision: null
+      numeric_scale: null
+      table: blogs
+    type: json
+  - collection: blogs
+    field: title
+    meta:
+      collection: blogs
+      conditions: null
+      display: null
+      display_options: null
+      field: title
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options:
+        clear: true
+        placeholder: Masukkan judul...
+        trim: true
+      readonly: false
+      required: true
+      sort: 7
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      comment: ''
+      data_type: varchar
+      default_value: null
+      foreign_key_column: null
+      foreign_key_table: null
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      max_length: 255
+      name: title
+      numeric_precision: null
+      numeric_scale: null
+      table: blogs
+    type: string
+  - collection: blogs
+    field: user_created
+    meta:
+      collection: blogs
+      conditions: null
+      display: user
+      display_options: null
+      field: user_created
+      group: null
+      hidden: false
+      interface: select-dropdown-m2o
+      note: null
+      options:
+        template: '{{avatar.$thumbnail}} {{first_name}} {{last_name}}'
+      readonly: false
+      required: false
+      sort: 3
+      special:
+        - user-created
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      comment: ''
+      data_type: char
+      default_value: null
+      foreign_key_column: id
+      foreign_key_table: directus_users
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      max_length: 36
+      name: user_created
+      numeric_precision: null
+      numeric_scale: null
+      table: blogs
+    type: string
+  - collection: blogs
+    field: user_updated
+    meta:
+      collection: blogs
+      conditions: null
+      display: user
+      display_options: null
+      field: user_updated
+      group: null
+      hidden: true
+      interface: select-dropdown-m2o
+      note: null
+      options:
+        template: '{{avatar.$thumbnail}} {{first_name}} {{last_name}}'
+      readonly: true
+      required: false
+      sort: 5
+      special:
+        - user-updated
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      comment: ''
+      data_type: char
+      default_value: null
+      foreign_key_column: id
+      foreign_key_table: directus_users
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      max_length: 36
+      name: user_updated
+      numeric_precision: null
+      numeric_scale: null
+      table: blogs
+    type: string
+  - collection: featured_blogs
+    field: blog
+    meta:
+      collection: featured_blogs
+      conditions: null
+      display: null
+      display_options: null
+      field: blog
+      group: null
+      hidden: false
+      interface: select-dropdown-m2o
+      note: null
+      options: null
+      readonly: false
+      required: true
+      sort: null
+      special:
+        - m2o
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      comment: ''
+      data_type: char
+      default_value: null
+      foreign_key_column: id
+      foreign_key_table: blogs
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      max_length: 36
+      name: blog
+      numeric_precision: null
+      numeric_scale: null
+      table: featured_blogs
+    type: string
+  - collection: featured_blogs
+    field: id
+    meta:
+      collection: featured_blogs
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: true
+      required: false
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      comment: ''
+      data_type: int unsigned
+      default_value: null
+      foreign_key_column: null
+      foreign_key_table: null
+      generation_expression: null
+      has_auto_increment: true
+      is_generated: false
+      is_nullable: false
+      is_primary_key: true
+      is_unique: false
+      max_length: null
+      name: id
+      numeric_precision: 10
+      numeric_scale: 0
+      table: featured_blogs
+    type: integer
+  - collection: featured_blogs
+    field: sort
+    meta:
+      collection: featured_blogs
+      conditions: null
+      display: null
+      display_options: null
+      field: sort
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      comment: ''
+      data_type: int
+      default_value: null
+      foreign_key_column: null
+      foreign_key_table: null
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      max_length: null
+      name: sort
+      numeric_precision: 10
+      numeric_scale: 0
+      table: featured_blogs
+    type: integer
+relations:
+  - collection: blog_categories
+    field: name
+    meta:
+      junction_field: null
+      many_collection: blog_categories
+      many_field: name
+      one_allowed_collections: null
+      one_collection: blogs
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    related_collection: blogs
+    schema: null
+  - collection: blogs
+    field: category
+    meta:
+      junction_field: null
+      many_collection: blogs
+      many_field: category
+      one_allowed_collections: null
+      one_collection: blog_categories
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    related_collection: blog_categories
+    schema:
+      column: category
+      constraint_name: blogs_category_foreign
+      foreign_key_column: id
+      foreign_key_table: blog_categories
+      on_delete: SET NULL
+      on_update: RESTRICT
+      table: blogs
+  - collection: blogs
+    field: featured_image
+    meta:
+      junction_field: null
+      many_collection: blogs
+      many_field: featured_image
+      one_allowed_collections: null
+      one_collection: directus_files
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    related_collection: directus_files
+    schema:
+      column: featured_image
+      constraint_name: blogs_featured_image_foreign
+      foreign_key_column: id
+      foreign_key_table: directus_files
+      on_delete: SET NULL
+      on_update: RESTRICT
+      table: blogs
+  - collection: blogs
+    field: user_created
+    meta:
+      junction_field: null
+      many_collection: blogs
+      many_field: user_created
+      one_allowed_collections: null
+      one_collection: directus_users
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    related_collection: directus_users
+    schema:
+      column: user_created
+      constraint_name: blogs_user_created_foreign
+      foreign_key_column: id
+      foreign_key_table: directus_users
+      on_delete: NO ACTION
+      on_update: RESTRICT
+      table: blogs
+  - collection: blogs
+    field: user_updated
+    meta:
+      junction_field: null
+      many_collection: blogs
+      many_field: user_updated
+      one_allowed_collections: null
+      one_collection: directus_users
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    related_collection: directus_users
+    schema:
+      column: user_updated
+      constraint_name: blogs_user_updated_foreign
+      foreign_key_column: id
+      foreign_key_table: directus_users
+      on_delete: NO ACTION
+      on_update: RESTRICT
+      table: blogs
+  - collection: featured_blogs
+    field: blog
+    meta:
+      junction_field: null
+      many_collection: featured_blogs
+      many_field: blog
+      one_allowed_collections: null
+      one_collection: blogs
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    related_collection: blogs
+    schema:
+      column: blog
+      constraint_name: featured_blogs_blog_foreign
+      foreign_key_column: id
+      foreign_key_table: blogs
+      on_delete: SET NULL
+      on_update: RESTRICT
+      table: featured_blogs

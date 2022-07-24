@@ -1,0 +1,5 @@
+dispatch:
+  - url: "bemuns.org/*"
+    service: default
+  - url: "cms.bemuns.org/*"
+    service: cms

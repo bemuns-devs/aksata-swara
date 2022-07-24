@@ -16,5 +16,8 @@
   },
   "workspaces": [
     "seeders"
-  ]
+  ],
+  "devDependencies": {
+    "@directus/sdk": "^10.1.1"
+  }
 }

@@ -1,2 +1,0 @@
-require('child_process')
-  .execSync(`npx directus schema snapshot ./snapshots/${Date.now()}.yaml`)

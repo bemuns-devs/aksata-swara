@@ -1,0 +1,7 @@
+node_modules
+scripts
+seeders
+snapshots
+uploads
+!uploads/empty
+*service-account.json

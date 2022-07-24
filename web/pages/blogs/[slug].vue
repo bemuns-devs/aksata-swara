@@ -156,7 +156,6 @@ const { data: blog, pending: isBlogLoading } = useLazyAsyncData(
   { default: () => ({} as Blog) },
 );
 
-// blog.value ? `related-blogs_${slug.value}` : null,
 const relatedBlogs = computedAsync(
   () => (blog.value.tags
     ? Blogs.list({
