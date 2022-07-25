@@ -14,12 +14,12 @@
     </div>
 
     <div class="lg:hidden">
-      <Button>
-        <Icon
-          icon="heroicons-solid:menu"
-          class="w-6 h-6 text-gray-700"
-        />
-      </Button>
+      <Button
+        icon="heroicons-solid:menu"
+        round
+        icon-class="w-6 h-6 text-gray-700"
+        @click="drawer = !drawer"
+      />
     </div>
 
     <ul class="hidden lg:flex items-center gap-4">
@@ -57,10 +57,11 @@
       </li>
     </ul>
   </nav>
+
+  <NavDrawer v-model="drawer" />
 </template>
 
 <script lang="ts" setup>
-import { Icon } from '@iconify/vue';
-
 const { y } = useWindowScroll();
+const drawer = ref(false);
 </script>

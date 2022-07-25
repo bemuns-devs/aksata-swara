@@ -1,14 +1,14 @@
 <template>
   <div class="flex flex-col">
-    <header class="flex gap-3 h-[80vh] p-8">
-      <div class="shrink-0 self-center flex flex-col gap-8 pb-8">
+    <header class="flex gap-3 h-[80vh] max-w-full p-4 md:p-8">
+      <div class="shrink-0 self-center max-w-full flex flex-col gap-8 pb-8">
         <div class="flex flex-col gap-2">
-          <h1 class="text-5xl text-primary font-bold font-brand flex flex-col">
+          <h1 class="text-4xl md:text-5xl text-primary font-bold font-brand flex flex-col">
             <span>BEM UNS 2022</span>
             <span>— AKSATA SWARA</span>
           </h1>
-          <p class="text-lg text-gray-700 max-w-prose flex flex-col">
-            <span>Badan Eksekutif Mahasiswa Universitas Sebelas Maret</span>
+          <p class="text-base md:text-lg text-gray-700 max-w-prose flex flex-col">
+            <span class="leading-none">Badan Eksekutif Mahasiswa Universitas Sebelas Maret</span>
             <span>Kabinet 2022/2023</span>
           </p>
         </div>

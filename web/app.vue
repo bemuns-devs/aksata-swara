@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col w-full min-h-screen">
+  <div class="flex flex-col min-h-screen">
     <WebNavbar />
 
     <NuxtPage class="grow" />
@@ -62,6 +62,15 @@ useHead({
     {
       href: 'https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap',
       rel: 'stylesheet',
+    },
+  ],
+  script: [
+    {
+      async: true,
+      src: 'https://www.googletagmanager.com/gtag/js?id=G-H9PQDQ4F8C',
+    },
+    {
+      children: 'window.dataLayer ||= [];function gtag(){dataLayer.push(arguments);}gtag(\'js\', new Date());gtag(\'config\', \'G-H9PQDQ4F8C\');',
     },
   ],
 });

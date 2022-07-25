@@ -7,7 +7,7 @@
     />
     <div class="thumbnail">
       <img
-        :src="`${imgSrc}?width=300`"
+        :src="`${imgSrc}?width=300&format=webp`"
         :alt="title"
       >
     </div>

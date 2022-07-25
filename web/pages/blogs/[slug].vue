@@ -22,7 +22,7 @@
           </div>
 
           <img
-            :src="`${getAssetUrl(blog.featured_image)}?width=900`"
+            :src="`${getAssetUrl(blog.featured_image)}?width=900&format=webp`"
             :alt="blog.title"
             class="w-full h-[50vh] lg:h-[70vh] object-cover bg-gray-300 shadow-lg"
           >

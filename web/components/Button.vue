@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { Component, DefineComponent, PropType } from 'vue';
+import { Icon } from '@iconify/vue';
 import { NuxtLink } from '#components';
 import type { NuxtLinkProps } from '#app';
 
@@ -44,10 +45,24 @@ export default defineNuxtComponent({
       required: false,
       default: false,
     },
+    round: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
     link: {
       type: Boolean,
       required: false,
       default: false,
+    },
+    icon: {
+      type: String,
+      required: false,
+      default: undefined,
+    },
+    iconClass: {
+      required: false,
+      default: undefined,
     },
   },
   setup(props, { attrs, slots }) {
@@ -60,15 +75,18 @@ export default defineNuxtComponent({
       return DEFAULT_TAG;
     });
 
+    const icon = props.icon ? h(Icon, { icon: props.icon, class: props.iconClass }) : undefined;
+
     return () => h(tag.value, {
       class: ['btn', {
         'btn--filled': props.filled,
         'btn--outlined': props.outlined,
         'btn--rounded': props.rounded,
+        'btn--round': props.round,
         'btn--link': props.link,
       }],
     }, {
-      default: () => slots.default?.() || props.label,
+      default: () => slots.default?.() || [icon, props.label],
     });
   },
   // Just for better typings
@@ -101,6 +119,9 @@ export default defineNuxtComponent({
 
   &--outlined
     @apply border border-primary-500
+
+  &--round
+    @apply rounded-full aspect-square
 
   &--link
     @apply underline

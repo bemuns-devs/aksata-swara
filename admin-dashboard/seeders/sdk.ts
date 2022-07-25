@@ -24,7 +24,7 @@ type Collections = {
 const sdk = new Directus<Collections>('http://localhost:8055', {
   auth: {
     mode: 'json',
-    staticToken: 'XdIemfEPz4cWo49L3VZIUGIhaqE2yMb0', // replace it with your own
+    staticToken: process.env.DIRECTUS_TOKEN, // replace it with your own
   }
 });
 

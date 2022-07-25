@@ -1,10 +1,10 @@
-import { Config } from 'tailwindcss';
-import defaultTheme from 'tailwindcss/defaultTheme';
-import PluginLineClamp from '@tailwindcss/line-clamp';
-import PluginForms from '@tailwindcss/forms';
-import PluginTypography from '@tailwindcss/typography';
+const defaultTheme = require('tailwindcss/defaultTheme');
+const PluginLineClamp = require('@tailwindcss/line-clamp');
+const PluginForms = require('@tailwindcss/forms');
+const PluginTypography = require('@tailwindcss/typography');
 
-export default <Config>{
+/** @type {import('tailwindcss').Config} */
+module.exports = {
   content: [
     './components/**/*.{js,vue,ts}',
     './layouts/**/*.vue',

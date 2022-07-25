@@ -6,7 +6,7 @@
     >
       <div class="shrink-0 h-24 lg:h-32 aspect-[7/5] lg:aspect-[9/5] bg-primary-900/20 border border-secondary-50 overflow-hidden rounded-md">
         <img
-          :src="`${imgSrc}?width=250`"
+          :src="`${imgSrc}?width=250&format=webp`"
           :alt="title"
           class="h-full mx-auto object-cover transition-transform group-hover:scale-110 group-hover:rotate-2"
         >
