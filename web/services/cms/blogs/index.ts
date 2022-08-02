@@ -1,5 +1,5 @@
 import type { QueryMany } from '@directus/sdk';
-import { extractSlug, fromInListRaw } from '~~/services/cms/blogs/formatter';
+import { extractSlug, fromInListRaw, fromRaw } from '~~/services/cms/blogs/formatter';
 import { PAGINATION_PERPAGE } from '~~/services/cms/constants';
 import sdk from '~~/services/cms/sdk';
 import {
@@ -56,6 +56,15 @@ const bySlug = async (slug: string): Promise<Blog> => {
   return fromInListRaw(data as BlogRaw) as Blog;
 };
 
+const byCodeInfo = async (code: string): Promise<Blog | null> => {
+  const { data: [data] } = await sdk().items('blogs').readByQuery({
+    limit: 1,
+    filter: { ...DEFAULT_FILTER, info_code: code },
+    fields: ['title', 'id'],
+  });
+  return data ? fromRaw(data as BlogRaw) : null;
+};
+
 const featuredBlogs = async (): Promise<BlogInList[]> => {
   const { data } = await sdk().items('featured_blogs').readByQuery({ limit: -1, fields: FEATURED_FIELDS });
   return data.map((el) => fromInListRaw(el.blog as BlogInListRaw));
@@ -64,6 +73,7 @@ const featuredBlogs = async (): Promise<BlogInList[]> => {
 export default {
   list,
   bySlug,
+  byCodeInfo,
   featured: featuredBlogs,
   DEFAULT_FILTER,
   DEFAULT_SORT,

@@ -39,15 +39,15 @@
       </div>
 
       <div
-        class="absolute inset-0 pointer-events-none [mask-image:url(/hero-figure2.png)] [mask-size:30vh] md:[mask-size:70vh] [mask-repeat:no-repeat] [mask-position:bottom_-10%_right_-10%] md:[mask-position:bottom_right] bg-primary-900/70 z-0 transform animate-in slide-in-from-bottom [animation-duration:500ms] [transition-duration:150ms]"
+        class="absolute inset-0 pointer-events-none [mask-image:url(/hero-figure2.webp)] [mask-size:30vh] md:[mask-size:70vh] [mask-repeat:no-repeat] [mask-position:bottom_-10%_right_-10%] md:[mask-position:bottom_right] bg-primary-900/70 z-0 transform animate-in slide-in-from-bottom [animation-duration:500ms] [transition-duration:150ms]"
         :style="{'--tw-translate-y': `${y / 4}px`}"
       />
       <div
-        class="absolute inset-0 pointer-events-none [mask-image:url(/hero-figure.png)] [mask-size:45vh] md:[mask-size:95vh] [mask-repeat:no-repeat] [mask-position:bottom_-10%_left_30%] md:[mask-position:bottom_left_20%] bg-primary-900/70 z-0 transform -scale-x-100 animate-in slide-in-from-bottom [animation-delay:150ms] [animation-duration:500ms] [transition-duration:150ms]"
+        class="absolute inset-0 pointer-events-none [mask-image:url(/hero-figure.webp)] [mask-size:45vh] md:[mask-size:95vh] [mask-repeat:no-repeat] [mask-position:bottom_-10%_left_30%] md:[mask-position:bottom_left_20%] bg-primary-900/70 z-0 transform -scale-x-100 animate-in slide-in-from-bottom [animation-delay:150ms] [animation-duration:500ms] [transition-duration:150ms]"
         :style="{'--tw-translate-y': `${y / .8}px`}"
       />
 
-      <div class="absolute inset-x-0 bottom-0 top-1/3 bg-gradient-to-t from-primary-700/60 via-primary-500/20 to-transparent pointer-events-none" />
+      <div class="absolute z-20 inset-x-0 bottom-0 top-1/3 bg-gradient-to-t from-primary-700/60 via-primary-500/20 to-transparent pointer-events-none" />
     </header>
 
     <main class="flex flex-col">
@@ -298,14 +298,11 @@ import {
 
 const { data: featuredBlogs } = useLazyAsyncData(() => Blogs.featured(), { default: () => [] as Blog[] });
 const { data: newestBlogs } = useLazyAsyncData(() => (Blogs.list()), { default: () => [] as Blog[] });
-const mostReadBlogs = ref<Blog[]>([]);
 
 const newestBlogsParts = computed(() => ({
   top4: newestBlogs.value.slice(0, 4),
   rest: newestBlogs.value.slice(4),
 }));
-
-const blogGalleryRef = ref<HTMLDivElement | null>(null);
 
 const { y } = useWindowScroll();
 </script>

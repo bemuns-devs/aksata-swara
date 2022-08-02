@@ -5,3 +5,7 @@ entrypoint: node ./.output/server/index.mjs
 automatic_scaling:
   max_instances: 3
   target_cpu_utilization: 0.75
+handlers:
+  - url: /.*
+    secure: always
+    script: auto

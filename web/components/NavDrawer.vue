@@ -1,86 +1,77 @@
 <template>
-  <transition
-    appear
-    @after-enter="onBackdropAfterEnter"
+  <Overlay
+    v-model="isOpen"
+    :transition="{
+      appear: true,
+      enterFromClass: 'translate-x-full',
+      enterToClass: 'translate-x-0',
+      leaveFromClass: 'translate-x-0',
+      leaveToClass: 'translate-x-full',
+      class:'transition-transform ease-in-out'
+    }"
   >
-    <div
-      v-show="isOpen"
-      class="fixed w-full h-full bg-slate-500/50 z-[9999] flex flex-col justify-center items-center"
-      @click.self="onOverlayClick"
-    >
-      <transition
-        appear
-        enter-from-class="translate-x-full"
-        enter-to-class="translate-x-0"
-        leave-from-class="translate-x-0"
-        leave-to-class="translate-x-full"
-        class="transition-transform ease-in-out"
-        @after-leave="onContentAfterLeave"
-      >
-        <nav
-          v-if="isShow"
-          class="self-end relative w-full h-full max-w-screen-sm bg-white p-2 overflow-y-auto flex flex-col shadow"
-        >
-          <div class="flex justify-between mb-2">
-            <div class="p-4">
-              <NuxtLink
-                to="/"
-                class="flex items-center gap-2"
-              >
-                <BrandSVG class="w-12 h-12" />
-                <span class="text-xl text-primary text-center font-bold font-brand">Aksata Swara</span>
-              </NuxtLink>
-            </div>
+    <nav class="self-end relative w-full h-full max-w-screen-sm bg-white p-2 overflow-y-auto flex flex-col shadow">
+      <div class="flex justify-between mb-2">
+        <div class="p-4">
+          <NuxtLink
+            to="/"
+            class="flex items-center gap-2"
+          >
+            <BrandSVG class="w-12 h-12" />
+            <span class="text-xl text-primary text-center font-bold font-brand">Aksata Swara</span>
+          </NuxtLink>
+        </div>
 
-            <Button
-              icon="heroicons-solid:x"
-              round
-              class="self-start "
-              icon-class="text-lg"
-              @click="onCloseClick"
-            />
-          </div>
+        <Button
+          icon="heroicons-solid:x"
+          round
+          class="self-start "
+          icon-class="text-lg"
+          @click="onCloseClick"
+        />
+      </div>
 
-          <hr>
+      <hr>
 
-          <ul class="nav-items mt-2 p-2">
-            <li @click="onNavItemClick">
-              <nuxt-link to="/">
-                Beranda
-              </nuxt-link>
-            </li>
+      <ul class="nav-items mt-2 p-2">
+        <li @click="onNavItemClick">
+          <nuxt-link to="/">
+            Beranda
+          </nuxt-link>
+        </li>
 
-            <li @click="onNavItemClick">
-              <nuxt-link to="/about">
-                Tentang
-              </nuxt-link>
-            </li>
+        <li @click="onNavItemClick">
+          <nuxt-link to="/about">
+            Tentang
+          </nuxt-link>
+        </li>
 
-            <li @click="onNavItemClick">
-              <nuxt-link :to="{name: 'blogs'}">
-                Informasi
-              </nuxt-link>
-            </li>
+        <li @click="onNavItemClick">
+          <nuxt-link :to="{name: 'blogs'}">
+            Informasi
+          </nuxt-link>
+        </li>
 
-            <li @click="onNavItemClick">
-              <nuxt-link to="/unit-platform">
-                Unit
-              </nuxt-link>
-            </li>
+        <li @click="onNavItemClick">
+          <nuxt-link to="/unit-platform">
+            Unit
+          </nuxt-link>
+        </li>
 
-            <li @click="onNavItemClick">
-              <nuxt-link
-                to="#"
-                filled
-              >
-                Masukkan Kode Info
-              </nuxt-link>
-            </li>
-          </ul>
-        </nav>
-      </transition>
-    </div>
-  </transition>
+        <div class="grow" />
+
+        <li @click="onNavItemClick">
+          <Button
+            filled
+            class="w-full"
+            @click="$emit('codeInfoClick')"
+          >
+            Masukkan Kode Info
+          </Button>
+        </li>
+      </ul>
+    </nav>
+  </Overlay>
 </template>
 
 <script lang="ts" setup>
@@ -90,6 +81,7 @@ interface Props {
 
 interface Emits {
   (e: 'update:modelValue', v: boolean): void;
+  (e: 'codeInfoClick'): void;
 }
 
 const props = defineProps<Props>();
@@ -106,26 +98,13 @@ const isOpen = computed({
     }
   },
 });
-const isShow = ref(isOpen.value);
-
-const onOverlayClick = () => {
-  isShow.value = false;
-};
 
 const onCloseClick = () => {
-  isShow.value = false;
-};
-
-const onNavItemClick = () => {
-  isShow.value = false;
-};
-
-const onContentAfterLeave = () => {
   isOpen.value = false;
 };
 
-const onBackdropAfterEnter = () => {
-  isShow.value = true;
+const onNavItemClick = () => {
+  isOpen.value = false;
 };
 </script>
 

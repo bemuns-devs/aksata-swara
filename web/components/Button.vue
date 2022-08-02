@@ -50,6 +50,11 @@ export default defineNuxtComponent({
       required: false,
       default: false,
     },
+    square: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
     link: {
       type: Boolean,
       required: false,
@@ -94,6 +99,7 @@ export default defineNuxtComponent({
         'btn--rounded': props.rounded,
         'btn--round': props.round,
         'btn--link': props.link,
+        'btn--square': props.square,
       }],
     }, {
       default: () => slots.default?.() || [icon, props.label, appendIcon],
@@ -121,8 +127,6 @@ export default defineNuxtComponent({
     .disabled
       @apply bg-primary-300 text-neutral-50
       @apply hover:bg-primary-300
-    *
-      @apply text-white
 
   &--rounded
     @apply rounded-full
@@ -132,6 +136,9 @@ export default defineNuxtComponent({
 
   &--round
     @apply rounded-full aspect-square
+
+  &--square
+    @apply rounded-none
 
   &--link
     @apply underline
