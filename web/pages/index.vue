@@ -1,13 +1,22 @@
 <template>
   <div class="flex flex-col">
-    <header class="flex gap-3 h-[80vh] max-w-full p-4 md:p-8">
-      <div class="shrink-0 self-center max-w-full flex flex-col gap-8 pb-8">
+    <header class="relative overflow-hidden flex gap-3 h-[80vh] max-w-full p-4 md:px-12 md:py-8 bg-gradient-to-tr from-primary-600/95 via-primary-500/50 to-primary-500/10">
+      <div class="absolute inset-0 bg-gradient-to-b from-secondary-100 to-primary-400/50 -z-50" />
+      <div
+        class="absolute inset-0 [mask-image:url(/pattern2.svg)] [mask-size:5rem] bg-gradient-to-b from-secondary-50/40 -z-50 transform [transition-duration:150ms]"
+        :style="{'--tw-translate-y': `${-(y / 2)}px`}"
+      />
+
+      <div
+        class="shrink-0 self-center max-w-full flex flex-col gap-8 pb-8 z-10 transform animate-in slide-in-from-bottom [animation-duration:700ms] [transition-duration:150ms]"
+        :style="{'--tw-translate-y': `${y / 1.5}px`}"
+      >
         <div class="flex flex-col gap-2">
-          <h1 class="text-4xl md:text-5xl text-primary font-bold font-brand flex flex-col">
+          <h1 class="text-4xl md:text-5xl text-white font-bold font-brand flex flex-col">
             <span>BEM UNS 2022</span>
             <span>— AKSATA SWARA</span>
           </h1>
-          <p class="text-base md:text-lg text-gray-700 max-w-prose flex flex-col">
+          <p class="text-base md:text-lg text-white max-w-prose flex flex-col">
             <span class="leading-none">Badan Eksekutif Mahasiswa Universitas Sebelas Maret</span>
             <span>Kabinet 2022/2023</span>
           </p>
@@ -18,82 +27,27 @@
             label="Informasi terbaru"
             filled
             :to="{hash: '#info'}"
+            class="!bg-white !text-primary hover:!bg-secondary-50 shadow shadow-primary active:shadow-none"
           />
           <Button
             label="Tentang kami"
+            filled
             :to="{name: 'about'}"
+            class="!bg-secondary hover:!bg-secondary-50"
           />
         </div>
       </div>
 
-      <div class="grow self-stretch hidden lg:flex flex-col items-end gap-8 h-full pl-8 overflow-hidden">
-        <h2 class="w-full text-2xl text-secondary text-center font-bold">
-          — Informasi pilihan
-        </h2>
+      <div
+        class="absolute inset-0 pointer-events-none [mask-image:url(/hero-figure2.png)] [mask-size:30vh] md:[mask-size:70vh] [mask-repeat:no-repeat] [mask-position:bottom_-10%_right_-10%] md:[mask-position:bottom_right] bg-primary-900/70 z-0 transform animate-in slide-in-from-bottom [animation-duration:500ms] [transition-duration:150ms]"
+        :style="{'--tw-translate-y': `${y / 4}px`}"
+      />
+      <div
+        class="absolute inset-0 pointer-events-none [mask-image:url(/hero-figure.png)] [mask-size:45vh] md:[mask-size:95vh] [mask-repeat:no-repeat] [mask-position:bottom_-10%_left_30%] md:[mask-position:bottom_left_20%] bg-primary-900/70 z-0 transform -scale-x-100 animate-in slide-in-from-bottom [animation-delay:150ms] [animation-duration:500ms] [transition-duration:150ms]"
+        :style="{'--tw-translate-y': `${y / .8}px`}"
+      />
 
-        <ul
-          ref="blogGalleryRef"
-          class="w-full flex flex-nowrap items-center gap-4 p-8 overflow-x-auto overflow-y-hidden"
-        >
-          <template v-if="featuredBlogs.length">
-            <li
-              v-for="blog in featuredBlogs"
-              :key="blog.id"
-            >
-              <BlogCard
-                :title="blog.title"
-                :img-src="getAssetUrl(blog.featured_image)"
-                :slug="blogFormatter.getSlug(blog)"
-                :date="blog.date_created"
-                :publisher="blog.user_created.first_name"
-              />
-            </li>
-          </template>
-
-          <div
-            class="blog-card justify-center hover:!bg-gray-50"
-            :class="{'w-full max-w-md mx-auto aspect-none': !featuredBlogs.length}"
-          >
-            <div
-              v-if="!featuredBlogs.length"
-              class="py-4"
-            >
-              <p class="text-center">
-                Tidak ada informasi yang ditampilkan untuk saat ini 🙏
-              </p>
-            </div>
-
-            <Button
-              label="Lihat informasi lainnya..."
-              :to="{name: 'blogs'}"
-              filled
-            />
-          </div>
-        </ul>
-
-        <div class="flex gap-4 p-2">
-          <Button
-            filled
-            rounded
-            @click="slideBlogGallery(true)"
-          >
-            <Icon
-              icon="heroicons-solid:arrow-left"
-              class="w-5 h-5"
-            />
-          </Button>
-          <Button
-            filled
-            rounded
-            @click="slideBlogGallery()"
-          >
-            <Icon
-              icon="heroicons-solid:arrow-right"
-              class="w-5 h-5"
-            />
-          </Button>
-        </div>
-      </div>
+      <div class="absolute inset-x-0 bottom-0 top-1/3 bg-gradient-to-t from-primary-700/60 via-primary-500/20 to-transparent pointer-events-none" />
     </header>
 
     <main class="flex flex-col">
@@ -176,7 +130,7 @@
           <h4 class="text-2xl lg:text-3xl text-primary font-bold">
             Terbaru
           </h4>
-          <p class="self-center text-sm text-gray-500 font-light mt-2">
+          <p class="self-center text-sm text-gray-500 font-light">
             | Ikuti perkembangan informasi dari kami
           </p>
         </div>
@@ -295,14 +249,14 @@
           <div class="shrink-0 flex flex-col gap-4">
             <div class="flex gap-2">
               <h4 class="text-2xl lg:text-3xl text-primary font-bold">
-                Banyak dibaca
+                Pilihan
               </h4>
             </div>
 
-            <template v-if="mostReadBlogs.length">
+            <template v-if="featuredBlogs.length">
               <ol>
                 <li
-                  v-for="blog in mostReadBlogs"
+                  v-for="blog in featuredBlogs"
                   :key="blog.id"
                   class="!h-64 self-start"
                 >
@@ -343,9 +297,7 @@ import {
 } from '~~/services/cms';
 
 const { data: featuredBlogs } = useLazyAsyncData(() => Blogs.featured(), { default: () => [] as Blog[] });
-
-const { data: newestBlogs } = useLazyAsyncData(() => Blogs.list(), { default: () => [] as Blog[] });
-
+const { data: newestBlogs } = useLazyAsyncData(() => (Blogs.list()), { default: () => [] as Blog[] });
 const mostReadBlogs = ref<Blog[]>([]);
 
 const newestBlogsParts = computed(() => ({
@@ -355,23 +307,5 @@ const newestBlogsParts = computed(() => ({
 
 const blogGalleryRef = ref<HTMLDivElement | null>(null);
 
-const slideBlogGallery = (reverse = false) => {
-  const elm = blogGalleryRef.value;
-
-  if (elm) {
-    if (reverse) {
-      const isLeftReached = elm.scrollLeft === 0;
-      return elm.scrollTo({
-        left: isLeftReached ? elm.scrollWidth : elm.scrollLeft - elm.clientWidth,
-        behavior: 'smooth',
-      });
-    }
-    const isRightReached = elm.scrollLeft + elm.clientWidth >= elm.scrollWidth;
-    return elm.scrollTo({
-      left: isRightReached ? 0 : elm.scrollLeft + elm.clientWidth,
-      behavior: 'smooth',
-    });
-  }
-  return undefined;
-};
+const { y } = useWindowScroll();
 </script>

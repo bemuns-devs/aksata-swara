@@ -25,6 +25,7 @@
     "eslint-plugin-vue": "^9.2.0",
     "marked": "^4.0.18",
     "nuxt": "3.0.0-rc.5",
-    "sass": "^1.53.0"
+    "sass": "^1.53.0",
+    "tailwindcss-animate": "^1.0.5"
   }
 }

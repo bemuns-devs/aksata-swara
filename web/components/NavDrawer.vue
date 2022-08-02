@@ -63,7 +63,7 @@
             </li>
 
             <li @click="onNavItemClick">
-              <nuxt-link to="/unit-and-platform">
+              <nuxt-link to="/unit-platform">
                 Unit
               </nuxt-link>
             </li>

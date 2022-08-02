@@ -2,6 +2,7 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 const PluginLineClamp = require('@tailwindcss/line-clamp');
 const PluginForms = require('@tailwindcss/forms');
 const PluginTypography = require('@tailwindcss/typography');
+const PluginAnimateCSS = require('tailwindcss-animate');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -53,5 +54,6 @@ module.exports = {
     PluginLineClamp,
     PluginForms,
     PluginTypography,
+    PluginAnimateCSS,
   ],
 };

@@ -64,6 +64,15 @@ export default defineNuxtComponent({
       required: false,
       default: undefined,
     },
+    appendIcon: {
+      type: String,
+      required: false,
+      default: undefined,
+    },
+    appendIconClass: {
+      required: false,
+      default: undefined,
+    },
   },
   setup(props, { attrs, slots }) {
     // Infer component to be used
@@ -76,6 +85,7 @@ export default defineNuxtComponent({
     });
 
     const icon = props.icon ? h(Icon, { icon: props.icon, class: props.iconClass }) : undefined;
+    const appendIcon = props.appendIcon ? h(Icon, { icon: props.appendIcon, class: props.appendIconClass }) : undefined;
 
     return () => h(tag.value, {
       class: ['btn', {
@@ -86,7 +96,7 @@ export default defineNuxtComponent({
         'btn--link': props.link,
       }],
     }, {
-      default: () => slots.default?.() || [icon, props.label],
+      default: () => slots.default?.() || [icon, props.label, appendIcon],
     });
   },
   // Just for better typings

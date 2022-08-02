@@ -1,7 +1,7 @@
 <template>
   <nav
     class="sticky top-0 z-10 flex justify-between items-center bg-white/60 backdrop-blur px-6 py-4 transition duration-500"
-    :class="{'bg-primary-100/30 border-b border-primary-500 shadow': y > 0}"
+    :class="{'!bg-primary-100/30 !border-b !border-primary-500 !shadow': y > 0}"
   >
     <div>
       <NuxtLink
@@ -9,7 +9,7 @@
         class="flex items-center gap-2"
       >
         <BrandSVG class="w-12 h-12" />
-        <span class="text-xl text-primary text-center font-bold font-brand hidden lg:block">Aksata Swara</span>
+        <span class="text-xl text-primary text-center font-bold font-brand">Aksata Swara</span>
       </NuxtLink>
     </div>
 
@@ -45,7 +45,10 @@
       </li>
 
       <li>
-        <Button label="Unit" />
+        <Button
+          label="Unit"
+          to="/unit-platform"
+        />
       </li>
 
       <li class="ml-4">
