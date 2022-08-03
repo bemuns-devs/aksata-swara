@@ -58,7 +58,7 @@
           @click="isCodeInfoOpen = !isCodeInfoOpen"
         >
           <span>
-            Masukkan Kode Info <kbd class="text-primary-300">ctrl k</kbd>
+            Masukkan Kode Info <kbd class="text-primary-300">/</kbd>
           </span>
         </Button>
       </li>
@@ -108,7 +108,6 @@
 <script lang="ts" setup>
 import { watchPostEffect } from 'vue';
 
-const router = useRouter();
 const { y } = useWindowScroll();
 const refCodeInfoInput = ref<HTMLInputElement>(null);
 const drawer = ref(false);
@@ -116,12 +115,12 @@ const isCodeInfoOpen = ref(false);
 const codeInfo = ref('');
 
 const onCodeInfoSubmit = async () => {
-  await router.push({ name: 'codeinfo', params: { codeinfo: codeInfo.value } });
+  await navigateTo({ name: 'codeinfo', params: { codeinfo: codeInfo.value } });
   isCodeInfoOpen.value = false;
 };
 
 const bindCodeInfoShortcut = (e: KeyboardEvent) => {
-  if (e.ctrlKey && e.key === 'k') {
+  if (e.key === '/') {
     e.preventDefault();
     isCodeInfoOpen.value = !isCodeInfoOpen.value;
   }

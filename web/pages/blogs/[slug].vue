@@ -7,10 +7,10 @@
         <div class="content-container z-[1] flex flex-col gap-8 px-4 py-12">
           <div class="flex">
             <NuxtLink
-              :to="{name: 'blogs', query: {category: blog.category.name}}"
+              :to="{name: 'blogs', query: {category: blog.category?.name}}"
               class="text-sm text-gray-700 capitalize bg-white hover:bg-secondary-50 px-2 py-0.5 rounded-full border border-secondary-300 ring focus:ring-1 ring-secondary transition"
             >
-              {{ blog.category.name }}
+              {{ blog.category?.name }}
             </NuxtLink>
           </div>
 
@@ -150,7 +150,7 @@ const slug = computed(() => String(route.params.slug));
 const shareUrl = computed(() => location?.href);
 const { copy } = useClipboard({ source: shareUrl });
 
-const { data: blog, pending: isBlogLoading } = useLazyAsyncData(
+const { data: blog, pending: isBlogLoading } = await useAsyncData(
   `blog_${slug.value}`,
   () => Blogs.bySlug(slug.value),
   { default: () => ({} as Blog) },

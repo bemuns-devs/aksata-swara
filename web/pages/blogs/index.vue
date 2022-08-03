@@ -104,7 +104,7 @@ const onSubmit = (e: FormDataEvent) => {
   const formElm = e.target as HTMLFormElement;
   const category = (formElm.elements.namedItem('category') as HTMLSelectElement).value;
   const search = (formElm.elements.namedItem('search') as HTMLSelectElement).value;
-  router.push({
+  return navigateTo({
     query: {
       search,
       category,
