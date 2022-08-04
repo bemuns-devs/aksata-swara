@@ -5,7 +5,7 @@
   >
     <div>
       <NuxtLink
-        to="/"
+        :to="{name: 'index'}"
         class="flex items-center gap-2"
       >
         <BrandSVG class="w-12 h-12" />
@@ -26,14 +26,14 @@
       <li>
         <Button
           label="Beranda"
-          to="/"
+          :to="{name:'index'}"
         />
       </li>
 
       <li>
         <Button
           label="Tentang"
-          to="/about"
+          :to="{name: 'about'}"
         />
       </li>
 
@@ -47,7 +47,7 @@
       <li>
         <Button
           label="Unit"
-          :to="{name: 'unit-platform'}"
+          :to="{name: 'index', hash: '#unit-platform'}"
         />
       </li>
 

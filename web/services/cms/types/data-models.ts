@@ -62,3 +62,22 @@ type FeaturedBlogInListPick<T> = Omit<T, 'id' | 'sort'>;
 export interface FeaturedBlogInList extends FeaturedBlogInListPick<FeaturedBlog> { }
 
 export interface FeaturedBlogInListRaw extends FeaturedBlogInListPick<FeaturedBlogRaw> { }
+
+export interface UnitPlatform {
+  id: string;
+  status: PublicationStatus;
+  name: string;
+  link: string;
+  logo: string;
+  short_description: string;
+  long_description: string
+  sort: number;
+}
+
+export interface UnitPlatformRaw extends UnitPlatform { }
+
+type UnitPlatformInListPick<T> = Omit<T, 'status' | 'sort' | 'long_description'>;
+
+export interface UnitPlatformInList extends UnitPlatformInListPick<UnitPlatform> { }
+
+export interface UnitPlatformInListRaw extends UnitPlatformInListPick<UnitPlatformRaw> { }

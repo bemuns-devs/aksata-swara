@@ -51,70 +51,53 @@
     </header>
 
     <main class="flex flex-col">
-      <section class="relative flex flex-col lg:flex-row justify-center items-stretch gap-4 lg:gap-16 bg-secondary-50 h-[80vh] px-4 py-8 lg:px-24 lg:py-16 overflow-hidden">
-        <BrandSVG class="absolute inset-1/2 left-[10%] opacity-10 -translate-y-1/2 -rotate-12 z-0" />
+      <section
+        ref="refAboutSection"
+        class="relative flex flex-col justify-center items-stretch gap-4 bg-secondary-50 h-[50vh] px-4 py-8 lg:px-24 lg:py-16 overflow-hidden"
+      >
+        <BrandSVG class="absolute inset-0 md:inset-1/2 md:left-[10%] opacity-10 -translate-y-1/2 -rotate-12 z-0" />
 
-        <h3 class="z-[1] text-sm lg:text-base text-gray-700 font-light">
-          Sekilas tentang kami
-        </h3>
-        <div class="z-[1] flex flex-col lg:p-2.5">
-          <h2 class="text-base lg:text-xl text-primary font-bold">
-            <span>BEM UNS kabinet &ldquo;AKSATA SWARA&rdquo;</span>
-          </h2>
-          <q class="text-sm lg:text-base text-gray-700 font-light p-2 lg:py-2.5">kami berkomitmen untuk</q>
-          <blockquote class="text-2xl lg:text-5xl text-primary font-bold">
-            &ldquo;Melayani Hak-hak Dasar Mahasiswa&rdquo;
-          </blockquote>
-          <p class="lg:text-lg text-gray-700 max-w-prose py-4 lg:py-8">
-            <!-- eslint-disable-next-line max-len -->
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-          </p>
-          <div class="flex flex-wrap gap-2 lg:gap-4">
-            <Button
-              to="/about"
-              link
-              class="!text-primary hover:!text-primary-800 hover:!bg-secondary-100/80"
-            >
-              <span class="text-primary">Visi Misi</span>
-              <Icon
-                icon="heroicons-solid:external-link"
-                class="icon"
-              />
-            </Button>
-            <Button
-              to="/about"
-              link
-              class="!text-primary hover:!text-primary-800 hover:!bg-secondary-100/80"
-            >
-              <span class="text-primary">Nilai dan Budaya Kerja</span>
-              <Icon
-                icon="heroicons-solid:external-link"
-                class="icon"
-              />
-            </Button>
-            <Button
-              to="/about"
-              link
-              class="!text-primary hover:!text-primary-800 hover:!bg-secondary-100/80"
-            >
-              <span class="text-primary">Filosofi</span>
-              <Icon
-                icon="heroicons-solid:external-link"
-                class="icon"
-              />
-            </Button>
-            <Button
-              to="/about"
-              link
-              class="!text-primary hover:!text-primary-800 hover:!bg-secondary-100/80"
-            >
-              <span class="text-primary">Struktur Organisasi</span>
-              <Icon
-                icon="heroicons-solid:external-link"
-                class="icon"
-              />
-            </Button>
-          </div>
+        <blockquote
+          class="relative text-3xl lg:text-5xl text-primary text-center font-bold fade-in slide-in-from-bottom duration-500"
+          :class="{'animate-in': isVisible.aboutSection, 'opacity-0': !isVisible.aboutSection}"
+          @animationend="onQuoteAnimationEnd"
+        >
+          &ldquo;Melayani Hak-hak Dasar Mahasiswa&rdquo;
+        </blockquote>
+
+        <div class="relative mt-4 flex justify-center content-center flex-wrap gap-2 lg:gap-4">
+          <Button
+            label="Visi Misi"
+            to="/about"
+            append-icon="heroicons-solid:external-link"
+            filled
+            class="fade-in slide-in-from-bottom-8 duration-500"
+            :class="{'animate-in': isVisible.aboutQuote, 'opacity-0': !isVisible.aboutQuote}"
+          />
+          <Button
+            label="Nilai dan Budaya Kerja"
+            to="/about"
+            append-icon="heroicons-solid:external-link"
+            filled
+            class="fade-in slide-in-from-bottom-8 duration-500"
+            :class="{'animate-in': isVisible.aboutQuote, 'opacity-0': !isVisible.aboutQuote}"
+          />
+          <Button
+            label="Filosofi"
+            to="/about"
+            append-icon="heroicons-solid:external-link"
+            filled
+            class="fade-in slide-in-from-bottom-8 duration-500"
+            :class="{'animate-in': isVisible.aboutQuote, 'opacity-0': !isVisible.aboutQuote}"
+          />
+          <Button
+            label="Struktur Organisasi"
+            to="/about"
+            append-icon="heroicons-solid:external-link"
+            filled
+            class="fade-in slide-in-from-bottom-8 duration-500"
+            :class="{'animate-in': isVisible.aboutQuote, 'opacity-0': !isVisible.aboutQuote}"
+          />
         </div>
       </section>
 
@@ -126,13 +109,10 @@
           Portal Informasi
         </h3>
 
-        <div class="flex gap-2">
+        <div class="hidden lg:flex gap-2">
           <h4 class="text-2xl lg:text-3xl text-primary font-bold">
             Terbaru
           </h4>
-          <p class="self-center text-sm text-gray-500 font-light">
-            | Ikuti perkembangan informasi dari kami
-          </p>
         </div>
 
         <ol
@@ -192,7 +172,9 @@
             <h4 class="text-2xl lg:text-3xl text-primary font-bold">
               Terbaru
             </h4>
-            <time class="self-center text-sm text-gray-500 font-light mt-2">| 20 April 2022</time>
+            <p class="self-center text-sm text-gray-500 font-light">
+              | Ikuti perkembangan informasi dari kami
+            </p>
           </div>
           <div class="flex flex-col">
             <ul class="flex flex-col">
@@ -286,6 +268,40 @@
           </div>
         </div>
       </section>
+
+      <section
+        id="unit-platform"
+        class="bg-slate-100 px-4 lg:px-8 py-8 lg:py-12 flex flex-col gap-8 lg:gap-16"
+      >
+        <h3 class="text-2xl lg:text-3xl text-primary text-center font-bold">
+          Unit dan Platform
+        </h3>
+
+        <ul class="max-w-screen-xl mx-auto flex justify-evenly flex-wrap gap-6 lg:gap-12">
+          <li
+            v-for="el in unitPlatforms"
+            :key="el.id"
+          >
+            <a
+              :href="el.link"
+              class="group relative flex flex-col items-center gap-4"
+              target="_blank"
+            >
+              <img
+                :src="`${getAssetUrl(el.logo)}?width=200&format=webp`"
+                :alt="`logo ${el.name}`"
+                class="w-40 h-40 rounded-full"
+              >
+              <span class="text-center">{{ el.name }}</span>
+
+              <Icon
+                icon="heroicons-solid:external-link"
+                class="absolute top-2 right-2 text-base hidden group-hover:block"
+              />
+            </a>
+          </li>
+        </ul>
+      </section>
     </main>
   </div>
 </template>
@@ -293,11 +309,13 @@
 <script lang="ts" setup>
 import { Icon } from '@iconify/vue';
 import {
-  Blog, blogFormatter, Blogs, getAssetUrl,
+  Blog, blogFormatter, Blogs, getAssetUrl, UnitPlatforms, UnitPlatformInList,
 } from '~~/services/cms';
 
+const refAboutSection = ref<HTMLElement>(null);
 const { data: featuredBlogs } = useLazyAsyncData(() => Blogs.featured(), { default: () => [] as Blog[] });
 const { data: newestBlogs } = useLazyAsyncData(() => (Blogs.list()), { default: () => [] as Blog[] });
+const { data: unitPlatforms } = useLazyAsyncData(() => UnitPlatforms.list(), { default: () => [] as UnitPlatformInList[] });
 
 const newestBlogsParts = computed(() => ({
   top4: newestBlogs.value.slice(0, 4),
@@ -305,4 +323,20 @@ const newestBlogsParts = computed(() => ({
 }));
 
 const { y } = useWindowScroll();
+const isVisible = reactive({
+  aboutSection: false,
+  aboutQuote: false,
+});
+
+const onQuoteAnimationEnd = () => {
+  isVisible.aboutQuote = true;
+};
+
+useIntersectionObserver(refAboutSection, ([{ isIntersecting }]) => {
+  isVisible.aboutSection = isIntersecting;
+
+  if (!isIntersecting) {
+    isVisible.aboutQuote = false;
+  }
+}, { threshold: 0.8 });
 </script>

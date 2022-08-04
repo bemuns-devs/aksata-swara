@@ -78,6 +78,11 @@ export default defineNuxtComponent({
       required: false,
       default: undefined,
     },
+    size: {
+      type: String,
+      required: false,
+      default: undefined,
+    },
   },
   setup(props, { attrs, slots }) {
     // Infer component to be used
@@ -100,9 +105,10 @@ export default defineNuxtComponent({
         'btn--round': props.round,
         'btn--link': props.link,
         'btn--square': props.square,
+        'btn--sm': props.size === 'sm',
       }],
     }, {
-      default: () => slots.default?.() || [icon, props.label, appendIcon],
+      default: () => slots.default?.() || [icon, props.label && h('span', props.label), appendIcon],
     });
   },
   // Just for better typings
@@ -111,22 +117,31 @@ export default defineNuxtComponent({
 
 <style lang="sass">
 .btn
-  @apply flex justify-center items-center gap-2 text-gray-900 font-semibold px-4 py-2.5 rounded-lg transition
+  --surface: transparent
+  --on-surface: theme(colors.slate.500)
+  background-color: var(--surface)
+  color: var(--on-surface)
+  @apply text-base flex justify-center items-center gap-2 font-semibold px-4 py-2.5 rounded-lg transition
   &:hover
-    @apply bg-primary-50
+    --surface: theme(colors.primary.50)
   &:focus
     @apply ring ring-primary-300
   &:active
-    @apply bg-primary-50/50
+    --surface: lighten(theme(colors.primary.50), 50%)
 
   &--filled
-    @apply text-white bg-primary
-    @apply hover:bg-primary-600
-    @apply active:bg-primary-700
+    --surface: theme(colors.primary.DEFAULT)
+    --on-surface: theme(colors.white)
+    &:hover
+      --surface: theme(colors.primary.600)
+    &:active
+      --surface: theme(colors.primary.700)
     &:disabled,
     .disabled
-      @apply bg-primary-300 text-neutral-50
-      @apply hover:bg-primary-300
+      --surface: theme(colors.primary.300)
+      --on-surface: theme(colors.neutral.50)
+      &:hover
+        --surface: theme(colors.primary.300)
 
   &--rounded
     @apply rounded-full
@@ -142,6 +157,9 @@ export default defineNuxtComponent({
 
   &--link
     @apply underline
+
+  &--sm
+    @apply px-2 py-1.5 leading-snug
 
   .icon
     @apply w-4 h-4

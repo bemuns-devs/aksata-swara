@@ -16,5 +16,6 @@
       "cms",
       "web"
     ],
+    "tailwindCSS.experimental.configFile": "web/tailwind.config.js"
   }
 }

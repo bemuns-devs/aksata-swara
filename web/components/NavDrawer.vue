@@ -14,7 +14,7 @@
       <div class="flex justify-between mb-2">
         <div class="p-4">
           <NuxtLink
-            to="/"
+            :to="{name: 'index'}"
             class="flex items-center gap-2"
           >
             <BrandSVG class="w-12 h-12" />
@@ -35,13 +35,13 @@
 
       <ul class="nav-items mt-2 p-2">
         <li @click="onNavItemClick">
-          <nuxt-link to="/">
+          <nuxt-link :to="{name: 'index'}">
             Beranda
           </nuxt-link>
         </li>
 
         <li @click="onNavItemClick">
-          <nuxt-link to="/about">
+          <nuxt-link :to="{name: 'about'}">
             Tentang
           </nuxt-link>
         </li>
@@ -53,7 +53,7 @@
         </li>
 
         <li @click="onNavItemClick">
-          <nuxt-link to="/unit-platform">
+          <nuxt-link :to="{name: 'index', hash: '#unit-platform'}">
             Unit
           </nuxt-link>
         </li>

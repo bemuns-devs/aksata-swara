@@ -1,5 +1,7 @@
 import { Directus } from '@directus/sdk';
-import { BlogCategoryRaw, BlogRaw, FeaturedBlogRaw } from '~~/services/cms/types/data-models';
+import type {
+  BlogCategoryRaw, BlogRaw, FeaturedBlogRaw, UnitPlatformRaw,
+} from '~~/services/cms/types/data-models';
 
 interface SDKConfig {
   url: string;
@@ -9,6 +11,7 @@ interface SDKConfig {
 type Collection = {
   blogs: BlogRaw;
   blog_categories: BlogCategoryRaw;
+  unit_platform: UnitPlatformRaw;
   featured_blogs: FeaturedBlogRaw;
 }
 
