@@ -53,7 +53,7 @@ const bySlug = async (slug: string): Promise<Blog> => {
   const data = await sdk().items('blogs').readOne(id, {
     fields: ['*', ...NESTED_FIELDS],
   });
-  return fromInListRaw(data as BlogRaw) as Blog;
+  return fromRaw(data as BlogRaw) as Blog;
 };
 
 const byCodeInfo = async (code: string): Promise<Blog | null> => {

@@ -281,14 +281,15 @@
           <li
             v-for="el in unitPlatforms"
             :key="el.id"
+            class="grow"
           >
             <a
               :href="el.link"
-              class="group relative flex flex-col items-center gap-4"
+              class="group relative p-2 flex flex-col items-center gap-4 hover:bg-slate-200 rounded"
               target="_blank"
             >
               <img
-                :src="`${getAssetUrl(el.logo)}?width=200&format=webp`"
+                :src="`${getAssetUrl(el.logo)}?width=150&format=webp`"
                 :alt="`logo ${el.name}`"
                 class="w-40 h-40 rounded-full"
               >
@@ -313,9 +314,9 @@ import {
 } from '~~/services/cms';
 
 const refAboutSection = ref<HTMLElement>(null);
-const { data: featuredBlogs } = useLazyAsyncData(() => Blogs.featured(), { default: () => [] as Blog[] });
-const { data: newestBlogs } = useLazyAsyncData(() => (Blogs.list()), { default: () => [] as Blog[] });
-const { data: unitPlatforms } = useLazyAsyncData(() => UnitPlatforms.list(), { default: () => [] as UnitPlatformInList[] });
+const { data: featuredBlogs } = await useAsyncData(() => Blogs.featured(), { default: () => [] as Blog[] });
+const { data: newestBlogs } = await useAsyncData(() => (Blogs.list()), { default: () => [] as Blog[] });
+const { data: unitPlatforms } = await useAsyncData(() => UnitPlatforms.list(), { default: () => [] as UnitPlatformInList[] });
 
 const newestBlogsParts = computed(() => ({
   top4: newestBlogs.value.slice(0, 4),
@@ -338,5 +339,5 @@ useIntersectionObserver(refAboutSection, ([{ isIntersecting }]) => {
   if (!isIntersecting) {
     isVisible.aboutQuote = false;
   }
-}, { threshold: 0.8 });
+}, { threshold: 0.75 });
 </script>

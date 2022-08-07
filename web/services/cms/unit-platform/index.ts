@@ -3,9 +3,7 @@ import sdk from '~~/services/cms/sdk';
 import type { UnitPlatform, UnitPlatformInList, UnitPlatformRaw } from '~~/services/cms/types/data-models';
 import { fromInListRaw, fromRaw } from './formatter';
 
-const DEFAULT_FILTER: QueryMany<UnitPlatformRaw>['filter'] = {
-  status: 'published',
-};
+const DEFAULT_FILTER: QueryMany<UnitPlatformRaw>['filter'] = {};
 
 const LIST_FIELDS: QueryMany<UnitPlatformRaw>['fields'] = [
   'id',

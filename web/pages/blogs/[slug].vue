@@ -1,5 +1,7 @@
 <template>
-  <div class="flex flex-col gap-4">
+  <div
+    class="flex flex-col gap-4"
+  >
     <section class="flex flex-col">
       <div class="relative flex flex-col bg-secondary">
         <div class="absolute z-0 inset-x-0 bottom-0 h-28 bg-white" />
@@ -32,7 +34,10 @@
       <div class="content-container flex flex-col lg:flex-row justify-between gap-8 bg-white px-4 pt-4 pb-12">
         <main class="prose lg:prose-lg">
           <!-- eslint-disable vue/no-v-html -->
-          <div v-html="marked(blog.content || '')" />
+          <div
+            ref="refMainContent"
+            v-html="marked(blog.content || '')"
+          />
           <!-- eslint-enable vue/no-v-html -->
           <ul class="list-none flex !px-0 mt-8 gap-x-2">
             <li
@@ -147,16 +152,24 @@ const route = useRoute();
 const slug = computed(() => String(route.params.slug));
 
 // eslint-disable-next-line no-restricted-globals
-const shareUrl = computed(() => location?.href);
+const shareUrl = computed(() => globalThis.location?.href);
 const { copy } = useClipboard({ source: shareUrl });
 
-const { data: blog, pending: isBlogLoading } = await useAsyncData(
+const refMainContent = ref<HTMLDivElement>(null);
+const { data: blog } = await useAsyncData(
   `blog_${slug.value}`,
-  () => Blogs.bySlug(slug.value),
-  { default: () => ({} as Blog) },
+  async () => {
+    const data = await Blogs.bySlug(slug.value);
+    if (data) {
+      return data;
+    }
+    throw createError({ statusCode: 404, statusMessage: 'Blog not found!' });
+  },
+  { default: () => (<Blog>{}) },
 );
 
-const relatedBlogs = computedAsync(
+const { data: relatedBlogs } = await useAsyncData(
+  `related-blogs_${slug.value}`,
   () => (blog.value.tags
     ? Blogs.list({
       filter: {
@@ -165,7 +178,7 @@ const relatedBlogs = computedAsync(
       },
     })
     : Promise.resolve([] as Blog[])),
-  [],
+  { default: () => <Blog[]>[], watch: [blog] },
 );
 
 const onCopy = () => copy()
@@ -183,11 +196,49 @@ const onShareClick = () => {
 };
 
 whenever(slug, () => {
-  window.scrollTo({ top: 0 });
+  globalThis.window?.scrollTo({ top: 0 });
 });
 
-useHead(({
-  title: (() => blog.value.title) as unknown as string,
+useHead(() => ({
+  title: blog.value.title,
+  meta: [
+    {
+      name: 'description',
+      content: refMainContent.value?.textContent.slice(0, 197).concat('...'),
+    },
+    {
+      name: 'og:title',
+      content: blog.value.title,
+    },
+    {
+      name: 'og:description',
+      content: refMainContent.value?.textContent.slice(0, 197).concat('...'),
+    },
+    {
+      name: 'og:image',
+      content: `${getAssetUrl(blog.value.featured_image)}?width=100`,
+    },
+    {
+      name: 'og:url',
+      content: shareUrl.value,
+    },
+    {
+      name: 'twitter:title',
+      content: blog.value.title,
+    },
+    {
+      name: 'twitter:description',
+      content: refMainContent.value?.textContent.slice(0, 197).concat('...'),
+    },
+    {
+      name: 'twitter:image',
+      content: `${getAssetUrl(blog.value.featured_image)}?width=100`,
+    },
+    {
+      name: 'twitter:url',
+      content: shareUrl.value,
+    },
+  ],
 }));
 </script>
 
