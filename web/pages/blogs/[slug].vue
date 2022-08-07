@@ -34,10 +34,7 @@
       <div class="content-container flex flex-col lg:flex-row justify-between gap-8 bg-white px-4 pt-4 pb-12">
         <main class="prose lg:prose-lg">
           <!-- eslint-disable vue/no-v-html -->
-          <div
-            ref="refMainContent"
-            v-html="marked(blog.content || '')"
-          />
+          <div v-html="marked(blog.content || '')" />
           <!-- eslint-enable vue/no-v-html -->
           <ul class="list-none flex !px-0 mt-8 gap-x-2">
             <li
@@ -144,9 +141,17 @@
 <script lang="ts" setup>
 import { Icon } from '@iconify/vue';
 import { marked } from 'marked';
+import { stripHtml } from 'string-strip-html';
 import {
   Blog, blogFormatter, Blogs, getAssetUrl,
 } from '~~/services/cms';
+
+const getPageDescription = useMemoize((blog: Blog) => {
+  const compiledMd = marked(blog.content || '');
+  return stripHtml(compiledMd).result
+    .slice(0, 197)
+    .concat('...');
+});
 
 const route = useRoute();
 const slug = computed(() => String(route.params.slug));
@@ -155,7 +160,6 @@ const slug = computed(() => String(route.params.slug));
 const shareUrl = computed(() => globalThis.location?.href);
 const { copy } = useClipboard({ source: shareUrl });
 
-const refMainContent = ref<HTMLDivElement>(null);
 const { data: blog } = await useAsyncData(
   `blog_${slug.value}`,
   async () => {
@@ -197,45 +201,49 @@ const onShareClick = () => {
 
 whenever(slug, () => {
   globalThis.window?.scrollTo({ top: 0 });
-});
+}, { immediate: true });
 
-useHead(() => ({
+useHead(({
   title: blog.value.title,
   meta: [
     {
-      name: 'description',
-      content: refMainContent.value?.textContent.slice(0, 197).concat('...'),
-    },
-    {
-      name: 'og:title',
+      name: 'title',
       content: blog.value.title,
     },
     {
-      name: 'og:description',
-      content: refMainContent.value?.textContent.slice(0, 197).concat('...'),
+      name: 'description',
+      content: getPageDescription(blog.value),
     },
     {
-      name: 'og:image',
+      property: 'og:title',
+      content: blog.value.title,
+    },
+    {
+      property: 'og:description',
+      content: getPageDescription(blog.value),
+    },
+    {
+      property: 'og:image',
       content: `${getAssetUrl(blog.value.featured_image)}?width=100`,
     },
     {
-      name: 'og:url',
+      property: 'og:url',
       content: shareUrl.value,
     },
     {
-      name: 'twitter:title',
+      property: 'twitter:title',
       content: blog.value.title,
     },
     {
-      name: 'twitter:description',
-      content: refMainContent.value?.textContent.slice(0, 197).concat('...'),
+      property: 'twitter:description',
+      content: getPageDescription(blog.value),
     },
     {
-      name: 'twitter:image',
+      property: 'twitter:image',
       content: `${getAssetUrl(blog.value.featured_image)}?width=100`,
     },
     {
-      name: 'twitter:url',
+      property: 'twitter:url',
       content: shareUrl.value,
     },
   ],
