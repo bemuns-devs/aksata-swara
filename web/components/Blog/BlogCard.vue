@@ -9,6 +9,7 @@
       <img
         :src="`${imgSrc}?width=300&format=webp`"
         :alt="title"
+        loading="lazy"
       >
     </div>
     <h5 class="title">

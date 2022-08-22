@@ -1,6 +1,8 @@
-import { PUBLICATION_STATUSES } from '~~/services/cms/constants';
+import { BLOG_VISIBILITIES, PUBLICATION_STATUSES } from '~~/services/cms/constants';
 
 export type PublicationStatus = typeof PUBLICATION_STATUSES[number];
+
+export type BlogVisibility = typeof BLOG_VISIBILITIES[number];
 
 export interface Blog {
   title: string;
@@ -21,6 +23,7 @@ export interface Blog {
     first_name: string;
   };
   user_updated: string;
+  visibility: BlogVisibility;
 }
 
 export interface BlogRaw extends Omit<Blog, 'date_created' | 'date_updated'> {
@@ -76,7 +79,7 @@ export interface UnitPlatform {
 
 export interface UnitPlatformRaw extends UnitPlatform { }
 
-type UnitPlatformInListPick<T> = Omit<T, 'status' | 'sort' | 'long_description'>;
+type UnitPlatformInListPick<T> = Omit<T, 'status' | 'sort' | 'short_description'>;
 
 export interface UnitPlatformInList extends UnitPlatformInListPick<UnitPlatform> { }
 

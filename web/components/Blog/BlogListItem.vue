@@ -8,6 +8,7 @@
         <img
           :src="`${imgSrc}?width=250&format=webp`"
           :alt="title"
+          loading="lazy"
           class="h-full mx-auto object-cover transition-transform group-hover:scale-110 group-hover:rotate-2"
         >
       </div>

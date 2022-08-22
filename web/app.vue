@@ -15,6 +15,10 @@ useHead({
   viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
   meta: [
     {
+      name: 'description',
+      content: 'Official Website BEM UNS',
+    },
+    {
       name: 'msapplication-TileColor',
       content: '#da532c',
     },

@@ -16,6 +16,13 @@ export const fromRaw = (raw: BlogRaw): Blog => ({
 export const getSlug = ({ id, title }: Pick<Blog, 'id' | 'title'>) => `${paramCase(title)}--${id}`;
 
 export const extractSlug = (slug: string) => {
-  const [title, id] = slug.split('--');
-  return { id, title };
+  if (slug.includes('--')) {
+    const [title, id] = slug.split('--');
+    return { id, title };
+  }
+
+  return {
+    id: slug,
+    title: null,
+  };
 };

@@ -57,7 +57,7 @@
           filled
           @click="isCodeInfoOpen = !isCodeInfoOpen"
         >
-          <span>
+          <span class="text-white">
             Masukkan Kode Info <kbd class="text-primary-300">/</kbd>
           </span>
         </Button>
@@ -140,3 +140,8 @@ watchPostEffect(() => {
   }
 });
 </script>
+
+<style lang="sass" scoped>
+.btn
+  --on-surface: theme(colors.slate.700)
+</style>

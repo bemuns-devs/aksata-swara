@@ -34,14 +34,15 @@
         <div class="nav-list">
           <h2>Unit</h2>
           <ul>
-            <li>
-              <a href="#">
-                Datalks
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                Desamitra
+            <li
+              v-for="el in unitPlatforms"
+              :key="el.id"
+            >
+              <a
+                :href="el.link"
+                target="_blank"
+              >
+                {{ el.name }}
               </a>
             </li>
           </ul>
@@ -54,6 +55,12 @@
     </div>
   </footer>
 </template>
+
+<script lang="ts" setup>
+import { UnitPlatformInList, UnitPlatforms } from '~~/services/cms';
+
+const { data: unitPlatforms } = await useAsyncData('unit-platforms', () => UnitPlatforms.list(), { default: () => [] as UnitPlatformInList[] });
+</script>
 
 <style lang="sass" scoped>
 footer

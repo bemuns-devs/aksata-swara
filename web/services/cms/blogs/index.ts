@@ -6,8 +6,13 @@ import {
   Blog, BlogInList, BlogInListRaw, BlogRaw, FeaturedBlogInListRaw,
 } from '~~/services/cms/types/data-models';
 
-const DEFAULT_FILTER: QueryMany<BlogRaw>['filter'] = {
-  status: 'published',
+const DEFAULT_LIST_FILTER: QueryMany<BlogRaw>['filter'] = {
+  status: {
+    _eq: 'published',
+  },
+  visibility: {
+    _eq: 'public',
+  },
 };
 
 const DEFAULT_SORT: QueryMany<BlogRaw>['sort'] = ['-date_created'];
@@ -33,7 +38,7 @@ const FEATURED_FIELDS: QueryMany<FeaturedBlogInListRaw>['fields'] = LIST_FIELDS
 
 const mergeListQuery = (source: QueryMany<BlogRaw>): QueryMany<BlogRaw> => ({
   ...source,
-  filter: { ...DEFAULT_FILTER, ...source.filter },
+  filter: { ...DEFAULT_LIST_FILTER, ...source.filter },
   limit: source.limit || PAGINATION_PERPAGE,
   fields: source.fields || LIST_FIELDS,
   sort: source.sort || DEFAULT_SORT,
@@ -59,7 +64,7 @@ const bySlug = async (slug: string): Promise<Blog> => {
 const byCodeInfo = async (code: string): Promise<Blog | null> => {
   const { data: [data] } = await sdk().items('blogs').readByQuery({
     limit: 1,
-    filter: { ...DEFAULT_FILTER, info_code: code },
+    filter: { info_code: code },
     fields: ['title', 'id'],
   });
   return data ? fromRaw(data as BlogRaw) : null;
@@ -75,7 +80,7 @@ export default {
   bySlug,
   byCodeInfo,
   featured: featuredBlogs,
-  DEFAULT_FILTER,
+  DEFAULT_FILTER: DEFAULT_LIST_FILTER,
   DEFAULT_SORT,
   LIST_FIELDS,
 };

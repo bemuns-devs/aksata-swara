@@ -291,6 +291,7 @@
               <img
                 :src="`${getAssetUrl(el.logo)}?width=150&format=webp`"
                 :alt="`logo ${el.name}`"
+                loading="lazy"
                 class="w-40 h-40 rounded-full"
               >
               <span class="text-center">{{ el.name }}</span>
@@ -309,14 +310,18 @@
 
 <script lang="ts" setup>
 import { Icon } from '@iconify/vue';
+import { toRefs } from '@vueuse/core';
 import {
-  Blog, blogFormatter, Blogs, getAssetUrl, UnitPlatforms, UnitPlatformInList,
+  blogFormatter, Blogs, getAssetUrl, UnitPlatforms, UnitPlatformInList, BlogInList,
 } from '~~/services/cms';
 
 const refAboutSection = ref<HTMLElement>(null);
-const { data: featuredBlogs } = await useAsyncData(() => Blogs.featured(), { default: () => [] as Blog[] });
-const { data: newestBlogs } = await useAsyncData(() => (Blogs.list()), { default: () => [] as Blog[] });
-const { data: unitPlatforms } = await useAsyncData(() => UnitPlatforms.list(), { default: () => [] as UnitPlatformInList[] });
+const { data } = await useAsyncData<[BlogInList[], BlogInList[]]>(() => Promise.all([
+  Blogs.featured(),
+  Blogs.list(),
+]), { default: () => [[], []] });
+const [featuredBlogs, newestBlogs] = toRefs(data);
+const { data: unitPlatforms } = await useAsyncData('unit-platforms', () => UnitPlatforms.list(), { default: () => [] as UnitPlatformInList[] });
 
 const newestBlogsParts = computed(() => ({
   top4: newestBlogs.value.slice(0, 4),

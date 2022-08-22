@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="flex flex-col gap-4"
-  >
+  <div class="flex flex-col gap-4">
     <section class="flex flex-col">
       <div class="relative flex flex-col bg-secondary">
         <div class="absolute z-0 inset-x-0 bottom-0 h-28 bg-white" />
@@ -143,7 +141,7 @@ import { Icon } from '@iconify/vue';
 import { marked } from 'marked';
 import { stripHtml } from 'string-strip-html';
 import {
-  Blog, blogFormatter, Blogs, getAssetUrl,
+  Blog, blogFormatter, BlogInList, Blogs, getAssetUrl,
 } from '~~/services/cms';
 
 const getPageDescription = useMemoize((blog: Blog) => {
@@ -169,10 +167,10 @@ const { data: blog } = await useAsyncData(
     }
     throw createError({ statusCode: 404, statusMessage: 'Blog not found!' });
   },
-  { default: () => (<Blog>{}) },
+  { default: () => ({} as Blog) },
 );
 
-const { data: relatedBlogs } = await useAsyncData(
+const { data: relatedBlogs } = await useAsyncData<BlogInList[]>(
   `related-blogs_${slug.value}`,
   () => (blog.value.tags
     ? Blogs.list({
@@ -181,8 +179,8 @@ const { data: relatedBlogs } = await useAsyncData(
         _or: blog.value.tags.map((tag) => ({ tags: { _contains: tag } })),
       },
     })
-    : Promise.resolve([] as Blog[])),
-  { default: () => <Blog[]>[], watch: [blog] },
+    : Promise.resolve([])),
+  { default: () => [], watch: [blog] },
 );
 
 const onCopy = () => copy()
@@ -200,7 +198,9 @@ const onShareClick = () => {
 };
 
 whenever(slug, () => {
-  globalThis.window?.scrollTo({ top: 0 });
+  if (!route.hash) {
+    globalThis.window?.scrollTo({ top: 0 });
+  }
 }, { immediate: true });
 
 useHead(({
