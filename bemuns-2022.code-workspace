@@ -7,6 +7,9 @@
       "path": "admin-dashboard"
     },
     {
+      "path": "datalks-web"
+    },
+    {
       "path": ".",
       "name": "$root"
     }
@@ -14,8 +17,10 @@
   "settings": {
     "conventionalCommits.scopes": [
       "cms",
-      "web"
+      "web",
+      "datalks"
     ],
-    "tailwindCSS.experimental.configFile": "web/tailwind.config.js"
+    "tailwindCSS.experimental.configFile": "web/tailwind.config.js",
+    "unocss.root": "datalks/web",
   }
 }
