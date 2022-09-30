@@ -1,4 +1,3 @@
-import { transformerDirectives } from 'unocss'
 import { imagetools } from 'vite-imagetools'
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
@@ -31,8 +30,6 @@ export default defineNuxtConfig({
     defaultLocale: 'id'
   },
   unocss: {
-    transformers: [
-      transformerDirectives()
-    ]
+    configFile: 'uno.config.ts',
   }
 })

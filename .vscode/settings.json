@@ -1,6 +1,5 @@
 {
   "files.exclude": {
-    "admin-dashboard/": true,
-    "web/": true,
+    "{admin-dashboard,web,datalks-web}/": true,
   }
 }
