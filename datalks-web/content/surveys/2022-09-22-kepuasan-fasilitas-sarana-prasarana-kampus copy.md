@@ -1,7 +1,8 @@
 ---
 title: Survei Kepuasan Fasilitas, Sarana, dan Prasarana Kampus
-image: import:/img/survey-cover_09-22-kepuasan-fasilitas-sarana-prasarana-kampus.jpeg
-periods: [2022-09-11, 2022-09-18]
+image: /survey/22-09-kepuasan-fasilitas-sarana-prasarana-kampus.jpeg
+periodStart: 2022-09-11
+periodEnd: 2022-12-18
 url: https://tinyurl.com/SurveiSarprasUNS2022
 ---
 

@@ -7,12 +7,14 @@
     "preview": "nuxt preview"
   },
   "devDependencies": {
+    "@iconify-json/akar-icons": "^1.1.10",
     "@nuxt/content": "^2.1.0",
     "@unocss/nuxt": "^0.45.21",
     "@unocss/reset": "^0.45.21",
     "@vueuse/core": "^9.2.0",
     "@vueuse/nuxt": "^9.2.0",
-    "nuxt": "^3.0.0-rc.10",
+    "animate.css": "^4.1.1",
+    "nuxt": "3.0.0-rc.13",
     "sass": "^1.54.9",
     "unocss": "^0.45.21",
     "vite-imagetools": "^4.0.9"
