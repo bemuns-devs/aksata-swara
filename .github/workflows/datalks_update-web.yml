@@ -1,0 +1,45 @@
+name: "Datalks: Update Web"
+
+on:
+  push:
+    branches: ["master"]
+    paths: "datalks-web/**"
+  workflow_dispatch:
+
+defaults:
+  run:
+    working-directory: datalks-web
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+    steps:
+    - uses: actions/checkout@v3
+    - uses: pnpm/action-setup@v2.2.4
+      with:
+        version: 7
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'pnpm'
+        cache-dependency-path: '**/pnpm-lock.yaml'
+    - name: Install dependencies
+      run: pnpm install --shamefully-hoist
+    - name: Build
+      run: pnpm run generate
+    - name: Deploy
+      uses: cpina/github-action-push-to-another-repository@main
+      env:
+        SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
+        API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+      with:
+        source-directory: "datalks-web/.output/public"
+        destination-github-username: "bemuns-devs"
+        destination-repository-name: "dist-datalks"
+        user-email: me@anhzf.dev
+        target-branch: main
+
