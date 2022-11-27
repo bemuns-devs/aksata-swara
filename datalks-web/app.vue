@@ -8,8 +8,7 @@ const st = useRootLayoutState();
     <nav class="sticky top-0 z-100 bg-white p-4 shadow-xl flex">
       <NuxtLink to="/" class="flex items-center gap-2 p-2 pr-4 hover:bg-stone-100 active:bg-stone-200">
         <div class="relative block w-10 h-10 overflow-hidden">
-          <img src="./assets/img/brand-datalks.png?webp&w=40" alt="Logo Datalks"
-            class="absolute object-cover w-150% h-150% inset-1/2 -translate-1/2">
+          <BrandLogo class="absolute object-cover w-150% h-150% inset-1/2 -translate-1/2" />
         </div>
         <span class="text-lg text-stone-700 tracking-widest">DATALKS</span>
       </NuxtLink>

@@ -46,7 +46,7 @@ useHead({
           <div class="p-4 pb-2">
             <h2 class="text-3xl text-stone-900 font-bold transform"
               :style="{ '--un-translate-y': `${Math.max(0, 25 - y / 8)}px` }">
-              Survey Kami
+              Survei Kami
             </h2>
           </div>
 
@@ -62,7 +62,7 @@ useHead({
                 class="group h-64 max-h-25vh aspect-5/3 flex flex-col justify-center bg-white hover:bg-amber-100 active:bg-amber-200 border-2 border-amber rounded-lg transform"
                 :style="{ '--un-translate-y': `${Math.max(0, 50 + (list.length * 20) - y / 4)}px` }">
                 <span class="self-center text-lg text-amber-600 font-medium flex items-center gap-2">
-                  <span>Lihat survey lainnya</span>
+                  <span>Lihat survei lainnya</span>
                   <div class="i-akar-icons:arrow-right group-hover:translate-x-2 transition-transform"></div>
                 </span>
               </NuxtLink>
@@ -72,7 +72,7 @@ useHead({
 
         <section class="bg-amber-100 py-4">
           <div class="p-4 pb-2">
-            <h2 class="text-3xl text-stone-900 font-bold">Berita</h2>
+            <h2 class="text-3xl text-stone-900 font-bold">Hasil Survei</h2>
           </div>
 
           <BlogGrid :query="{ limit: 7 }" />
@@ -80,7 +80,7 @@ useHead({
           <div class="flex p-4 pt-8">
             <NuxtLink href="/blogs"
               class="bg-amber-400 hover:bg-amber-300 active:bg-amber-500 px-4 py-3 text-white font-medium flex items-center gap-2 rounded-lg">
-              <span>Lihat berita lainnya</span>
+              <span>Lihat hasil survei lainnya</span>
               <div class="i-akar-icons:arrow-right group-hover:translate-x-2 transition-transform"></div>
             </NuxtLink>
           </div>
