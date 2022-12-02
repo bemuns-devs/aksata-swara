@@ -10,7 +10,7 @@ coba coba edit
 
 mantap
 
-<iframe src="https:/datalks.bemuns.org/blog/LAPORAN SURVEI AWAL BEM UNS 2022"></iframe>
+<iframe src="https:/datalks.bemuns.org/blog/LAPORAN SURVEI AWAL BEM UNS 2022.pdf"></iframe>
 
 
 
