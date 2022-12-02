@@ -16,10 +16,10 @@ const imgUrl = useContentAsset(() => props.imgSrc, '?webp&w=320')
   <article>
     <NuxtLink :to="url"
       class="group relative h-48 hover:bg-amber-50 active:bg-amber-100 flex gap-2 p-4 overflow-hidden rounded-lg">
-      <div class="w-2/5 min-w-36 h-full bg-slate">
+      <div class="shrink-0 aspect-5/4 min-w-36 h-full bg-slate">
         <img :src="imgUrl" :alt="`Gambar thumbnail '${title}'`" loading="lazy" class="w-full h-full object-cover">
       </div>
-      <div class="grow flex flex-col">
+      <div class="flex flex-col">
         <span class="text-sm text-stone-500">
           {{ date.toLocaleDateString('id-ID', { dateStyle: 'long' }) }}
         </span>

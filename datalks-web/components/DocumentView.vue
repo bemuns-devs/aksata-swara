@@ -8,6 +8,8 @@ interface Props {
 }
 
 defineProps<Props>();
+
+const { y } = useWindowScroll();
 </script>
 
 <template>
@@ -17,9 +19,12 @@ defineProps<Props>();
     </h1>
   </div>
 
-  <img :src="image" :alt="title">
+  <div class="overflow-hidden w-full h-70vh bg-slate">
+    <img :src="image" :alt="title" class="w-full h-full object-cover transform"
+      :style="{ '--un-translate-y': `${y / 2}px` }">
+  </div>
 
-  <div class="prose p-4">
+  <div class="prose p-4 max-w-none">
     <ContentRenderer :value="value" />
   </div>
 
@@ -29,3 +34,8 @@ defineProps<Props>();
     <slot name="actions" />
   </div>
 </template>
+
+<style lang="sass" scoped>
+:deep(iframe)
+  @apply w-full min-h-60vh
+</style>
