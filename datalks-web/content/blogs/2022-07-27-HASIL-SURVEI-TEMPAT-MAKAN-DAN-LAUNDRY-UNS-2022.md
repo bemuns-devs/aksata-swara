@@ -1,7 +1,7 @@
 ---
 title: HASIL SURVEI TEMPAT MAKAN DAN LAUNDRY 2022
 date:  2022-07-27
-image: URL GAMBAR COVER
+image: https://drive.google.com/file/d/1B94s0tCR1UD5Wydj3e-TqZ80BLGSsYA0/view?usp=sharing
 ---
 
 [ HASIL SURVEI TEMPAT MAKAN DAN LAUNDRY 2022 ]
