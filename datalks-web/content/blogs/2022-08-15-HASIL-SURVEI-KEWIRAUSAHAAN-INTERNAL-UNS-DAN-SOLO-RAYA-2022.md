@@ -14,7 +14,7 @@ Sebelumnya, terima kasih kepada seluruh responden yang telah berkontribusi dalam
 
 Untuk hasil survei, bisa dilihat di bawah ini:
 
-<iframe src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://datalks.bemuns.org/blog/LaporanHasilSurveiKepuasanFasilitasSaranadanPrasaranaKampusSURVEIKEWIRAUSAHAANINTERNALUNS2022DANSOLORAYA.pdf"></iframe>
+<iframe src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://datalks.bemuns.org/blog/SURVEIKEWIRAUSAHAANINTERNALUNS2022DANSOLORAYA.pdf"></iframe>
 
 Salam hangat,
 Kementerian Riset dan Data
