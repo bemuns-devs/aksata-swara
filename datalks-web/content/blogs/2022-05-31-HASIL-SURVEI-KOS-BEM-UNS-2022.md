@@ -1,7 +1,7 @@
 ---
 title: HASIL SURVEI KOS BEM UNS 2022
 date:  2022-05-31
-image: URL GAMBAR COVER
+image: https://drive.google.com/file/d/1TuzprGmbzGs-z2VzpwFOmNjg9aJb-EkU/view?usp=sharing
 ---
 
 [ HASIL SURVEI KOS BEM UNS 2022 ]
