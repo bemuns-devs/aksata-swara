@@ -16,14 +16,5 @@ Berikut adalah hasil survei kos BEM UNS 2022:
 
 <iframe src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://datalks.bemuns.org/blog/HasilSurveiKosUNS2022.pdf"></iframe>
 
-Salam hangat,
-Kementerian Riset dan Data
-BEM UNS 2022
-Kabinet Aksata Swara
 
-TWITTER : @bemuns
-IG : @bemuns
-IG : @datalks.uns
-LINE : @bemuns
-WEB : bemuns.com
 

@@ -16,13 +16,5 @@ Untuk hasil survei, bisa dilihat di bawah ini:
 
 <iframe src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://datalks.bemuns.org/blog/LaporanhasilSurveiPenguatanBerdayadanPenangananKejahatanSeksualUNSTahun2022.pdf"></iframe>
 
-Salam hangat,
-Kementerian Riset dan Data
-BEM UNS 2022
-Kabinet Aksata Swara
 
-TWITTER : @bemuns
-IG : @bemuns
-LINE : @bemuns
-WEB : bemuns.com
 
