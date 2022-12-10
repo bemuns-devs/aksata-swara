@@ -18,5 +18,14 @@ Berikut adalah laporan hasil survei awal BEM UNS 2022:
 
 <iframe src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://datalks.bemuns.org/blog/LAPORAN%20SURVEI%20AWAL%20BEM%20UNS%202022.pdf"></iframe>
 
+Salam hangat,
+Kementerian Riset dan Data
+BEM UNS 2022
+Kabinet Aksata Swara
 
+TWITTER : @bemuns
+IG : @bemuns
+IG : @datalks.uns
+LINE : @bemuns
+WEB : bemuns.com
 

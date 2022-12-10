@@ -4,7 +4,7 @@ date:  2022-10-09
 image: /blog/SURVEIKEPUASANFASILITASSARANAPRASARANAKAMPUS2022.jpg
 ---
 
-[ HASIL SURVEI KEPUASAN FASILITAS SARANA & PRASARANA KAMPUS 2022]
+[ HASIL SURVEI KEPUASAN FASILITAS SARANA & PRASARANA KAMPUS 2022 ]
 
 Haii Datalkers 👋🏻
 
@@ -19,5 +19,14 @@ Untuk hasil survei, bisa dilihat di bawah ini:
 
 <iframe src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://datalks.bemuns.org/blog/LaporanHasilSurveiKepuasanFasilitasSaranadanPrasaranaKampus.pdf"></iframe>
 
+Salam hangat,
+Kementerian Riset dan Data
+BEM UNS 2022
+Kabinet Aksata Swara
 
+TWITTER : @bemuns
+IG : @bemuns
+IG : @datalks.uns
+LINE : @bemuns
+WEB : bemuns.com
 

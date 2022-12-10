@@ -20,7 +20,7 @@ Salam hangat,
 Kementerian Riset dan Data
 BEM UNS 2022
 Kabinet Aksata Swara
--------------------------
+
 TWITTER : @bemuns
 IG : @bemuns
 LINE : @bemuns
