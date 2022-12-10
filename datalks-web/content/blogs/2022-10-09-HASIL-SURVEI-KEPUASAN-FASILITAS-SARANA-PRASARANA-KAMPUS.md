@@ -1,7 +1,7 @@
 ---
-title: HASIL SURVEI TEMPAT MAKAN DAN LAUNDRY 2022
+title: HASIL SURVEI KEPUASAN FASILITAS SARANA DAN PRASARANA KAMPUS 2022
 date:  2022-10-09
-image: URL GAMBAR COVER
+image: /blog/SURVEIKEPUASANFASILITASSARANAPRASARANAKAMPUS2022.jpg
 ---
 
 [ HASIL SURVEI KEPUASAN FASILITAS SARANA & PRASARANA KAMPUS 2022]
@@ -14,10 +14,10 @@ Fasilitas sarana & prasarana kampus merupakan keresahan kita bersama, maka dari 
 
 Sebelumnya kami ucapkan terimakasih kepada seluruh responden yang telah berkontribusi dalam survei kepuasan fasilitas sarana & prasarana kampus UNS 2022 kali ini ✨
 
-Untuk hasil lebih lanjut, bisa dilihat di link yang tertera maupun Qr code yang telah tersedia
+Untuk hasil survei, bisa dilihat di bawah ini:
 
 
-<iframe src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://https://drive.google.com/file/d/1yhqF-wP0mFVFdHF-lxYh29ChhkM7GiDU/view"></iframe>
+<iframe src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://datalks.bemuns.org/blog/HasilSurveiTempatMakandanLaundryLaporanHasilSurveiKepuasanFasilitasSaranadanPrasaranaKampus.pdf"></iframe>
 
 
 
