@@ -17,7 +17,7 @@ Sebelumnya kami ucapkan terimakasih kepada seluruh responden yang telah berkontr
 Untuk hasil survei, bisa dilihat di bawah ini:
 
 
-<iframe src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://datalks.bemuns.org/blog/HasilSurveiTempatMakandanLaundryLaporanHasilSurveiKepuasanFasilitasSaranadanPrasaranaKampus.pdf"></iframe>
+<iframe src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://datalks.bemuns.org/blog/LaporanHasilSurveiKepuasanFasilitasSaranadanPrasaranaKampus.pdf"></iframe>
 
 
 
