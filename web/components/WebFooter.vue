@@ -57,9 +57,10 @@
 </template>
 
 <script lang="ts" setup>
-import { UnitPlatformInList, UnitPlatforms } from '~~/services/cms';
+// import { UnitPlatformInList, UnitPlatforms } from '~~/services/cms';
 
-const { data: unitPlatforms } = await useAsyncData('unit-platforms', () => UnitPlatforms.list(), { default: () => [] as UnitPlatformInList[] });
+// const { data: unitPlatforms } = await useAsyncData('unit-platforms', () => UnitPlatforms.list(), { default: () => [] as UnitPlatformInList[] });
+const { data: unitPlatforms } = [];
 </script>
 
 <style lang="sass" scoped>

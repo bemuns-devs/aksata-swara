@@ -1,9 +1,7 @@
 <template>
   <div class="flex flex-col min-h-screen">
     <WebNavbar />
-
     <NuxtPage class="grow" />
-
     <WebFooter />
   </div>
 </template>
@@ -12,7 +10,7 @@
 useHead({
   title: 'Beranda',
   titleTemplate: '%s | BEM UNS 2022 Aksata Swara',
-  viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
+  // viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
   meta: [
     {
       name: 'description',

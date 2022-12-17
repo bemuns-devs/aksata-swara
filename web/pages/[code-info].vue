@@ -1,18 +1,21 @@
+<template>
+  <ContentDoc />
+</template>
+
 <script lang="ts" setup>
-import { createError } from 'h3';
-import { blogFormatter, Blogs } from '~~/services/cms';
+// import { createError } from 'h3';
 
-definePageMeta({
-  middleware: async (to) => {
-    const { codeinfo } = to.params;
-    const { data } = await useAsyncData(String(codeinfo), () => Blogs.byCodeInfo(String(codeinfo)));
+// definePageMeta({
+//   middleware: async (to) => {
+//     const { codeinfo } = to.params;
+//     const { data } = await useAsyncData(String(codeinfo), async () => ({} as Record<string, any>));
 
-    if (data.value) {
-      return { name: 'blogs-slug', params: { slug: blogFormatter.getSlug(data.value) } };
-    }
+//     if (data.value) {
+//       return { name: 'blogs-slug', params: { slug: JSON.stringify(data) } };
+//     }
 
-    throw createError({ statusCode: 404, statusMessage: `Blog dengan kode info ${codeinfo} tidak ditemukan` });
-  },
-});
+//     throw createError({ statusCode: 404, statusMessage: `Blog dengan kode info ${codeinfo} tidak ditemukan` });
+//   },
+// });
 
 </script>

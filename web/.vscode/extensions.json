@@ -1,9 +1,0 @@
-{
-  "recommendations": [
-    "dbaeumer.vscode-eslint",
-    "csstools.postcss",
-    "syler.sass-indented",
-    "bradlc.vscode-tailwindcss",
-    "Vue.volar"
-  ]
-}

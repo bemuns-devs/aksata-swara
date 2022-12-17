@@ -1,0 +1,20 @@
+{
+  "name": "directus-cms-to-nuxt-content",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@directus/sdk": "^10.3.0",
+    "change-case": "^4.1.2",
+    "image-downloader": "^4.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.15"
+  }
+}

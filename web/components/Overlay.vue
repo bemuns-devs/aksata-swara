@@ -1,17 +1,8 @@
 <template>
-  <transition
-    appear
-    @after-enter="onBackdropAfterEnter"
-  >
-    <div
-      v-show="isOpen"
-      class="fixed w-full h-full bg-slate-500/50 z-[9999] flex flex-col justify-center items-center"
-      @click.self="onOverlayClick"
-    >
-      <transition
-        v-bind="props.transition"
-        @after-leave="onContentAfterLeave"
-      >
+  <transition appear @after-enter="onBackdropAfterEnter">
+    <div v-show="isOpen" class="fixed w-full h-full bg-slate-500/50 z-[9999] flex flex-col justify-center items-center"
+      @click.self="onOverlayClick">
+      <transition v-bind="props.transition" @after-leave="onContentAfterLeave">
         <slot v-if="isShow" />
       </transition>
     </div>
@@ -23,7 +14,7 @@ import type { TransitionProps } from 'vue';
 
 interface Props {
   modelValue?: boolean;
-  transition?: TransitionProps;
+  transition?: TransitionProps & Record<string, any>;
 }
 
 interface Emits {
@@ -40,7 +31,7 @@ const isOpen = computed({
     if (props.modelValue === undefined) {
       _isOpen.value = v;
     } else {
-      emit('update:modelValue', v);
+      emit('update:modelValue', !!v);
     }
   },
 });

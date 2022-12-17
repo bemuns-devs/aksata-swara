@@ -1,16 +1,18 @@
+<script lang="ts" setup>
+defineProps<{
+  title: string;
+  imgSrc: string;
+  slug: string;
+  date: Date;
+  publisher: string;
+}>();
+</script>
+
 <template>
   <article class="blog-card">
-    <NuxtLink
-      :title="title"
-      :to="{name: 'blogs-slug', params: {slug}}"
-      class="click-helper"
-    />
+    <NuxtLink :title="title" :to="{ name: 'blogs-slug', params: { slug } }" class="click-helper" />
     <div class="thumbnail">
-      <img
-        :src="`${imgSrc}?width=300&format=webp`"
-        :alt="title"
-        loading="lazy"
-      >
+      <img :src="`${imgSrc}?width=300&format=webp`" :alt="title" loading="lazy">
     </div>
     <h5 class="title">
       {{ title }}
@@ -21,16 +23,6 @@
     </div>
   </article>
 </template>
-
-<script lang="ts" setup>
-defineProps<{
-  title: string;
-  imgSrc: string;
-  slug: string;
-  date: Date;
-  publisher: string;
-}>();
-</script>
 
 <style lang="sass">
 .blog-card

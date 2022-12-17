@@ -1,5 +1,0 @@
-{
-  "[vue]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
-  }
-}
