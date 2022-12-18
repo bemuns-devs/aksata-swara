@@ -1,15 +1,23 @@
 export interface Blog {
   id: string;
   title: string;
-  category: string;
+  category: BlogCategory;
   content: string;
   tags?: string[];
   image?: string;
   date: Date;
   author: string;
+  path: string;
 }
 
 export interface BlogInList extends Omit<Blog, 'content'> { }
+
+export interface BlogCategory {
+  id: string;
+  name: string;
+}
+
+export interface BlogCategoryInList extends Omit<BlogCategory, never> { }
 
 export interface UnitPlatform {
   id: string;

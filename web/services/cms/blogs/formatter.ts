@@ -1,16 +1,17 @@
 import { paramCase } from 'change-case';
-import {
-  Blog, BlogInList, BlogInListRaw, BlogRaw,
-} from '~~/services/cms/types/data-models';
+import { getAssetUrl } from '~~/services/cms/formatter';
+import { BlogInListRaw, BlogRaw } from '~~/services/cms/types/data-models';
+import { Blog, BlogInList } from '~~/services/shared/models';
 
 export const fromInListRaw = (raw: BlogInListRaw): BlogInList => ({
   ...raw,
-  date_created: raw.date_created && new Date(raw.date_created),
+  image: raw.featured_image && getAssetUrl(raw.featured_image),
+  author: raw.user_created.first_name,
+  date: new Date(raw.date_created),
 });
 
 export const fromRaw = (raw: BlogRaw): Blog => ({
   ...fromInListRaw(raw) as Blog,
-  date_updated: new Date(raw.date_updated),
 });
 
 export const getSlug = ({ id, title }: Pick<Blog, 'id' | 'title'>) => `${paramCase(title)}--${id}`;

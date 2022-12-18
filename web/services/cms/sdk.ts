@@ -25,7 +25,7 @@ const sdk = () => {
     };
 
     _sdk = new Directus<Collection>(cfg.url, {
-      auth: cfg.token && {
+      auth: {
         mode: 'json',
         staticToken: cfg.token,
       },

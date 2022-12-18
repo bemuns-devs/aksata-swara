@@ -1,9 +1,6 @@
 <script lang="ts" setup>
-import { MarkdownParsedContent } from '@nuxt/content/dist/runtime/types';
 import { sentenceCase } from 'change-case';
-import { BlogInList } from '~~/services/shared/models'
-
-type ListItem = MarkdownParsedContent & BlogInList;
+import { Blogs } from '~~/services/content';
 
 const route = useRoute();
 
@@ -14,8 +11,14 @@ const { data: categories } = useLazyAsyncData<string[]>(async () => {
   const { categories } = await queryContent('/blogs/_meta').only(['categories']).findOne();
   return categories;
 }, { default: () => [] });
+const { data } = useLazyAsyncData(() => Blogs
+  .list({ ...(qSearch.value && { search: qSearch.value }), ...(qCategory.value && { category: qCategory.value }) }),
+  {
+    default: () => [],
+    watch: [qSearch, qCategory],
+  });
 
-const onSubmit = (e: FormDataEvent) => {
+const onSubmit = (e: Event) => {
   const formElm = e.target as HTMLFormElement;
   const category = (formElm.elements.namedItem('category') as HTMLSelectElement).value;
   const search = (formElm.elements.namedItem('search') as HTMLSelectElement).value;
@@ -50,28 +53,26 @@ useHead({
         <Button label="Cari" type="submit" filled />
       </form>
 
-      <ContentList path="/blogs">
-        <template v-slot="{ list }">
-          <ul class="flex flex-col">
-            <li v-for="blog in (list as ListItem[])" :key="blog.id">
-              <BlogListItem :title="blog.title" :img-src="blog.image!" :url="blog._path!" :date="new Date(blog.date)"
-                :publisher="blog.author" />
-            </li>
-          </ul>
+      <template v-if="data?.length">
+        <ul class="flex flex-col">
+          <li v-for="blog in data" :key="blog.id">
+            <BlogListItem :title="blog.title" :img-src="blog.image!" :slug="blog.path" :date="blog.date"
+              :author="blog.author" />
+          </li>
+        </ul>
 
-          <Button to="/blogs" link class="self-start text-primary">
-            Tampilkan lebih banyak
-          </Button>
-        </template>
+        <Button to="/blogs" link class="self-start text-primary">
+          Tampilkan lebih banyak
+        </Button>
+      </template>
 
-        <template #not-found>
-          <div class="min-h-[40vh]">
-            <p class="text-xl text-center text-gray-500 mt-20">
-              Tidak ada artikel yang dapat ditampilkan 🙏
-            </p>
-          </div>
-        </template>
-      </ContentList>
+      <template v-else>
+        <div class="min-h-[40vh]">
+          <p class="text-xl text-center text-gray-500 mt-20">
+            Tidak ada artikel yang dapat ditampilkan 🙏
+          </p>
+        </div>
+      </template>
     </div>
   </main>
 </template>

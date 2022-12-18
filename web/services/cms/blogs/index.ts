@@ -5,6 +5,7 @@ import sdk from '~~/services/cms/sdk';
 import {
   Blog, BlogInList, BlogInListRaw, BlogRaw, FeaturedBlogInListRaw,
 } from '~~/services/cms/types/data-models';
+import { BlogRepository } from '~~/services/shared/repository';
 
 const DEFAULT_LIST_FILTER: QueryMany<BlogRaw>['filter'] = {
   status: {
@@ -44,24 +45,24 @@ const mergeListQuery = (source: QueryMany<BlogRaw>): QueryMany<BlogRaw> => ({
   sort: source.sort || DEFAULT_SORT,
 });
 
-const list = async (query: QueryMany<BlogRaw> = {}): Promise<BlogInList[]> => {
+const list: BlogRepository.list = async (query = {}) => {
   const mergedQuery = mergeListQuery(query);
   const { data } = await sdk().items('blogs').readByQuery(mergedQuery);
-  return data.map(fromInListRaw);
+  return (data || []).map(fromInListRaw);
 };
 
 /**
  * @param slug String formatted as '{title}--{id}'
  */
-const bySlug = async (slug: string): Promise<Blog> => {
+const bySlug: BlogRepository.bySlug = async (slug) => {
   const { id } = extractSlug(slug);
   const data = await sdk().items('blogs').readOne(id, {
     fields: ['*', ...NESTED_FIELDS],
   });
-  return fromRaw(data as BlogRaw) as Blog;
+  return fromRaw(data as BlogRaw);
 };
 
-const byCodeInfo = async (code: string): Promise<Blog | null> => {
+const byCodeInfo: BlogRepository.byCodeInfo = async (code) => {
   const { data: [data] } = await sdk().items('blogs').readByQuery({
     limit: 1,
     filter: { info_code: code },
@@ -70,19 +71,16 @@ const byCodeInfo = async (code: string): Promise<Blog | null> => {
   return data ? fromRaw(data as BlogRaw) : null;
 };
 
-const featuredBlogs = async (): Promise<BlogInList[]> => {
+const getFeatured: BlogRepository.getFeatured = async () => {
   const { data } = await sdk().items('featured_blogs').readByQuery({ limit: -1, fields: FEATURED_FIELDS });
   return data.map((el) => fromInListRaw(el.blog as BlogInListRaw));
 };
 
-export default {
+export default <BlogRepository.default>{
   list,
   bySlug,
   byCodeInfo,
-  featured: featuredBlogs,
-  DEFAULT_FILTER: DEFAULT_LIST_FILTER,
-  DEFAULT_SORT,
-  LIST_FIELDS,
+  getFeatured,
 };
 
 export * as blogFormatter from './formatter';

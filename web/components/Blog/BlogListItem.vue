@@ -2,15 +2,15 @@
 defineProps<{
   title: string;
   imgSrc: string;
-  url: string;
+  slug: string;
   date: Date;
-  publisher: string;
+  author: string;
 }>();
 </script>
 
 <template>
   <article class="group">
-    <NuxtLink :to="url"
+    <NuxtLink :to="{ name: 'blogs-slug', params: { slug } }"
       class="flex gap-4 p-2 group-hover:bg-secondary/5 rounded-lg focus:ring active:ring ring-secondary-100 transition">
       <div
         class="shrink-0 h-24 lg:h-32 aspect-[7/5] lg:aspect-[9/5] bg-primary-900/20 border border-secondary-50 overflow-hidden rounded-md">
@@ -22,7 +22,7 @@ defineProps<{
           {{ title }}
         </h5>
         <div class="text-sm text-gray-500 flex items-center divide-x divide-gray-300">
-          <span class="shrink break-all line-clamp-1 pr-2">{{ publisher }}</span>
+          <span class="shrink break-all line-clamp-1 pr-2">{{ author }}</span>
           <time class="shrink-0 pl-2 font-light">{{ date.toLocaleDateString() }}</time>
         </div>
       </div>

@@ -4,7 +4,7 @@ defineProps<{
   imgSrc: string;
   slug: string;
   date: Date;
-  publisher: string;
+  author: string;
 }>();
 </script>
 
@@ -18,7 +18,7 @@ defineProps<{
       {{ title }}
     </h5>
     <div class="subtitle">
-      <span class="author">{{ publisher }}</span>
+      <span class="author">{{ author }}</span>
       <time class="">{{ date.toLocaleDateString() }}</time>
     </div>
   </article>

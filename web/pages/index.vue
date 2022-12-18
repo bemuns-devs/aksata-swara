@@ -1,16 +1,21 @@
 <script lang="ts" setup>
 import { Icon } from '@iconify/vue';
 import { toRefs } from '@vueuse/core';
+import type { Ref } from 'vue'
+import { Blogs } from '~~/services/content';
 import { BlogInList } from '~~/services/shared/models';
+import { SiteInfo } from "~~/types/models";
 
 type UnitPlatformInList = Record<string, any>;
 
+const site = inject<SiteInfo>('_site')
+
 const refAboutSection = ref<HTMLElement | null>(null);
 const { data } = await useAsyncData<[BlogInList[], BlogInList[]]>(() => Promise.all([
-  [],
-  [],
+  Blogs.getFeatured(),
+  Blogs.list(),
 ]), { default: () => [[], []] });
-const [featuredBlogs, newestBlogs] = toRefs(data);
+const [featuredBlogs, newestBlogs] = toRefs(data as Ref<[BlogInList[], BlogInList[]]>);
 const { data: unitPlatforms } = await useAsyncData('unit-platforms', async () => [], { default: () => [] as UnitPlatformInList[] });
 
 const newestBlogsParts = computed(() => ({
@@ -43,6 +48,10 @@ const blogFormatter = {
 }
 
 const getAssetUrl = (url: string) => url;
+
+useHead({
+  title: 'Beranda'
+})
 </script>
 
 <template>
@@ -58,13 +67,11 @@ const getAssetUrl = (url: string) => url;
         class="shrink-0 self-center max-w-full flex flex-col gap-8 pb-8 z-10 transform animate-in slide-in-from-bottom [animation-duration:700ms] [transition-duration:150ms]"
         :style="{ '--tw-translate-y': `${y / 1.5}px` }">
         <div class="flex flex-col gap-2">
-          <h1 class="text-4xl md:text-5xl text-white font-bold font-brand flex flex-col">
-            <span>BEM UNS 2022</span>
-            <span>— AKSATA SWARA</span>
+          <h1 class="text-4xl md:text-5xl text-white font-bold font-brand flex flex-col whitespace-pre">
+            {{ site?.home.hero.title }}
           </h1>
-          <p class="text-base md:text-lg text-white max-w-prose flex flex-col">
-            <span class="leading-none">Badan Eksekutif Mahasiswa Universitas Sebelas Maret</span>
-            <span>Kabinet 2022/2023</span>
+          <p class="text-base md:text-lg text-white max-w-prose flex flex-col whitespace-pre leading-none">
+            {{ site?.home.hero.subtitle }}
           </p>
         </div>
 
@@ -102,13 +109,13 @@ const getAssetUrl = (url: string) => url;
           <Button label="Visi Misi" to="/about" append-icon="heroicons-solid:external-link" filled
             class="fade-in slide-in-from-bottom-8 duration-500"
             :class="{ 'animate-in': isVisible.aboutQuote, 'opacity-0': !isVisible.aboutQuote }" />
-          <Button label="Nilai dan Budaya Kerja" to="/about" append-icon="heroicons-solid:external-link" filled
+          <Button label="Nilai dan Budaya Kerja" to="/about/nilai-dan-budaya"
+            append-icon="heroicons-solid:external-link" filled class="fade-in slide-in-from-bottom-8 duration-500"
+            :class="{ 'animate-in': isVisible.aboutQuote, 'opacity-0': !isVisible.aboutQuote }" />
+          <Button label="Filosofi" to="/about/filosofi" append-icon="heroicons-solid:external-link" filled
             class="fade-in slide-in-from-bottom-8 duration-500"
             :class="{ 'animate-in': isVisible.aboutQuote, 'opacity-0': !isVisible.aboutQuote }" />
-          <Button label="Filosofi" to="/about" append-icon="heroicons-solid:external-link" filled
-            class="fade-in slide-in-from-bottom-8 duration-500"
-            :class="{ 'animate-in': isVisible.aboutQuote, 'opacity-0': !isVisible.aboutQuote }" />
-          <Button label="Struktur Organisasi" to="/about" append-icon="heroicons-solid:external-link" filled
+          <Button label="Struktur Organisasi" to="/about/organisasi" append-icon="heroicons-solid:external-link" filled
             class="fade-in slide-in-from-bottom-8 duration-500"
             :class="{ 'animate-in': isVisible.aboutQuote, 'opacity-0': !isVisible.aboutQuote }" />
         </div>
@@ -127,8 +134,8 @@ const getAssetUrl = (url: string) => url;
 
         <ol v-if="newestBlogs.length" class="hidden lg:flex justify-start gap-4">
           <li v-for="blog in newestBlogsParts.top4" :key="blog.id">
-            <BlogCard :title="blog.title" :img-src="getAssetUrl(blog.featured_image)"
-              :slug="blogFormatter.getSlug(blog)" :date="blog.date_created" :publisher="blog.user_created.first_name" />
+            <BlogCard :title="blog.title" :img-src="blog.image!" :slug="blog.path" :date="blog.date"
+              :author="blog.author" />
           </li>
         </ol>
 
@@ -143,8 +150,8 @@ const getAssetUrl = (url: string) => url;
 
           <ul class="flex flex-col">
             <li v-for="blog in featuredBlogs.slice(0, 4)" :key="blog.id">
-              <BlogListItem :title="blog.title" :img-src="getAssetUrl(blog.featured_image)" :url="blog.url"
-                :date="blog.date_created" :publisher="blog.user_created.first_name" />
+              <BlogListItem :title="blog.title" :img-src="blog.image!" :slug="blog.path" :date="blog.date"
+                :author="blog.author" />
             </li>
           </ul>
 
@@ -163,8 +170,8 @@ const getAssetUrl = (url: string) => url;
           <div class="flex flex-col">
             <ul class="flex flex-col">
               <li v-for="blog in newestBlogs" :key="blog.id">
-                <BlogListItem :title="blog.title" :img-src="getAssetUrl(blog.featured_image)" :url="blog.url"
-                  :date="blog.date_created" :publisher="blog.user_created.first_name" />
+                <BlogListItem :title="blog.title" :img-src="blog.image!" :slug="blog.path" :date="blog.date"
+                  :author="blog.author" />
               </li>
             </ul>
           </div>
@@ -173,18 +180,18 @@ const getAssetUrl = (url: string) => url;
         </div>
 
         <div class="hidden lg:flex gap-8">
-          <ContentList path="/blogs" :query="{ limit: 20 }" v-slot="{ list }">
-            <div class="grow flex flex-col gap-8">
-              <ol v-if="newestBlogsParts.rest.length" class="flex flex-col">
-                <li v-for="blog in (list as BlogInList[])" :key="blog.id">
-                  <BlogListItem :title="blog.title" :img-src="blog.image || 'https://via.placeholder.com/150'"
-                    :url="{ name: 'blogs', params: {} }" :date="blog.date" :publisher="blog.author" />
-                </li>
-              </ol>
+          <!-- <ContentList path="/blogs" :query="{ limit: 20 }" v-slot="{ list }"> -->
+          <div class="grow flex flex-col gap-8">
+            <ol v-if="newestBlogsParts.rest.length" class="flex flex-col">
+              <li v-for="blog in newestBlogsParts.rest" :key="blog.id">
+                <BlogListItem :title="blog.title" :img-src="blog.image || 'https://via.placeholder.com/150'"
+                  :slug="blog.path" :date="blog.date" :author="blog.author" />
+              </li>
+            </ol>
 
-              <Button label="Lihat lebih banyak" :to="{ name: 'blogs' }" link class="self-start" />
-            </div>
-          </ContentList>
+            <Button label="Lihat lebih banyak" :to="{ name: 'blogs' }" link class="self-start" />
+          </div>
+          <!-- </ContentList> -->
 
           <div class="shrink-0 flex flex-col gap-4">
             <div class="flex gap-2">
@@ -196,9 +203,8 @@ const getAssetUrl = (url: string) => url;
             <template v-if="featuredBlogs.length">
               <ol>
                 <li v-for="blog in featuredBlogs" :key="blog.id" class="!h-64 self-start">
-                  <BlogCard :title="blog.title" :img-src="getAssetUrl(blog.featured_image)"
-                    :slug="blogFormatter.getSlug(blog)" :date="blog.date_created"
-                    :publisher="blog.user_created.first_name" />
+                  <BlogCard :title="blog.title" :img-src="blog.image!" :slug="blog.path" :date="blog.date"
+                    :author="blog.author" />
                 </li>
               </ol>
 

@@ -1,12 +1,8 @@
-<template>
-  <div class="flex flex-col min-h-screen">
-    <WebNavbar />
-    <NuxtPage class="grow" />
-    <WebFooter />
-  </div>
-</template>
-
 <script lang="ts" setup>
+const { data: site } = await useAsyncData(() => queryContent('/_site').findOne())
+
+provide('_site', site)
+
 useHead({
   title: 'Beranda',
   titleTemplate: '%s | BEM UNS 2022 Aksata Swara',
@@ -77,3 +73,11 @@ useHead({
   ],
 });
 </script>
+
+<template>
+  <div class="flex flex-col min-h-screen">
+    <WebNavbar />
+    <NuxtPage class="grow" />
+    <WebFooter />
+  </div>
+</template>

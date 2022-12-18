@@ -1,0 +1,3 @@
+# Filosofi
+
+[Back home](/)
