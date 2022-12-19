@@ -8,7 +8,7 @@ import { fileURLToPath } from 'url';
 import { replaceMustacheVars } from '../utils.mjs';
 
 const ENDPOINT = 'https://cms.bemuns.org';
-const TEMPLATE_PATH = './template.md';
+const TEMPLATE_PATH = './template-blog.md';
 const OUTPUT_PATH = './.generated';
 
 const sdk = new Directus(ENDPOINT);

@@ -28,8 +28,6 @@ const mergeQuery = (query: QueryBuilderWhere): QueryBuilderWhere => ({
 })
 
 const list: BlogRepository.list = async (query = {}) => {
-  console.log(mergeQuery(query));
-
   const data = await queryContent<ParsedBlogInList>('/blogs')
     .where(mergeQuery(query))
     .limit(LIST_PERPAGE)
